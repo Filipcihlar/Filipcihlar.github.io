@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrhy</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+body{
+    margin: 0px;
+    background-color: lightgrey;
+}
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+    margin: 1px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="700" height="500" style="border: 1px solid;"></canvas>
+        <div style="width: 230px; margin: 3px;">
+            <div style="text-align: right;">
+                <label>\(v:\) </label><input id="v">
+                <label>\(\alpha:\) </label><input id="a">
+                <label>\(g:\) </label><input id="g"><br>
+                <label>\(x(0):\) </label><input id="x"><br>
+                <label>\(y(0):\) </label><input id="y">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Odpor vzduchu:</label><br>
+            <div style="text-align: right;">
+                <label>\(k:\) </label><input id="k">
+                <label>\(m:\) </label><input id="m">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přesnost:</label><br>
+            <div style="text-align: right;">
+                <label>\(\Delta t:\) </label><input id="p">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Zobrazení:</label><br>
+            <div style="text-align: right;">
+                <label>Zvětšení: </label><input id="met"><br>
+                <label>\(X:\) </label><input id="X">
+                <label>\(Y:\) </label><input id="Y">
+            </div>
+            <br>
+            <button id="but">Spustit</button><button id="pause"><i id="ic" class="fa fa-pause"></i></button>
+            <br>
+            <label>\(x\) = </label><label id="x1"></label><br>
+            <label>\(y\) = </label><label id="y1"></label><br>
+            <label>\(v_x\) = </label><label id="vx1"></label><br>
+            <label>\(v_y\) = </label><label id="vy1"></label><br>
+            <label>\(v\) = </label><label id="v1"></label><br>
+            <label>\(\alpha\) = </label><label id="a1"></label><br>
+            <label>\(t\) = </label><label id="t1"></label><br>
+            <label>\(y_{\textrm{max}}\) = </label><label id="ymax"></label><br>
+            <label>\(x_\textrm{d}\) = </label><label id="xd"></label><br>
+            <label>\(t_\textrm{d}\) = </label><label id="td"></label>
+        </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+
+let timer = null;
+let test = 0;
+
+
+
+zapis();
+get();
+clear();
+
+document.getElementById("but").onclick = function(){
+    test = 1;
+    clearInterval(timer)
+    get();
+    clear();
+    poc();
+    rozl();
+    timer = setInterval(vykres, p);
+}
+document.getElementById("pause").onclick = function(){
+    if(test == 1){
+        clearInterval(timer);
+        test = 2;
+        document.getElementById("ic").className = "fa fa-play";
+    }
+    else if(test != 0){
+        timer = setInterval(vykres, p);
+        test = 1;
+        document.getElementById("ic").className = "fa fa-pause";
+    }
+}
+function vykres(){
+    t = p/1000;
+    T += t;
+    x = x+vx*t;
+    y = y+vy*t;
+    vx = vx-(k/m)*vx*t;
+    vy = vy-g*t-(k/m)*vy*t;
+    if(y > ymax){
+        ymax = y;
+    }
+    document.getElementById("x1").innerHTML = Math.round(x*100)/100;
+    document.getElementById("y1").innerHTML = Math.round(y*100)/100;
+    document.getElementById("vx1").innerHTML = Math.round(vx*100)/100;
+    document.getElementById("vy1").innerHTML = Math.round(vy*100)/100;
+    document.getElementById("v1").innerHTML = Math.round(Math.pow(vx*vx+vy*vy,0.5)*100)/100;
+    document.getElementById("a1").innerHTML = Math.round((Math.acos(vx/Math.pow(vx*vx+vy*vy,0.5))*180/Math.PI)*100)/100;
+    document.getElementById("t1").innerHTML = Math.round(T*100)/100;
+    document.getElementById("ymax").innerHTML = Math.round(ymax*100)/100;
+
+    console.log(vx+" "+vy);
+    console.log(x+" "+y);
+    cnx.lineTo(x*met, Y-y*met);
+    cnx.stroke();
+    if(y < 0){
+        test = 0;
+        clearInterval(timer);
+        document.getElementById("xd").innerHTML = Math.round(x*100)/100;
+        document.getElementById("td").innerHTML = Math.round(T*100)/100;
+    }
+
+}
+function poc(){
+    cnx.beginPath();
+    cnx.fillStyle = "black";
+    cnx.lineWidth = 1;
+    cnx.moveTo(x*met, Y-y*met);
+}
+function rozl(){
+    vx = v*Math.cos(a*(Math.PI/180));
+    vy = v*Math.sin(a*(Math.PI/180));
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+    osy();
+}
+function zapis(){
+    document.getElementById("v").value = "10";
+    document.getElementById("a").value = "45";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("x").value = "0";
+    document.getElementById("y").value = "0";
+    document.getElementById("k").value = "0";
+    document.getElementById("m").value = "1";
+    document.getElementById("p").value = "5";
+    document.getElementById("met").value = "40";
+    document.getElementById("X").value = "700";
+    document.getElementById("Y").value = "500";
+}
+function get(){
+    v = Number(document.getElementById("v").value);
+    a = Number(document.getElementById("a").value);
+    g = Number(document.getElementById("g").value);
+    x = Number(document.getElementById("x").value);
+    y = Number(document.getElementById("y").value);
+    k = Number(document.getElementById("k").value);
+    m = Number(document.getElementById("m").value);
+    p = Number(document.getElementById("p").value);
+    met = Number(document.getElementById("met").value);
+    X = Number(document.getElementById("X").value);
+    Y = Number(document.getElementById("Y").value);
+    document.getElementById("can").height = Y;
+    document.getElementById("can").width = X;
+    ymax = 0; T = 0;
+}
+function osy(){
+    cnx.beginPath();
+    cnx.fillStyle = "black";
+    cnx.lineWidth = 1;
+    cnx.moveTo(0, Y);
+    for(let i = 0; i < Y/met; i++){
+        cnx.lineTo(0, Y-met*i);
+        cnx.moveTo(0, Y-met*i);
+        if(i%5 == 0){
+            cnx.lineTo(7, Y-met*i);
+        }
+        else{
+            cnx.lineTo(4, Y-met*i);
+        }
+        cnx.moveTo(0, Y-met*i);
+    }
+    for(let i = 0; i < X/met; i++){
+        cnx.lineTo(met*i, Y);
+        cnx.moveTo(met*i, Y);
+        if(i%5 == 0){
+            cnx.lineTo(met*i, Y-7);
+        }
+        else{
+            cnx.lineTo(met*i, Y-4);
+        }
+        cnx.moveTo(met*i, Y);
+    }
+    cnx.stroke();
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Sudoku</title>
+    <style>
+        input{
+            width: 30px;
+            height: 30px;
+            border: 1px solid;
+            font-size: 20px;
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="padding: 5px;">
+        <div id="sud" style="width: 350px;"></div><br>
+        <button id="solve" style="border: 2px solid black; height: 30px; width: 80px; background: linear-gradient(to bottom, #034772 0%, #10c088 200%); color: white;">Vyřešit</button>
+    </div>
+    <script>
+let num1 = Array(81);
+let poc = 0;
+let pam = "";
+nakres();
+document.getElementById("solve").onclick = function(){
+    zapis();
+    res();
+}
+function nakres(){
+    for(let i = 0; i < 81; i++){
+        pol = document.createElement("input");
+        pol.id = String(i);
+        if(i < 9){
+            pol.style.borderTop = "2px solid"
+        }
+        if(i%3 == 0){
+            pol.style.borderLeft = "2px solid";
+        }
+        if((i >= 18 && i < 27) || (i >= 45 && i < 54) || i >= 72){
+            pol.style.borderBottom = "2px solid";
+        }
+        if((i+1)%9 == 0){
+            pol.style.borderRight = "2px solid";
+        }
+        document.getElementById("sud").appendChild(pol);
+    }
+}
+function zapis(){
+    for(let i = 0; i <= 81; i++){
+        try{
+            num1[i] = Number(document.getElementById(i).value);
+        }
+        catch{
+            
+        }
+    }
+}
+function res(){
+    for(let i = 0; i < 81; i++){
+        if(!num1[i]){
+            for(let n = 1; n <= 9; n++){
+                for(let ii = 9*Math.floor(i/9); ii <= 9*Math.floor(i/9)+8; ii++){
+                    if(num1[ii] == n){
+                        poc++;
+                        break;
+                    }
+                }
+                for(let ii = i%9; ii <= 72; ii += 9){
+                    if(num1[ii] == n){
+                        poc++;
+                        break;
+                    }
+                }
+                ii1 = 27*Math.floor(Math.floor(i/9)/3)+3*Math.floor((i%9)/3)
+                for(let x1 = 0; x1 < 3; x1++){
+                    for(let x2 = 0; x2 < 3; x2++){
+                        if(num1[ii1] == n){
+                            poc++;
+                            break;
+                        }
+                        ii1++
+                    }
+                    ii1 += 6;
+                }
+                if(poc == 0){
+                    pam += String(n);
+                }
+                poc = 0;
+            }
+            if(pam.length == 1){
+                document.getElementById(i).value = pam;
+                num1[i] = pam;
+            }
+            pam = "";
+        }
+    }
+}
+    </script>
+</body>
+</html>

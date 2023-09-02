@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravitace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+#body{
+    text-align: center;
+    display:flex;
+    margin: 3px;
+}
+#can{
+    border: 2px solid;
+}
+#par{
+    text-align: left;
+}
+#b1{
+    width: 75px;
+    background-color: blue;
+}
+#b2{
+    width: 75px;
+    background-color: red;
+}
+#b3{
+    width: 75px;
+    background-color: green;
+}
+#b4{
+    width: 75px;
+    background-color: yellow;
+}
+#but{
+    width: 59px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but2{
+    width: 59px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but3{
+    width: 59px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but4{
+    width: 22px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but5{
+    width: 22px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but6{
+    width: 59px;
+    height: 22px;
+    background-color: chartreuse;
+}
+#but7{
+    width: 59px;
+    height: 22px;
+    background-color: chartreuse;
+}
+input{
+    width: 50px;
+}
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: darkgray;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div id="body">
+    <div id="can0" style="width: 510px; text-align: left;">
+        <canvas id="can" width="500" height="500"></canvas>
+    </div>
+    <div id="par" style="width: 260px;">
+        <label>&nbsp;Velikost okna:</label><br>
+        <label>&nbsp;x:</label>
+        <input id="X" size="5" name="i">
+        <label>y:</label>
+        <input id="Y" size="5" name="i"><br>
+        
+        <label>G:</label>
+        <input id="G" size="5">
+        <label>&nbsp;t:</label>
+        <input id="t" size="5">
+        <label>z:</label>
+        <input id="z" size="5"><br>
+        <br>
+        <input type="checkbox" style="width: 10px;" id="c1">
+        <label style="color:blue;">&nbsp;1. těleso:</label><br>
+        <label>&nbsp;x:</label>
+        <input id="x" size="5">
+        <label>y:</label>
+        <input id="y" size="5">
+        <button type="submit" id="b1">Vybrat</button><br>
+        <label>m:</label>
+        <input id="m" size="5">
+        <label>v:</label>
+        <input id="v" size="5">
+        <label>u:</label>
+        <input id="u" size="5"><br>
+        
+        <input type="checkbox" style="width: 10px;" id="c2">
+        <label style="color:red;">&nbsp;2. těleso:</label><br>
+        <label>&nbsp;x:</label>
+        <input id="x2" size="5">
+        <label>y:</label>
+        <input id="y2" size="5">
+        <button type="submit" id="b2">Vybrat</button><br>
+        <label>m:</label>
+        <input id="m2" size="5">
+        <label>v:</label>
+        <input id="v2" size="5">
+        <label>u:</label>
+        <input id="u2" size="5"><br>
+        
+        <input type="checkbox" style="width: 10px;" id="c3">
+        <label style="color:green;">&nbsp;3. těleso:</label><br>
+        <label>&nbsp;x:</label>
+        <input id="x3" size="5">
+        <label>y:</label>
+        <input id="y3" size="5">
+        <button type="submit" id="b3">Vybrat</button><br>
+        <label>m:</label>
+        <input id="m3" size="5">
+        <label>v:</label>
+        <input id="v3" size="5">
+        <label>u:</label>
+        <input id="u3" size="5"><br>
+        
+        <input type="checkbox" style="width: 10px;" id="c4">
+        <label style="color:yellow;">&nbsp;4. těleso:</label><br>
+        <label>&nbsp;x:</label>
+        <input id="x4" size="5">
+        <label>y:</label>
+        <input id="y4" size="5">
+        <button type="submit" id="b4">Vybrat</button><br>
+        <label>m:</label>
+        <input id="m4" size="5">
+        <label>v:</label>
+        <input id="v4" size="5">
+        <label>u:</label>
+        <input id="u4" size="5"><br>
+        <br>
+        <input type="radio" name="a" id="r1">
+        <label>Dráha</label>
+        <input type="radio" name="a" id="r2">
+        <label>Tělesa</label><br>
+        <button type="submit" id="but">Start</button>
+        <button type="submit" id="but2">Reset</button>
+        <button type="submit" id="but3">Clear</button>
+        <button type="submit" id="but4">||</button>
+        <button type="submit" id="but5">></button><br>
+        <button type="submit" id="but6">Demo</button>
+        <button type="submit" id="but7">Demo2</button><br>
+        <br>
+        <div id="par1" style=" height: 73px; width: 234px;">
+            <label id="p1" style="color: blue;">x = ;</label>
+            <label id="p2" style="color: blue;">y = ;</label>
+            <label id="p3" style="color: blue;">v = </label><br>
+            <label id="p4" style="color: red;">x = ;</label>
+            <label id="p5" style="color: red;">y = ;</label>
+            <label id="p6" style="color: red;">v = </label><br>
+            <label id="p7" style="color: green;">x = ;</label>
+            <label id="p8" style="color: green;">y = ;</label>
+            <label id="p9" style="color: green;">v = </label><br>
+            <label id="p10" style="color: yellow;">x = ;</label>
+            <label id="p11" style="color: yellow;">y = ;</label>
+            <label id="p12" style="color: yellow;">v = </label>
+        </div>
+    </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+
+let X = 500;
+let Y = 500;
+let timer = null;
+let t = 0.005;
+let tt = t*1000;
+let t1 = 0;
+
+let u21;
+let a10;
+let u22;
+let a20;
+let u23;
+let a30;
+let ax;
+let ay;
+
+let u212;
+let a102;
+let u222;
+let a202;
+let u232;
+let a302;
+let ax2;
+let ay2;
+
+let u213;
+let a103;
+let u223;
+let a203;
+let u233;
+let a303;
+let ax3;
+let ay3;
+
+let u214;
+let a104;
+let u224;
+let a204;
+let u234;
+let a304;
+let ax4;
+let ay4;
+
+let u1 = 0
+let v = 60;
+let vx = v*Math.cos(u1*Math.PI/180);
+let vy = v*Math.sin(u1*Math.PI/180);
+let u12 = 0
+let v2 = 70;
+let vx2 = v2*Math.cos(u12*Math.PI/180);
+let vy2 = v2*Math.sin(u12*Math.PI/180);
+let u13 = 60
+let v3 = 20;
+let vx3 = v3*Math.cos(u13*Math.PI/180);
+let vy3 = v3*Math.sin(u13*Math.PI/180);
+let u14 = 0
+let v4 = 185;
+let vx4 = v4*Math.cos(u14*Math.PI/180);
+let vy4 = v4*Math.sin(u14*Math.PI/180);
+
+let x = 0;
+let y = 200;
+let x2 = 150;
+let y2 = 250;
+let x3 = 150;
+let y3 = 450;
+let x4 = 146;
+let y4 = 519;
+
+let dx;
+let dy;
+let c1y = 1;
+let c1x = 1;
+let c2y = 1;
+let c2x = 1;
+let c3y = 1;
+let c3x = 1;
+
+let dx2;
+let dy2;
+let c1y2 = 1;
+let c1x2 = 1;
+let c2y2 = 1;
+let c2x2 = 1;
+let c3y2 = 1;
+let c3x2 = 1;
+
+let dx3;
+let dy3;
+let c1y3 = 1;
+let c1x3 = 1;
+let c2y3 = 1;
+let c2x3 = 1;
+let c3y3 = 1;
+let c3x3 = 1;
+
+let dx4;
+let dy4;
+let c1y4 = 1;
+let c1x4 = 1;
+let c2y4 = 1;
+let c2x4 = 1;
+let c3y4 = 1;
+let c3x4 = 1;
+
+let r1;
+let r2;
+let r3;
+let r12;
+let r22;
+let r32
+let r13;
+let r23;
+let r33;
+let r14;
+let r24;
+let r34;
+
+let M = 20;
+let M2 = 10;
+let M3 = 200;
+let M4 = 1;
+let G = 10000;
+
+let blbost = 0;
+let blbost2 = 0;
+let blbost3 = 0;
+let z = 1;
+
+app();
+
+function app(){
+    document.getElementById("r1").checked = true;
+    document.getElementById("c1").checked = true;
+    document.getElementById("c2").checked = true;
+    document.getElementById("c3").checked = true;
+    document.getElementById("c4").checked = true;
+    clear();
+    out();
+    window.addEventListener("mousedown", mouse);
+    document.getElementById("b1").onclick = function(){
+        blbost = 1;
+    }
+    document.getElementById("b2").onclick = function(){
+        blbost = 2;
+    }
+    document.getElementById("b3").onclick = function(){
+        blbost = 3;
+    }
+    document.getElementById("b4").onclick = function(){
+        blbost = 4;
+    }
+    document.getElementById("but2").onclick = function(){
+        reset();
+    }
+    document.getElementById("but3").onclick = function(){
+        clear();
+    }
+    document.getElementById("but4").onclick = function(){
+        clearInterval(timer);
+        blbost2 = 1
+    }
+    document.getElementById("but5").onclick = function(){
+        if(blbost2 == 1){
+            tmr();
+        }
+        blbost2 = 0;
+    }
+    document.getElementById("but6").onclick = function(){
+        demo();
+    }
+    document.getElementById("but7").onclick = function(){
+        demo2();
+    }
+    document.getElementById("but").onclick = function(){
+        reset();
+        inp();
+        cnx.beginPath();
+        cnx.fillStyle = "white";
+        cnx.fillRect(0, 0, X, Y);
+        cnx.stroke();
+        tmr();
+    }
+}
+function demo(){
+    document.getElementById("X").value = 1000;
+    document.getElementById("Y").value = 550;
+    document.getElementById("G").value = 10000;
+    document.getElementById("t").value = 5;
+    document.getElementById("x").value = 492;
+    document.getElementById("y").value = 103;
+    document.getElementById("m").value = 0;
+    document.getElementById("v").value = 7;
+    document.getElementById("u").value = 0;
+    document.getElementById("x2").value = 475;
+    document.getElementById("y2").value = 123;
+    document.getElementById("m2").value = 10;
+    document.getElementById("v2").value = 70;
+    document.getElementById("u2").value = 0;
+    document.getElementById("x3").value = 480;
+    document.getElementById("y3").value = 322;
+    document.getElementById("m3").value = 100;
+    document.getElementById("v3").value = -7;
+    document.getElementById("u3").value = 0;
+    document.getElementById("x4").value = 476;
+    document.getElementById("y4").value = 256;
+    document.getElementById("m4").value = 0;
+    document.getElementById("v4").value = 100;
+    document.getElementById("u4").value = 0;
+}
+function demo2(){
+    document.getElementById("X").value = 500;
+    document.getElementById("Y").value = 500;
+    document.getElementById("G").value = 6.67e-26;
+    document.getElementById("t").value = 10;
+    document.getElementById("x").value = 250;
+    document.getElementById("y").value = 102.9;
+    document.getElementById("m").value = 5.972e24;
+    document.getElementById("v").value = 30.3;
+    document.getElementById("u").value = 0;
+    document.getElementById("x2").value = 250;
+    document.getElementById("y2").value = 250;
+    document.getElementById("m2").value = 1.989e30;
+    document.getElementById("v2").value = 0;
+    document.getElementById("u2").value = 0;
+    document.getElementById("x3").value = 250;
+    document.getElementById("y3").value = 142.5;
+    document.getElementById("m3").value = 4.778e24;
+    document.getElementById("v3").value = 35.26;
+    document.getElementById("u3").value = 0;
+    document.getElementById("x4").value = 250;
+    document.getElementById("y4").value = 204;
+    document.getElementById("m4").value = 0.328e24;
+    document.getElementById("v4").value = 59;
+    document.getElementById("u4").value = 0;
+}
+function reset(){
+    clearInterval(timer);
+    inp();
+    clear();
+}
+function poc(){
+    cnx.beginPath();
+    cnx.fillStyle = "blue";
+    cnx.strokeStyle = "blue";
+    cnx.arc(x, y, 2, 0, 2*Math.PI);
+    cnx.fill();
+    cnx.stroke();
+
+    cnx.beginPath();
+    cnx.fillStyle = "red";
+    cnx.strokeStyle = "red";
+    cnx.arc(x2, y2, 2, 0, 2*Math.PI);
+    cnx.fill();
+    cnx.stroke();
+
+    cnx.beginPath();
+    cnx.fillStyle = "green";
+    cnx.strokeStyle = "green";
+    cnx.arc(x3, y3, 2, 0, 2*Math.PI);
+    cnx.fill();
+    cnx.stroke();
+
+    cnx.beginPath();
+    cnx.fillStyle = "yellow";
+    cnx.strokeStyle = "yellow";
+    cnx.arc(x4, y4, 2, 0, 2*Math.PI);
+    cnx.fill();
+    cnx.stroke();
+}
+function clear(){
+    cnx.beginPath();
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+    cnx.stroke();
+    poc();
+}
+function mouse(event){
+    if(blbost == 1){
+        x = event.clientX-10;
+        y = event.clientY-10;
+        blbost = 0;
+        out();
+        clear();
+    }
+    if(blbost == 2){
+        x2 = event.clientX-10;
+        y2 = event.clientY-10;
+        blbost = 0;
+        out();
+        clear();
+    }
+    if(blbost == 3){
+        x3 = event.clientX-10;
+        y3 = event.clientY-10;
+        blbost = 0;
+        out();
+        clear();
+    }
+    if(blbost == 4){
+        x4 = event.clientX-10;
+        y4 = event.clientY-10;
+        blbost = 0;
+        out();
+        clear();
+    }
+}
+function out(){
+    document.getElementById("X").value = X;
+    document.getElementById("Y").value = Y;
+    document.getElementById("G").value = G;
+    document.getElementById("t").value = tt;
+    document.getElementById("z").value = z;
+    document.getElementById("x").value = x;
+    document.getElementById("y").value = y;
+    document.getElementById("m").value = M;
+    document.getElementById("v").value = v;
+    document.getElementById("u").value = u1;
+    document.getElementById("x2").value = x2;
+    document.getElementById("y2").value = y2;
+    document.getElementById("m2").value = M2;
+    document.getElementById("v2").value = v2;
+    document.getElementById("u2").value = u12;
+    document.getElementById("x3").value = x3;
+    document.getElementById("y3").value = y3;
+    document.getElementById("m3").value = M3;
+    document.getElementById("v3").value = v3;
+    document.getElementById("u3").value = u13;
+    document.getElementById("x4").value = x4;
+    document.getElementById("y4").value = y4;
+    document.getElementById("m4").value = M4;
+    document.getElementById("v4").value = v4;
+    document.getElementById("u4").value = u14;
+}
+function inp(){
+    X = Number(document.getElementById("X").value);
+    Y = Number(document.getElementById("Y").value);
+    G = Number(document.getElementById("G").value);
+    tt = Number(document.getElementById("t").value)
+    z = Number(document.getElementById("z").value);
+    x = Number(document.getElementById("x").value);
+    y = Number(document.getElementById("y").value);
+    M = Number(document.getElementById("m").value);
+    v = Number(document.getElementById("v").value);
+    u1 = Number(document.getElementById("u").value);
+    x2 = Number(document.getElementById("x2").value);
+    y2 = Number(document.getElementById("y2").value);
+    M2 = Number(document.getElementById("m2").value);
+    v2 = Number(document.getElementById("v2").value);
+    u12 = Number(document.getElementById("u2").value);
+    x3 = Number(document.getElementById("x3").value);
+    y3 = Number(document.getElementById("y3").value);
+    M3 = Number(document.getElementById("m3").value);
+    v3 = Number(document.getElementById("v3").value);
+    u13 = Number(document.getElementById("u3").value);
+    x4 = Number(document.getElementById("x4").value);
+    y4 = Number(document.getElementById("y4").value);
+    M4 = Number(document.getElementById("m4").value);
+    v4 = Number(document.getElementById("v4").value);
+    u14 = Number(document.getElementById("u4").value);
+    vx = v*Math.cos(u1*Math.PI/180);
+    vy = v*Math.sin(u1*Math.PI/180);
+    vx2 = v2*Math.cos(u12*Math.PI/180);
+    vy2 = v2*Math.sin(u12*Math.PI/180);
+    vx3 = v3*Math.cos(u13*Math.PI/180);
+    vy3 = v3*Math.sin(u13*Math.PI/180);
+    vx4 = v4*Math.cos(u14*Math.PI/180);
+    vy4 = v4*Math.sin(u14*Math.PI/180);
+    t = tt/1000;
+    if(document.getElementById("r1").checked){
+        blbost3 = 0;
+    }
+    if(document.getElementById("r2").checked){
+        blbost3 = 1;
+    }
+    document.getElementById("can0").style.width = (X+10)+"px";
+    document.getElementById("can").width = X;
+    document.getElementById("can").height = Y;
+}
+
+
+function tmr(){
+    timer = setInterval(nkrs, tt/z);
+}
+function nkrs(){
+    if(document.getElementById("c1").checked){
+        cnx.beginPath();
+        cnx.strokeStyle = "blue";
+        cnx.moveTo(x, y);
+        nkrs1();
+        cnx.stroke();
+        document.getElementById("p1").innerHTML = "x = "+Math.round(x);
+        document.getElementById("p2").innerHTML = "; y = "+Math.round(y);
+        document.getElementById("p3").innerHTML = "; v = "+Math.round(Math.sqrt(vx*vx+vy*vy));
+    }
+    if(document.getElementById("c2").checked){
+        cnx.beginPath();
+        cnx.strokeStyle = "red";
+        cnx.moveTo(x2, y2);
+        nkrs2();
+        cnx.stroke();
+        document.getElementById("p4").innerHTML = "x = "+Math.round(x2);
+        document.getElementById("p5").innerHTML = "; y = "+Math.round(y2);
+        document.getElementById("p6").innerHTML = "; v = "+Math.round(Math.sqrt(vx2*vx2+vy2*vy2));
+    }
+    if(document.getElementById("c3").checked){
+        cnx.beginPath();
+        cnx.strokeStyle = "green";
+        cnx.moveTo(x3, y3);
+        nkrs3();
+        cnx.stroke();
+        document.getElementById("p7").innerHTML = "x = "+Math.round(x3);
+        document.getElementById("p8").innerHTML = "; y = "+Math.round(y3);
+        document.getElementById("p9").innerHTML = "; v = "+Math.round(Math.sqrt(vx3*vx3+vy3*vy3));
+    }
+    if(document.getElementById("c4").checked){
+        cnx.beginPath();
+        cnx.strokeStyle = "yellow";
+        cnx.moveTo(x4, y4);
+        nkrs4();
+        cnx.stroke();
+        document.getElementById("p10").innerHTML = "x = "+Math.round(x4);
+        document.getElementById("p11").innerHTML = "; y = "+Math.round(y4);
+        document.getElementById("p12").innerHTML = "; v = "+Math.round(Math.sqrt(vx4*vx4+vy4*vy4));
+    }
+    if(blbost3 == 1){
+        clear();
+    }
+}
+function nkrs1(){
+    if(y < y2){
+        c1y = -1;
+    }
+    if(x < x2){
+        c1x = -1;
+    }
+    if(y < y3){
+        c2y = -1;
+    }
+    if(x < x3){
+        c2x = -1;
+    }
+    if(y < y4){
+        c3y = -1;
+    }
+    if(x < x4){
+        c3x = -1;
+    }
+    r1 = Math.sqrt(Math.pow(x-x2, 2)+Math.pow(y-y2, 2));
+    r2 = Math.sqrt(Math.pow(x-x3, 2)+Math.pow(y-y3, 2));
+    r3 = Math.sqrt(Math.pow(x-x4, 2)+Math.pow(y-y4, 2));
+    a10 = (M2*G)/(r1*r1);
+    a20 = (M3*G)/(r2*r2);
+    a30 = (M4*G)/(r3*r3);
+    u21 = Math.atan(Math.abs(y-y2)/Math.abs(x-x2));
+    u22 = Math.atan(Math.abs(y-y3)/Math.abs(x-x3));
+    u23 = Math.atan(Math.abs(y-y4)/Math.abs(x-x4));
+    ax = a10*Math.cos(u21)*c1x+a20*Math.cos(u22)*c2x+a30*Math.cos(u23)*c3x;
+    ay = a10*Math.sin(u21)*c1y+a20*Math.sin(u22)*c2y+a30*Math.sin(u23)*c3y;
+    vx -= ax*t;
+    vy += ay*t;
+    dx = vx*t+0.5*ax*t*t;
+    dy = vy*t+0.5*ay*t*t;
+    x += dx;
+    y -= dy;
+    c1x = 1;
+    c1y = 1;
+    c2x = 1;
+    c2y = 1;
+    c3x = 1;
+    c3y = 1;
+    cnx.lineTo(x, y);
+}
+function nkrs2(){
+    if(y2 < y){
+        c1y2 = -1;
+    }
+    if(x2 < x){
+        c1x2 = -1;
+    }
+    if(y2 < y3){
+        c2y2 = -1;
+    }
+    if(x2 < x3){
+        c2x2 = -1;
+    }
+    if(y2 < y4){
+        c3y2 = -1;
+    }
+    if(x2 < x4){
+        c3x2 = -1;
+    }
+    r12 = Math.sqrt(Math.pow(x2-x, 2)+Math.pow(y2-y, 2));
+    r22 = Math.sqrt(Math.pow(x2-x3, 2)+Math.pow(y2-y3, 2));
+    r32 = Math.sqrt(Math.pow(x2-x4, 2)+Math.pow(y2-y4, 2));
+    a102 = (M*G)/(r12*r12);
+    a202 = (M3*G)/(r22*r22);
+    a302 = (M4*G)/(r32*r32);
+    u212 = Math.atan(Math.abs(y2-y)/Math.abs(x2-x));
+    u222 = Math.atan(Math.abs(y2-y3)/Math.abs(x2-x3));
+    u232 = Math.atan(Math.abs(y2-y4)/Math.abs(x2-x4));
+    ax2 = a102*Math.cos(u212)*c1x2+a202*Math.cos(u222)*c2x2+a302*Math.cos(u232)*c3x2;
+    ay2 = a102*Math.sin(u212)*c1y2+a202*Math.sin(u222)*c2y2+a302*Math.sin(u232)*c3y2;
+    vx2 -= ax2*t;
+    vy2 += ay2*t;
+    dx2 = vx2*t+0.5*ax2*t*t;
+    dy2 = vy2*t+0.5*ay2*t*t;
+    x2 += dx2;
+    y2 -= dy2;
+    c1x2 = 1;
+    c1y2 = 1;
+    c2x2 = 1;
+    c2y2 = 1;
+    c3x2 = 1;
+    c3y2 = 1;
+    cnx.lineTo(x2, y2);
+}
+function nkrs3(){
+    if(y3 < y2){
+        c1y3 = -1;
+    }
+    if(x3 < x2){
+        c1x3 = -1;
+    }
+    if(y3 < y){
+        c2y3 = -1;
+    }
+    if(x3 < x){
+        c2x3 = -1;
+    }
+    if(y3 < y4){
+        c3y3 = -1;
+    }
+    if(x3 < x4){
+        c3x3 = -1;
+    }
+    r13 = Math.sqrt(Math.pow(x3-x2, 2)+Math.pow(y3-y2, 2));
+    r23 = Math.sqrt(Math.pow(x3-x, 2)+Math.pow(y3-y, 2));
+    r33 = Math.sqrt(Math.pow(x3-x4, 2)+Math.pow(y3-y4, 2));
+    a103 = (M2*G)/(r13*r13);
+    a203 = (M*G)/(r23*r23);
+    a303 = (M4*G)/(r33*r33);
+    u213 = Math.atan(Math.abs(y3-y2)/Math.abs(x3-x2));
+    u223 = Math.atan(Math.abs(y3-y)/Math.abs(x3-x));
+    u233 = Math.atan(Math.abs(y3-y4)/Math.abs(x3-x4));
+    ax3 = a103*Math.cos(u213)*c1x3+a203*Math.cos(u223)*c2x3+a303*Math.cos(u233)*c3x3;
+    ay3 = a103*Math.sin(u213)*c1y3+a203*Math.sin(u223)*c2y3+a303*Math.sin(u233)*c3y3;
+    vx3 -= ax3*t;
+    vy3 += ay3*t;
+    dx3 = vx3*t+0.5*ax3*t*t;
+    dy3 = vy3*t+0.5*ay3*t*t;
+    x3 += dx3;
+    y3 -= dy3;
+    c1x3 = 1;
+    c1y3 = 1;
+    c2x3 = 1;
+    c2y3 = 1;
+    c3x3 = 1;
+    c3y3 = 1;
+    cnx.lineTo(x3, y3);
+}
+function nkrs4(){
+    if(y4 < y){
+        c1y4 = -1;
+    }
+    if(x4 < x){
+        c1x4 = -1;
+    }
+    if(y4 < y2){
+        c2y4 = -1;
+    }
+    if(x4 < x2){
+        c2x4 = -1;
+    }
+    if(y4 < y3){
+        c3y4 = -1;
+    }
+    if(x4 < x3){
+        c3x4 = -1;
+    }
+    r14 = Math.sqrt(Math.pow(x4-x, 2)+Math.pow(y4-y, 2));
+    r24 = Math.sqrt(Math.pow(x4-x2, 2)+Math.pow(y4-y2, 2));
+    r34 = Math.sqrt(Math.pow(x4-x3, 2)+Math.pow(y4-y3, 2));
+    a104 = (M*G)/(r14*r14);
+    a204 = (M2*G)/(r24*r24);
+    a304 = (M3*G)/(r34*r34);
+    u214 = Math.atan(Math.abs(y4-y)/Math.abs(x4-x));
+    u224 = Math.atan(Math.abs(y4-y2)/Math.abs(x4-x2));
+    u234 = Math.atan(Math.abs(y4-y3)/Math.abs(x4-x3));
+    ax4 = a104*Math.cos(u214)*c1x4+a204*Math.cos(u224)*c2x4+a304*Math.cos(u234)*c3x4;
+    ay4 = a104*Math.sin(u214)*c1y4+a204*Math.sin(u224)*c2y4+a304*Math.sin(u234)*c3y4;
+    vx4 -= ax4*t;
+    vy4 += ay4*t;
+    dx4 = vx4*t+0.5*ax4*t*t;
+    dy4 = vy4*t+0.5*ay4*t*t;
+    x4 += dx4;
+    y4 -= dy4;
+    c1x4 = 1;
+    c1y4 = 1;
+    c2x4 = 1;
+    c2y4 = 1;
+    c3x4 = 1;
+    c3y4 = 1;
+    cnx.lineTo(x4, y4);
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematické kyvadlo</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
+        <div  style="width: 100px; padding: 5px;">
+            <div style="text-align: right;">
+                <label>\(\varphi(0):\) </label><input id="fi"><br>
+                <label>\(\omega(0):\) </label><input id="om"><br>
+                <label>\(l:\) </label><input id="l"><br>
+                <label>\(g:\) </label><input id="g">
+            </div><br>
+            <label style="font-weight: bold;">Přesnost:</label><br>
+            <div>
+                <label>\(\Delta t:\) </label><input id="t">
+            </div>
+            <br>
+            <button id="but">Spustit</button><br>
+            <br>
+            <label>\(\varphi\) = </label><label id="fi1"></label><br>
+            <label>\(\omega\) = </label><label id="om1"></label><br>
+            <label>\(\varphi_\textrm{max}\) = </label><label id="fimax"></label><br>
+            <label>\(T\) = </label><label id="T"></label>
+        </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+const X = 800;
+const Y = 500;
+let m = 60;
+let timer = null;
+
+zapis();
+get();
+clear();
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    timer = setInterval(a, t);
+}
+
+function a(){
+    clear();
+    b();
+    om1 = om-(g*Math.sin((fi*Math.PI)/180)/l)*dt;
+    fi1 = fi+(om*dt*180)/Math.PI;
+    if(fi1 > fimax){
+        fimax = fi1;
+        T = T1*dt;
+    }
+    else{
+        if(T == T1*dt && fi1 < fi){T1 = 0;}
+        T1++;
+    }
+    fi = fi1; om = om1;
+    console.log(fi+" "+om+" "+Math.round(T*100)/100+" "+fimax);
+    document.getElementById("fi1").innerHTML = Math.round(fi*100)/100;
+    document.getElementById("om1").innerHTML = Math.round(om*100)/100;
+    document.getElementById("fimax").innerHTML = Math.round(fimax*100)/100;
+    document.getElementById("T").innerHTML = Math.round(T*100)/100;
+}
+function b(){
+    cnx.beginPath();
+    cnx.moveTo(X/2-50, 50);
+    cnx.lineTo(X/2+50, 50);
+    cnx.moveTo(X/2, 50);
+    cnx.lineTo(l*m*Math.sin((fi*Math.PI)/180)+X/2, l*m*Math.cos((fi*Math.PI)/180)+50);
+    cnx.moveTo(l*m*Math.sin((fi*Math.PI)/180)+X/2+6, l*m*Math.cos((fi*Math.PI)/180)+50);
+    cnx.arc(l*m*Math.sin((fi*Math.PI)/180)+X/2, l*m*Math.cos((fi*Math.PI)/180)+50, 6, 0, 2*Math.PI);
+    cnx.stroke();
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+}
+function zapis(){
+    document.getElementById("fi").value = "30";
+    document.getElementById("om").value = "0";
+    document.getElementById("l").value = "1";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("t").value = "4";
+}
+function get(){
+    fi = Number(document.getElementById("fi").value);
+    om = Number(document.getElementById("om").value);
+    l = Number(document.getElementById("l").value);
+    g = Number(document.getElementById("g").value);
+    t = Number(document.getElementById("t").value);
+    dt = t/1000;
+    fimax = 0;
+    T1 = 0;
+}
+
+    </script>
+    </div>
+</body>
+</html>

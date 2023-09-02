@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Had</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        button:not(.dropbtn){
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        body{
+          margin: 0;
+          text-align: center;
+          background-color:lightslategrey;
+        }
+        .navbar {
+          overflow: hidden;
+          background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+        }
+        
+        .navbar a {
+          float: left;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+          border: none;
+        }
+        .dropdown {
+          float: left;
+          overflow: hidden;
+        }
+        
+        .dropdown .dropbtn {
+          cursor: pointer;
+          font-size: 17px;  
+          border: none;
+          outline: none;
+          color: white;
+          padding: 14px 16px;
+          background-color: inherit;
+          font-family: inherit;
+          margin: 0;
+        }
+        
+        .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+          background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background: white;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          float: none;
+          color: black;
+          padding: 8px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+        
+        .dropdown-content a:hover {
+          background-color: white;
+        }
+        
+        .show {
+          display: block;
+        }
+    </style>
+</head>
+<body id="body">
+    <div class="navbar" id="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <label id="score">Score:0</label>
+    <div id="ressc">
+        <button type="submit" id="resscore" style="height: 25px;">Reset HS</button>
+    </div><br>
+    <div id="eggs">
+        <label id="magic"></label>
+        <label id="golds"></label>
+        <label id="worm"></label>
+    </div>
+    <div id="game">
+        <canvas id="can" width="500" height="500" style="box-shadow: 0px 8px 16px 0px rgb(0, 0, 0);"></canvas>
+        <canvas id="can2" width="500" height="500"></canvas>
+    </div>
+    <div id="menu">
+        <button type="submit" id="b6">2D</button>
+        <button type="submit" id="b7">3D</button><br><br>
+        <button type="submit" id="b5">Sandbox</button>
+        <button type="submit" id="b1">Easy</button>
+        <button type="submit" id="b2">Medium</button>
+        <button type="submit" id="b3">Hard</button>
+        <button type="submit" id="b4">Expert</button>
+        <div id="par">
+            <label id="par2"></label><br>
+            <div id="par3">
+                <label>Speed(ms/move): </label>
+                <input type="number" id="speed"><br>
+                <label>Gold(%): </label>
+                <input type="number" id="pgold"><br>
+                <label>Magic(%): </label>
+                <input type="number" id="pmag"><br>
+                <label>Magic(T): </label>
+                <input type="number" id="tmag"><br>
+                <label>Magic(n): </label>
+                <input type="number" id="pocmag">
+            </div>
+            <button type="submit" id="play">Play (Enter)</button>
+        </div>
+        <div id="tabl">
+            <br>
+            <table id="tab">
+                <th id="nad" colspan="3">HS</th>
+                <tr>
+                    <td>Difficulty</td>
+                    <td>2D</td>
+                    <td>3D</td>
+                </tr>
+                <tr>
+                    <td>Easy:</td>
+                    <td id="hs1"></td>
+                    <td id="hs13"></td>
+                </tr>
+                <tr>
+                    <td>Medium:</td>
+                    <td id="hs2"></td>
+                    <td id="hs23"></td>
+                </tr>
+                <tr>
+                    <td>Hard:</td>
+                    <td id="hs3"></td>
+                    <td id="hs33"></td>
+                </tr>
+                <tr>
+                    <td>Expert:</td>
+                    <td id="hs4"></td>
+                    <td id="hs43"></td>
+                </tr>
+                <tr>
+                    <td>Sandbox:</td>
+                    <td id="hs5"></td>
+                    <td id="hs53"></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <button type="submit" id="resallHS">Reset all HS</button>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let can2 = document.getElementById("can2");
+let cnx2 = can2.getContext("2d");
+
+
+document.getElementById("game").style.display = "table";
+document.getElementById("game").style.marginRight = "auto";
+document.getElementById("game").style.marginLeft = "auto";
+document.getElementById("can").style.border = "2px solid";
+document.getElementById("can2").style.border = "2px solid";
+document.getElementById("score").style.fontSize = "35px";
+document.getElementById("menu").style.textAlign = "center";
+document.getElementById("b5").style.backgroundColor = "yellow";
+document.getElementById("b1").style.backgroundColor = "chartreuse";
+document.getElementById("b2").style.backgroundColor = "chartreuse";
+document.getElementById("b3").style.backgroundColor = "chartreuse";
+document.getElementById("b4").style.backgroundColor = "yellow";
+document.getElementById("resscore").style.backgroundColor = "yellow";
+document.getElementById("play").style.backgroundColor = "chartreuse";
+document.getElementById("b6").style.backgroundColor = "chartreuse";
+document.getElementById("b7").style.backgroundColor = "chartreuse";
+document.getElementById("resallHS").style.backgroundColor = "yellow";
+
+
+document.getElementById("par3").style.width = "300px";
+document.getElementById("par3").style.textAlign = "right";
+document.getElementById("par3").style.display = "table";
+document.getElementById("par3").style.marginRight = "auto";
+document.getElementById("par3").style.marginLeft = "auto";
+document.getElementById("ressc").style.height = "10px";
+document.getElementById("tab").style.backgroundColor = "chartreuse";
+document.getElementById("tab").style.borderCollapse = "collapse";
+document.getElementById("tab").style.border = "2px solid";
+document.getElementById("tab").style.textAlign = "right";
+document.getElementById("nad").style.backgroundColor = "yellow";
+document.getElementById("nad").style.border = "2px solid";
+document.getElementById("nad").style.textAlign = "center";
+document.getElementById("nad").style.fontSize = "20px";
+document.getElementById("tabl").style.textAlign = "center";
+document.getElementById("tabl").style.display = "table";
+document.getElementById("tabl").style.marginRight = "auto";
+document.getElementById("tabl").style.marginLeft = "auto";
+
+
+const X = 500;
+const Y = 500;
+const Z = 500;
+const a = 10;
+const start = 5;
+
+let rych;
+let timer = null;
+let x;
+let y;
+let z;
+let x1;
+let y1;
+let z1;
+let x2;
+let y2;
+let z2;
+let ces = "rrrrr";
+let del = start;
+let gold;
+let golds = 0;
+let mag;
+let magic = 0;
+let worm = 0;
+let tmag;
+let pocmag;
+let pmag;
+let pgold;
+let ces0;
+let blbost = 0;
+let blbost2 = 0;
+let blbost3 = 0;
+let blbost4 = 0;
+let dif;
+let dim = 0;
+let eahs = 0;
+let mehs = 0;
+let hahs = 0;
+let exhs = 0;
+let sahs = 0;
+let eahs3 = 0;
+let mehs3 = 0;
+let hahs3 = 0;
+let exhs3 = 0;
+let sahs3 = 0;
+
+savehs();
+reset();
+
+function hra(){
+    timer = setInterval(game, rych);
+}
+
+function game(){
+    window.addEventListener("keydown", pause);
+    window.addEventListener("keydown", move);
+    switch(ces[ces.length-1]){
+        case "r":
+            ces += "r";
+            y -= a;
+            break;
+        case "l":
+            ces += "l";
+            x -= a;
+            break;
+        case "p":
+            ces += "p";
+            x += a;
+            break;
+        case "d":
+            ces += "d";
+            y += a;
+            break;
+        case "i":
+            ces += "i";
+            z += a;
+            break;
+        case "o":
+            ces += "o";
+            z -= a;
+            break;
+    }
+    for(let i = ces.length-del; i < ces.length; i++){
+        ces0 += ces[i];
+        console.log(ces0);
+    }
+    ces = ces0;
+    ces0 = "";
+    clear();
+    cnx.beginPath();
+    cnx.fillStyle = "black";
+    cnx.rect(x, y, a, a);
+    cnx.fillRect(x, y, a, a);
+    cnx.stroke();
+    if(dim == 1){
+        cnx2.beginPath();
+        cnx2.fillStyle = "black";
+        cnx2.rect(z, y, a, a);
+        cnx2.fillRect(z, y, a, a);
+        cnx2.stroke();
+        z1 = z;
+    }
+    x1 = x;
+    y1 = y;
+    move1();
+    jabko();
+    if(x >= X && y == Y-a){
+        x = 0;
+        y = 0;
+        del += 2;
+        worm++;
+        document.getElementById("eggs").style.display = "block";
+        document.getElementById("worm").innerHTML = "Wormholes(+2):" + worm;
+    }
+    else if(x < 0 || x >= X || y < 0 || y >= Y){
+        if(magic > 0){
+            if(x < 0){
+                x = X-a;
+            }
+            if(x >= X){
+                x = 0;
+            }
+            if(y < 0){
+                y = Y-a;
+            }
+            if(y >= Y){
+                y = 0;
+            }
+            magic--;
+            del -= 10;
+            document.getElementById("magic").innerHTML = "Magic(+10):" + magic;
+        }
+        else{
+            reset();
+        }
+    }
+    else if(dim == 1){
+        if(z < 0 || z >= Z){
+            if(magic > 0){
+                if(z < 0){
+                    z = Z-a;
+                }
+                if(z >= Z){
+                    z = 0;
+                }
+            }
+            else{
+                reset();
+            }
+        }
+    }
+    hscores();
+    console.log(ces);
+
+}
+function move(event){
+    if(blbost4 == 0){
+        switch(event.key){
+            case "w":
+                if(ces[ces.length-1] != "d"){
+                    ces += "r";
+                    y -= a;
+                }
+                break;
+            case "a":
+                if(ces[ces.length-1] != "p"){
+                    ces += "l";
+                    x -= a;
+                }
+                break;
+            case "d":
+                if(ces[ces.length-1] != "l"){
+                    ces += "p";
+                    x += a;
+                }
+                break;
+            case "s":
+                if(ces[ces.length-1] != "r"){
+                    ces += "d";
+                    y += a;
+                }
+                break;
+            case "q":
+                if(ces[ces.length-1] != "i" && dim == 1){
+                    ces += "o";
+                    z -= a;
+                }
+                break;
+            case "e":
+                if(ces[ces.length-1] != "o" && dim == 1){
+                    ces += "i";
+                    z += a;
+                }
+                break;
+            case "ArrowUp":
+                if(ces[ces.length-1] != "d" && dim == 0){
+                    ces += "r";
+                    y -= a;
+                }
+                break;
+            case "ArrowLeft":
+                if(ces[ces.length-1] != "p" && dim == 0){
+                    ces += "l";
+                    x -= a;
+                }
+                break;
+            case "ArrowRight":
+                if(ces[ces.length-1] != "l" && dim == 0){
+                    ces += "p";
+                    x += a;
+                }
+                break;
+            case "ArrowDown":
+                if(ces[ces.length-1] != "r" && dim == 0){
+                    ces += "d";
+                    y += a;
+                }
+                break;
+        }
+    }
+    if(dim == 0){
+        ham();
+    }
+    if(dim == 1 && z == z2){
+        ham();
+    }
+    clear();
+    cnx.beginPath();
+    cnx.fillStyle = "black";
+    cnx.rect(x, y, a, a);
+    cnx.fillRect(x, y, a, a);
+    cnx.stroke();
+    if(dim == 1){
+        cnx2.beginPath();
+        cnx2.fillStyle = "black";
+        cnx2.rect(z, y, a, a);
+        cnx2.fillRect(z, y, a, a);
+        cnx2.stroke();
+        z1 = z;
+    }
+    x1 = x;
+    y1 = y;
+    move1();
+}
+function clear(){
+    cnx.fillStyle = "chartreuse";
+    cnx.fillRect(0, 0, X, Y);
+    cnx2.fillStyle = "chartreuse";
+    cnx2.fillRect(0, 0, Z, Y);
+}
+function move1(){
+    for(let i = 1; i <= del; i++){
+        for(let ii = 1; ii < i+1; ii++){
+            switch(ces[ces.length-ii]){
+                case "r":
+                    y1 += a;
+                    break;
+                case "l":
+                    x1 += a;
+                    break;
+                case "p":
+                    x1 -= a;
+                    break;
+                case "d":
+                    y1 -= a;
+                    break;
+                case "i":
+                    z1 -= a;
+                    break;
+                case "o":
+                    z1 += a;
+                    break;
+            }
+        }
+        if(dim == 0){
+            while(x2 == x1 && y2 == y1){
+                x2 = Math.floor(Math.random()*50)*10;
+                y2 = Math.floor(Math.random()*50)*10;
+            }
+        }
+        if(dim == 1){
+            while(x2 == x1 && y2 == y1 && z2 == z1){
+                x2 = Math.floor(Math.random()*50)*10;
+                y2 = Math.floor(Math.random()*50)*10;
+                z2 = Math.floor(Math.random()*50)*10;
+            }
+        }
+        cnx.beginPath();
+        cnx.fillStyle = "dimgray";
+        cnx.fillRect(x1, y1, a, a);
+        cnx.rect(x1, y1, a, a);
+        cnx.stroke();
+        if(dim == 1){
+            cnx2.beginPath();
+            cnx2.fillStyle = "dimgray";
+            cnx2.fillRect(z1, y1, a, a);
+            cnx2.rect(z1, y1, a, a);
+            cnx2.stroke();
+        }
+        if(x == x1 && y == y1){
+            if(z == z1 && dim == 1){
+                reset();
+            }
+            else if(dim == 0){
+                reset();
+            }
+        }
+        x1 = x;
+        y1 = y;
+        if(dim == 1){
+            z1 = z;
+        }
+    }
+}
+function jabko(){
+    cnx.beginPath();
+    cnx.fillStyle = "red";
+    if(dim == 1){
+        cnx2.beginPath();
+        cnx2.fillStyle = "red";
+    }
+    if(gold == 0){
+        cnx.fillStyle = "yellow";
+        if(dim == 1){
+            cnx2.fillStyle = "yellow";
+        }
+    }
+    if(mag == 0){
+        cnx.fillStyle = "blue";
+        if(dim == 1){
+            cnx2.fillStyle = "blue";
+        }
+        blbost++;
+    }
+    if(mag == 0 && blbost >= (tmag*1000)/rych){
+        rndm1();
+        blbost2++;
+        blbost = 0;
+    }
+    if(mag == 0 && blbost%5 == 0){
+        cnx.fillStyle = "cyan";
+        if(dim == 1){
+            cnx2.fillStyle = "cyan";
+        }
+    }
+    if(mag == 0 && pocmag == blbost2){
+        rndm();
+        blbost2 = 0;
+    }
+    cnx.rect(x2, y2, a, a);
+    cnx.fillRect(x2, y2, a, a);
+    cnx.stroke();
+    if(dim == 1){
+        cnx2.rect(z2, y2, a, a);
+        cnx2.fillRect(z2, y2, a, a);
+        cnx2.stroke();
+    }
+    if(dim == 0){
+        ham();
+    }
+    if(dim == 1 && z == z2){
+        ham();
+    }
+}
+function ham(){
+    if(x == x2 && y == y2){
+        if(mag == 0){
+            del += 9;
+            magic++;
+            blbost2 = 0;
+            blbost = 0;
+            document.getElementById("eggs").style.display = "block";
+            document.getElementById("magic").innerHTML = "Magic(+10):" + magic;
+        }
+        else if(gold == 0){
+            del += 4;
+            golds++;
+            document.getElementById("eggs").style.display = "block";
+            document.getElementById("golds").innerHTML = "Golds(+5):" + golds;
+        }
+        del++;
+        rndm();
+    }
+}
+function rndm(){
+    cnx.fillStyle = "red";
+    if(dim == 1){
+        cnx2.fillStyle = "red";
+    }
+    mag = Math.floor(Math.floor(Math.random()*100)*(1/pmag))
+    gold = Math.floor(Math.floor(Math.random()*100)*(1/pgold));
+    rndm1();
+}
+function rndm1(){
+    if(dim == 0){
+        do{
+            x2 = Math.floor(Math.random()*50)*10;
+            y2 = Math.floor(Math.random()*50)*10;
+        }
+        while((x2 == x1 && y2 == y1) || (y2 == y && x2 == x));
+    }
+    if(dim == 1){
+        do{
+            x2 = Math.floor(Math.random()*50)*10;
+            y2 = Math.floor(Math.random()*50)*10;
+            z2 = Math.floor(Math.random()*50)*10;
+        }
+        while((x2 == x1 && y2 == y1 && z2 == z1) || (y2 == y && x2 == x && z2 == z));
+    }
+}
+function reset(){
+    blbost3 = 1;
+    but();
+    document.getElementById("magic").innerHTML = "";
+    document.getElementById("golds").innerHTML = "";
+    document.getElementById("worm").innerHTML = "";
+    document.getElementById("par").style.display = "none";
+    document.getElementById("game").style.display = "none";
+    document.getElementById("eggs").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("ressc").style.display = "block";
+    document.getElementById("navbar").style.display = "block";
+    clearInterval(timer);
+    switch(dif){
+        case 1:
+            easy();
+            break;
+        case 2:
+            medium();
+            break;
+        case 3:
+            hard();
+            break;
+        case 4:
+            expert();
+            break;
+        case 5:
+            sandbox();
+            break;
+    }
+    if(dim == 0){
+        but2();
+    }
+    else{
+        document.getElementById("b6").style.border = "2px solid";
+        document.getElementById("b7").style.border = "4px solid";
+    }
+    document.getElementById("resscore").onclick = function(){
+        reshscores();
+    }
+    document.getElementById("resallHS").onclick = function(){
+        localStorage.removeItem("eahs");
+        localStorage.removeItem("mehs");
+        localStorage.removeItem("hahs");
+        localStorage.removeItem("exhs");
+        localStorage.removeItem("sahs");
+        localStorage.removeItem("eahs3");
+        localStorage.removeItem("mehs3");
+        localStorage.removeItem("hahs3");
+        localStorage.removeItem("exhs3");
+        localStorage.removeItem("sahs3");
+        savehs();
+    }
+    document.getElementById("b1").onclick = function(){
+        easy();
+    }
+    document.getElementById("b2").onclick = function(){
+        medium();
+    }
+    document.getElementById("b3").onclick = function(){
+        hard();
+    }
+    document.getElementById("b4").onclick = function(){
+        expert();
+    }
+    document.getElementById("b5").onclick = function(){
+        sandbox();
+    }
+    document.getElementById("b6").onclick = function(){
+        but2();
+        dim = 0;
+    }
+    document.getElementById("b7").onclick = function(){
+        document.getElementById("b6").style.border = "2px solid";
+        document.getElementById("b7").style.border = "4px solid";
+        dim = 1;
+    }
+    function easy(){
+        document.getElementById("par2").style.display = "block";
+        document.getElementById("par3").style.display = "none";
+        but();
+        document.getElementById("b1").style.border = "4px solid";
+        dif = 1;
+        rych = 200;
+        pgold = 10;
+        pmag = 1;
+        tmag = 3;
+        pocmag = 5;
+        menu2();
+    }
+    function medium(){
+        document.getElementById("par2").style.display = "block";
+        document.getElementById("par3").style.display = "none";
+        but();
+        document.getElementById("b2").style.border = "4px solid";
+        dif = 2;
+        rych = 100;
+        pgold = 10;
+        pmag = 1;
+        tmag = 3;
+        pocmag = 5;
+        menu2();
+    }
+    function hard(){
+        document.getElementById("par2").style.display = "block";
+        document.getElementById("par3").style.display = "none";
+        but();
+        document.getElementById("b3").style.border = "4px solid";
+        dif = 3;
+        rych = 50;
+        pgold = 10;
+        pmag = 1;
+        tmag = 3;
+        pocmag = 5;
+        menu2();
+    }
+    function expert(){
+        document.getElementById("par2").style.display = "block";
+        document.getElementById("par3").style.display = "none";
+        but();
+        document.getElementById("b4").style.border = "4px solid";
+        dif = 4;
+        rych = 25;
+        pgold = 10;
+        pmag = 5;
+        tmag = 3;
+        pocmag = 5;
+        menu2();
+    }
+    function sandbox(){
+        document.getElementById("par2").style.display = "none";
+        document.getElementById("par3").style.display = "block";
+        but();
+        document.getElementById("b5").style.border = "4px solid";
+        dif = 5;
+        document.getElementById("speed").value = rych;
+        document.getElementById("pgold").value = pgold;
+        document.getElementById("pmag").value = pmag;
+        document.getElementById("tmag").value = tmag;
+        document.getElementById("pocmag").value = pocmag;
+        menu2();
+    }
+}
+function reset1(){
+    x = X/2;
+    y = Y/2;
+    z = Z/2;
+    rndm();
+    ces = "rrrrr";
+    del = start;
+    golds = 0;
+    worm = 0;
+    magic = 0;
+    blbost2 = 0;
+    blbost = 0;
+    blbost3 = 0;
+}
+function reset2(){
+    document.getElementById("ressc").style.display = "none";
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("navbar").style.display = "none";
+    if(dim == 0){
+        document.getElementById("game").style.display = "block";
+        document.getElementById("can2").style.visibility = "hidden";
+        document.getElementById("game").style.width = "500px";
+    }
+    if(dim == 1){
+        document.getElementById("game").style.display = "block";
+        document.getElementById("can2").style.visibility = "visible";
+        document.getElementById("game").style.width = "1100px";
+    }
+    if(dif == 5){
+        getval();
+    }
+    reset1();
+    hra();
+}
+function menu2(){
+    hscores();
+    document.getElementById("par").style.display = "block";
+    document.getElementById("par2").innerHTML = "Speed: "+rych+" ms/move, "+"Gold: "+pgold+" %, "+"Magic: "+pmag+" %, "+"Magic(T): "+tmag+" s, "+"Magic(n): "+pocmag;
+    document.getElementById("play").onclick = function(){
+        reset2();
+    }
+    document.addEventListener("keydown", play);
+}
+function play(event){
+    if(event.key == "Enter" && blbost3 == 1){
+        reset2();
+    }
+}
+function but(){
+    document.getElementById("b1").style.border = "2px solid";
+    document.getElementById("b2").style.border = "2px solid";
+    document.getElementById("b3").style.border = "2px solid";
+    document.getElementById("b4").style.border = "2px solid";
+    document.getElementById("b5").style.border = "2px solid";
+    document.getElementById("resscore").style.border = "2px solid";
+    document.getElementById("play").style.border = "2px solid";
+    document.getElementById("resallHS").style.border = "2px solid";
+}
+function but2(){
+    document.getElementById("b6").style.border = "4px solid";
+    document.getElementById("b7").style.border = "2px solid";
+}
+function getval(){
+    rych = document.getElementById("speed").value;
+    pgold = document.getElementById("pgold").value;
+    pmag = document.getElementById("pmag").value;
+    tmag = document.getElementById("tmag").value;
+    pocmag = document.getElementById("pocmag").value;
+}
+function hscores(){
+    if(dim == 0){
+        switch(dif){
+            case 1:
+                if(eahs <= del-start && blbost3 == 0){
+                    eahs = del-start;
+                    localStorage.setItem("eahs", eahs);
+                }
+                document.getElementById("score").innerHTML = "Easy 2D: Score:" + (del - start) + " HS:" + eahs;
+                document.getElementById("hs1").innerHTML = eahs;
+                break;
+            case 2:
+                if(mehs <= del-start && blbost3 == 0){
+                    mehs = del-start;
+                    localStorage.setItem("mehs", mehs);
+                }
+                document.getElementById("score").innerHTML = "Medium 2D: Score:" + (del - start) + " HS:" + mehs;
+                document.getElementById("hs2").innerHTML = mehs;   
+                break;
+            case 3:
+                if(hahs <= del-start && blbost3 == 0){
+                    hahs = del-start;
+                    localStorage.setItem("hahs", hahs);
+                }
+                document.getElementById("score").innerHTML = "Hard 2D: Score:" + (del - start) + " HS:" + hahs;
+                document.getElementById("hs3").innerHTML = hahs;
+                break;
+            case 4:
+                if(exhs <= del-start && blbost3 == 0){
+                    exhs = del-start;
+                    localStorage.setItem("exhs", exhs);
+                }
+                document.getElementById("score").innerHTML = "Expert 2D: Score:" + (del - start) + " HS:" + exhs;
+                document.getElementById("hs4").innerHTML = exhs;
+                break;
+            case 5:
+                if(sahs <= del-start && blbost3 == 0){
+                    sahs = del-start;
+                    localStorage.setItem("sahs", sahs);
+                }
+                document.getElementById("score").innerHTML = "Sandbox 2D: Score:" + (del - start) + " HS:" + sahs;
+                document.getElementById("hs5").innerHTML = sahs;
+                break;
+        }
+    }
+    if(dim == 1){
+        switch(dif){
+            case 1:
+                if(eahs3 <= del-start && blbost3 == 0){
+                    eahs3 = del-start;
+                    localStorage.setItem("eahs3", eahs3);
+                }
+                document.getElementById("score").innerHTML = "Easy 3D: Score:" + (del - start) + " HS:" + eahs3;
+                document.getElementById("hs13").innerHTML = eahs3;
+                break;
+            case 2:
+                if(mehs3 <= del-start && blbost3 == 0){
+                    mehs3 = del-start;
+                    localStorage.setItem("mehs3", mehs3);
+                }
+                document.getElementById("score").innerHTML = "Medium 3D: Score:" + (del - start) + " HS:" + mehs3;
+                document.getElementById("hs23").innerHTML = mehs3;   
+                break;
+            case 3:
+                if(hahs3 <= del-start && blbost3 == 0){
+                    hahs3 = del-start;
+                    localStorage.setItem("hahs3", hahs3);
+                }
+                document.getElementById("score").innerHTML = "Hard 3D: Score:" + (del - start) + " HS:" + hahs3;
+                document.getElementById("hs33").innerHTML = hahs3;
+                break;
+            case 4:
+                if(exhs3 <= del-start && blbost3 == 0){
+                    exhs3 = del-start;
+                    localStorage.setItem("exhs3", exhs3);
+                }
+                document.getElementById("score").innerHTML = "Expert 3D: Score:" + (del - start) + " HS:" + exhs3;
+                document.getElementById("hs43").innerHTML = exhs3;
+                break;
+            case 5:
+                if(sahs3 <= del-start && blbost3 == 0){
+                    sahs3 = del-start;
+                    localStorage.setItem("sahs3", sahs3);
+                }
+                document.getElementById("score").innerHTML = "Sandbox 3D: Score:" + (del - start) + " HS:" + sahs3;
+                document.getElementById("hs53").innerHTML = sahs3;
+                break;
+        }
+    }
+}
+function reshscores(){
+    if(dim == 0){
+        switch(dif){
+            case 1:
+                eahs = 0;
+                localStorage.removeItem("eahs");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + eahs;
+                document.getElementById("hs1").innerHTML = eahs;
+                break;
+            case 2:
+                mehs = 0;
+                localStorage.removeItem("mehs");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + mehs;
+                document.getElementById("hs2").innerHTML = mehs;   
+                break;
+            case 3:
+                hahs = 0;
+                localStorage.removeItem("hahs");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + hahs;
+                document.getElementById("hs3").innerHTML = hahs;
+                break;
+            case 4:
+                exhs = 0;
+                localStorage.removeItem("exhs");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + exhs;
+                document.getElementById("hs4").innerHTML = exhs;
+                break;
+            case 5:
+                sahs = 0;
+                localStorage.removeItem("sahs");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + sahs;
+                document.getElementById("hs5").innerHTML = sahs;
+                break;
+        }
+    }
+    if(dim == 1){
+        switch(dif){
+            case 1:
+                eahs3 = 0;
+                localStorage.removeItem("eahs3");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + eahs3;
+                document.getElementById("hs13").innerHTML = eahs3;
+                break;
+            case 2:
+                mehs3 = 0;
+                localStorage.removeItem("mehs3");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + mehs3;
+                document.getElementById("hs23").innerHTML = mehs3;   
+                break;
+            case 3:
+                hahs3 = 0;
+                localStorage.removeItem("hahs3");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + hahs3;
+                document.getElementById("hs33").innerHTML = hahs3;
+                break;
+            case 4:
+                exhs3 = 0;
+                localStorage.removeItem("exhs3");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + exhs3;
+                document.getElementById("hs43").innerHTML = exhs3;
+                break;
+            case 5:
+                sahs3 = 0;
+                localStorage.removeItem("sah3");
+                document.getElementById("score").innerHTML = "Score:" + (del - start) + " HS:" + sahs3;
+                document.getElementById("hs53").innerHTML = sahs3;
+                break;
+        }
+    }
+}
+function pause(event){
+    if(event.key == "p" && blbost3 == 0){
+        clearInterval(timer);
+        blbost4 = 1;
+    }
+    if(event.key == "o" && blbost4 == 1){
+        blbost4 = 0;
+        hra();
+    }
+}
+function savehs(){
+    eahs = localStorage.getItem("eahs") || 0;
+    mehs = localStorage.getItem("mehs") || 0;
+    hahs = localStorage.getItem("hahs") || 0;
+    exhs = localStorage.getItem("exhs") || 0;
+    sahs = localStorage.getItem("sahs") || 0;
+    eahs3 = localStorage.getItem("eahs3") || 0;
+    mehs3 = localStorage.getItem("mehs3") || 0;
+    hahs3 = localStorage.getItem("hahs3") || 0;
+    exhs3 = localStorage.getItem("exhs3") || 0;
+    sahs3 = localStorage.getItem("sahs3") || 0;
+    document.getElementById("hs1").innerHTML = eahs;
+    document.getElementById("hs2").innerHTML = mehs;
+    document.getElementById("hs3").innerHTML = hahs;
+    document.getElementById("hs4").innerHTML = exhs;
+    document.getElementById("hs5").innerHTML = sahs;
+    document.getElementById("hs13").innerHTML = eahs3;
+    document.getElementById("hs23").innerHTML = mehs3;
+    document.getElementById("hs33").innerHTML = hahs3;
+    document.getElementById("hs43").innerHTML = exhs3;
+    document.getElementById("hs53").innerHTML = sahs3;
+}
+    </script>
+</body>
+</html>

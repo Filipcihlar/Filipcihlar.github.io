@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic gates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+button{
+    width: 150px;
+    height: 40px;
+    border: 2px solid;
+    margin: 1px;
+    background-color: chartreuse;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.619);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.429);
+}
+body{
+    margin: 0px;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 10px;">
+    <div>
+    <canvas id="can" width="900" height="500" style="border: 2px solid;"></canvas>
+    </div>
+    <div>
+        <button id="but">Input</button><button id="end">Output</button><br>
+        <button id="and">AND</button><button id="nand">NAND</button><br>
+        <button id="or">OR</button><button id="nor">NOR</button><br>
+        <button id="xor">XOR</button><button id="nxor">NXOR</button><br>
+        <button id="ha">Half adder</button><button id="fa">Full adder</button><br>
+        <button id="not">NOT</button><br>
+        <br>
+        <button id="clear">Clear</button>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let par1 = null;
+let par2 = null;
+let vel1x = 70;
+let vel1y = 30;
+let vel2x = 13;
+let vel2y = 13;
+let dx = 10;
+let dy = 61;
+spoje = [];
+pos = [];
+op = [];
+
+document.getElementById("but").onclick = function(){
+    pos.push(Array("but",[100,100]));
+    op.push(Array("but",[],["false"]));
+}
+document.getElementById("end").onclick = function(){
+    pos.push(Array("end",[100,100]));
+    op.push(Array("end",[,],[]));
+}
+document.getElementById("and").onclick = function(){
+    pos.push(Array("and",[100,100]));
+    op.push(Array("and",[[,],[,]],[]));
+}
+document.getElementById("or").onclick = function(){
+    pos.push(Array("or",[100,100]));
+    op.push(Array("or",[[,],[,]],[]));
+}
+document.getElementById("xor").onclick = function(){
+    pos.push(Array("xor",[100,100]));
+    op.push(Array("xor",[[,],[,]],[]));
+}
+document.getElementById("nand").onclick = function(){
+    pos.push(Array("nand",[100,100]));
+    op.push(Array("nand",[[,],[,]],[]));
+}
+document.getElementById("nor").onclick = function(){
+    pos.push(Array("nor",[100,100]));
+    op.push(Array("nor",[[,],[,]],[]));
+}
+document.getElementById("nxor").onclick = function(){
+    pos.push(Array("nxor",[100,100]));
+    op.push(Array("nxor",[[,],[,]],[]));
+}
+document.getElementById("not").onclick = function(){
+    pos.push(Array("not",[100,100]));
+    op.push(Array("not",[,],["true"]));
+}
+document.getElementById("ha").onclick = function(){
+    pos.push(Array("ha",[100,100]));
+    op.push(Array("ha",[[,],[,]],[,]));
+}
+document.getElementById("fa").onclick = function(){
+    pos.push(Array("fa",[100,100]));
+    op.push(Array("fa",[[,],[,],[,]],[,]));
+}
+document.getElementById("clear").onclick = function(){
+    setTimeout(() => {
+        clear();
+        vykres();
+    }, 100);
+    spoje = [];
+    pos = [];
+    op = [];
+}
+
+vykres();
+window.addEventListener("click", click);
+window.addEventListener("mousemove", move);
+
+function vykres(){
+    console.log(op);
+    del();
+    vyp();
+    clear();
+    cnx.font = "20px Arial";
+    cnx.fillStyle = "red";
+    cnx.fillRect(0, 0, 100, 50);
+    cnx.fillStyle = "black";
+    cnx.fillText("DELETE", 10, 35);
+    for(let ii = 0; ii < pos.length; ii++){
+        cnx.fillStyle = "lightgrey";
+        cnx.fillRect(pos[ii][1][0]-vel1x/2, pos[ii][1][1]-vel1y/2, vel1x, vel1y);
+        cnx.fillStyle = "black";
+        if(pos[ii][0] != "end" && pos[ii][0] != "but"){
+            cnx.fillText(pos[ii][0].toUpperCase(),pos[ii][1][0]-vel1x/2+5, pos[ii][1][1]+vel1y/2-7);
+        }
+        else{
+            cnx.fillText(op[ii][2], pos[ii][1][0]-vel1x/2+5, pos[ii][1][1]+vel1y/2-7);
+        }
+        cnx.fillStyle = "red";
+        if(pos[ii][0] != "but"){
+            cnx.fillRect(pos[ii][1][0]-vel1x/2-vel2x, pos[ii][1][1]-vel1y/2, vel2x, vel2y);
+            if(pos[ii][0] != "end" && pos[ii][0] != "not"){
+                cnx.fillRect(pos[ii][1][0]-vel1x/2-vel2x, pos[ii][1][1]+vel1y/2-vel2y, vel2x, vel2y);
+            }
+        }
+        if(pos[ii][0] != "end" && pos[ii][0] != "ha" && pos[ii][0] != "fa"){
+            cnx.fillRect(pos[ii][1][0]+vel1x/2, pos[ii][1][1]-vel2y/2, vel2x, vel2y);
+        }
+        if(pos[ii][0] == "ha" || pos[ii][0] == "fa"){
+            cnx.fillRect(pos[ii][1][0]+vel1x/2, pos[ii][1][1]-vel1y/2, vel2x, vel2y);
+            cnx.fillRect(pos[ii][1][0]+vel1x/2, pos[ii][1][1]+vel1y/2-vel2y, vel2x, vel2y);
+        }
+        if(pos[ii][0] == "fa"){
+            cnx.fillRect(pos[ii][1][0]-vel2x/2, pos[ii][1][1]-vel1y/2-vel2y, vel2x, vel2y);
+        }
+        if(pos[ii][0] == "but"){
+            cnx.fillStyle = "green";
+            cnx.fillRect(pos[ii][1][0]-vel2x/2, pos[ii][1][1]-vel1y/2-vel2y, vel2x, vel2y);
+        }
+    }
+    for(let ii of spoje){
+        cnx.beginPath();
+        if(ii[0][0] != "2"){
+            cnx.moveTo(pos[ii[0].slice(1)][1][0]-vel1x/2-vel2x/2, pos[ii[0].slice(1)][1][1]-vel1y/2+vel2y/2-2*(-vel1y/2+vel2y/2)*ii[0][0]);
+        }
+        else{
+            cnx.moveTo(pos[ii[0].slice(1)][1][0], pos[ii[0].slice(1)][1][1]-vel1y/2-vel2y/2);
+        }
+        if(ii[1][0] != "2"){
+            cnx.lineTo(pos[ii[1].slice(1)][1][0]+vel1x/2+vel2x/2, pos[ii[1].slice(1)][1][1]-vel1y/2+vel2y/2-2*(-vel1y/2+vel2y/2)*ii[1][0]);
+        }
+        else{
+            cnx.lineTo(pos[ii[1].slice(1)][1][0]+vel1x/2+vel2x/2, pos[ii[1].slice(1)][1][1]);
+        }
+        cnx.stroke();
+    }
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, 900, 500)
+}
+function move(e){
+    if(e.buttons == 1){
+        if(test == 1){
+            i1[1][0] = e.clientX-dx; i1[1][1] = e.clientY-dy;
+            if(e.clientX-dx < 100 && e.clientY-dy < 50){
+                pos[i2][1][0] = -100;
+                for(let i = 0; i < spoje.length; i++){
+                    if(spoje[i][0].slice(1) == String(i2) || spoje[i][1].slice(1) == String(i2)){
+                        spoje.splice(i, 1);
+                    }
+                }
+                for(let i of op){
+                    if(i[0] != "end" && i[0] != "not" && i[0] != "but"){
+                        if(i[1][0][0].slice(1) == String(i2)){
+                            i[1][0] = [,];
+                        }
+                        if(i[1][1][0].slice(1) == String(i2)){
+                            i[1][1] = [,];
+                        }
+                        if(i[0] == "fa" && i[1][2][0].slice(1) == String(i2)){
+                            i[1][2] = [,];
+                        }
+                    }
+                    else if(i[0] != "but"){
+                        if(i[1][0].slice(1) == String(i2)){
+                            i[1] = [,];
+                        }
+                    }
+                }
+            }
+            vykres();
+        }
+        for(let i = 0; i < pos.length; i++){
+            if(e.clientX-dx < pos[i][1][0]+vel1x/2 && e.clientX-dx > pos[i][1][0]-vel1x/2 && e.clientY-dy < pos[i][1][1]+vel1y/2 && e.clientY-dy > pos[i][1][1]-vel1y/2){
+                test = 1;
+                i1 = pos[i];
+                i2 = i;
+            }
+        }
+    }
+    else{
+        test = 0;
+    }
+}
+
+function click(e){
+    for(let i = 0; i < pos.length; i++){
+        if(e.clientX-dx < pos[i][1][0]-vel1x/2 && e.clientX-dx > pos[i][1][0]-vel1x/2-vel2x && e.clientY-dy < pos[i][1][1]-vel1y/2+vel2y && e.clientY-dy > pos[i][1][1]-vel1y/2 && pos[i][0] != "but"){
+            if(par2 != null){
+                if(op[i][0] == "end" || op[i][0] == "not"){
+                    op[i][1][0] = par2;
+                }
+                else{
+                    op[i][1][0][0] = par2;
+                }
+                spoje.push(Array("0"+i, par2));
+                par2 = null;
+            }
+            else if(par1 == null){
+                par1 = "0"+i;
+            }
+            else{
+                par1 = null;
+            }
+        }
+        if(e.clientX-dx < pos[i][1][0]-vel1x/2 && e.clientX-dx > pos[i][1][0]-vel1x/2-vel2x && e.clientY-dy < pos[i][1][1]+vel1y/2 && e.clientY-dy > pos[i][1][1]+vel1y/2-vel2y && pos[i][0] != "end" && pos[i][0] != "but" && pos[i][0] != "not"){
+            if(par2 != null){
+                op[i][1][1][0] = par2;
+                spoje.push(Array("1"+i, par2));
+                par2 = null;
+            }
+            else if(par1 == null){
+                par1 = "1"+i;
+            }
+            else{
+                par1 = null;
+            }
+        }
+        if(pos[i][0] == "fa" && e.clientX-dx < pos[i][1][0]+vel2x/2 && e.clientX-dx > pos[i][1][0]-vel2x/2 && e.clientY-dy < pos[i][1][1]-vel1y/2 && e.clientY-dy > pos[i][1][1]-vel1y/2-vel2y){
+            if(par2 != null){
+                op[i][1][2][0] = par2;
+                spoje.push(Array("2"+i, par2));
+                par2 = null;
+            }
+            else if(par1 == null){
+                par1 = "2"+i;
+            }
+            else{
+                par1 = null;
+            }
+        }
+        if(e.clientX-dx < pos[i][1][0]+vel1x/2+vel2x && e.clientX-dx > pos[i][1][0]+vel1x/2 && e.clientY-dy < pos[i][1][1]+vel2y/2 && e.clientY-dy > pos[i][1][1]-vel2y/2  && pos[i][0] != "end" && pos[i][0] != "ha" && pos[i][0] != "fa"){
+            if(par1 != null){
+                if(op[par1.slice(1)][0] == "not" || op[par1.slice(1)][0] == "end"){
+                    op[par1.slice(1)][1][0] = "2"+i;
+                }
+                else{
+                    op[par1.slice(1)][1][par1[0]][0] = "2"+i;
+                }
+                spoje.push(Array(par1, "2"+i))
+                par1 = null;
+            }
+            else if(par2 == null){
+                par2 = "2"+i;
+            }
+            else{
+                par2 = null;
+            }
+        }
+        if((pos[i][0] == "ha" || pos[i][0] == "fa") && e.clientX-dx < pos[i][1][0]+vel1x/2+vel2x && e.clientX-dx > pos[i][1][0]+vel1x/2 && e.clientY-dy < pos[i][1][1]-vel1y/2+vel2y && e.clientY-dy > pos[i][1][1]-vel1y/2){
+            if(par1 != null){
+                if(op[par1.slice(1)][0] == "not" || op[par1.slice(1)][0] == "end"){
+                    op[par1.slice(1)][1][0] = "0"+i;
+                }
+                else{
+                    op[par1.slice(1)][1][par1[0]][0] = "0"+i;
+                }
+                spoje.push(Array(par1, "0"+i))
+                par1 = null;
+            }
+            else if(par2 == null){
+                par2 = "0"+i;
+            }
+            else{
+                par2 = null;
+            }
+        }
+        if((pos[i][0] == "ha" || pos[i][0] == "fa") && e.clientX-dx < pos[i][1][0]+vel1x/2+vel2x && e.clientX-dx > pos[i][1][0]+vel1x/2 && e.clientY-dy < pos[i][1][1]+vel1y/2 && e.clientY-dy > pos[i][1][1]+vel1y/2-vel2y){
+            if(par1 != null){
+                if(op[par1.slice(1)][0] == "not" || op[par1.slice(1)][0] == "end"){
+                    op[par1.slice(1)][1][0] = "1"+i;
+                }
+                else{
+                    op[par1.slice(1)][1][par1[0]][0] = "1"+i;
+                }
+                spoje.push(Array(par1, "1"+i))
+                par1 = null;
+            }
+            else if(par2 == null){
+                par2 = "1"+i;
+            }
+            else{
+                par2 = null;
+            }
+        }
+        if(pos[i][0] == "but" && e.clientX-dx < pos[i][1][0]+vel2x/2 && e.clientX-dx > pos[i][1][0]-vel2x/2 && e.clientY-dy < pos[i][1][1]-vel1y/2 && e.clientY-dy > pos[i][1][1]-vel1y/2-vel2y){
+            if(op[i][2] == "false"){
+                op[i][2] = "true";
+            }
+            else{
+                op[i][2] = "false";
+            }
+        }
+    }
+    vykres();
+}
+function del(){
+    console.log(spoje);
+    for(let ii = 0; ii < spoje.length-1; ii++){
+        if(spoje[ii][0] == spoje[spoje.length-1][0] && spoje[ii][1] == spoje[spoje.length-1][1]){
+            if(op[spoje[ii][0].slice(1)][0] == "not" || op[spoje[ii][0].slice(1)][0] == "end"){
+                op[spoje[ii][0].slice(1)][1] = [,];
+                op[spoje[ii][0].slice(1)][2] = [];
+            }
+            else{
+                op[spoje[ii][0].slice(1)][1][spoje[ii][0][0]] = [,];
+                op[spoje[ii][0].slice(1)][2] = [];
+            }
+            spoje.pop();
+            spoje.splice(ii,1);
+        }
+    }
+}
+
+function vyp(){
+for(let ii = 0; ii < 10; ii++){
+for(let i of op){
+    if(i[0] != "but"){
+    if(i[0] == "end" && (i[1][1] == "true" || i[1][1] == "false")){
+        i[2] = i[1][1];
+    }
+    if(i[0] == "not" && (i[1][1] == "true" || i[1][1] == "false")){
+        if(i[1][1] == "false"){
+            i[2] = "true";
+        }
+        else{
+            i[2] = "false";
+        }
+    }
+    if(i[0] != "end" && i[0] != "not" && (i[1][1][1] == "true" || i[1][1][1] == "false") && (i[1][0][1] == "true" || i[1][0][1] == "false")){
+        if(i[0] == "and"){
+            i[2] = AND(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "or"){
+            i[2] = OR(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "xor"){
+            i[2] = XOR(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "nand"){
+            i[2] = NAND(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "nor"){
+            i[2] = NOR(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "nxor"){
+            i[2] = NXOR(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "ha"){
+            i[2][0] = XOR(i[1][0][1], i[1][1][1]);
+            i[2][1] = AND(i[1][0][1], i[1][1][1]);
+        }
+        if(i[0] == "fa" && (i[1][2][1] == "true" || i[1][2][1] == "false")){
+            i[2][0] = XOR(i[1][2][1], XOR(i[1][0][1], i[1][1][1]));
+            i[2][1] = OR(AND(i[1][0][1], i[1][1][1]),AND(XOR(i[1][0][1], i[1][1][1]), i[1][2][1]));
+        }
+    }
+    if(i[0] != "end" && i[0] != "not"){
+        if(i[1][0][0]){
+            if(i[1][0][0][0] == "2"){
+                if(op[i[1][0][0].slice(1)][2] == "true" || op[i[1][0][0].slice(1)][2] == "false"){
+                    i[1][0][1] = op[i[1][0][0].slice(1)][2];
+                }
+            }
+            else{
+                if(op[i[1][0][0].slice(1)][2][i[1][0][0][0]] == "true" || op[i[1][0][0].slice(1)][2][i[1][0][0][0]] == "false"){
+                    i[1][0][1] = op[i[1][0][0].slice(1)][2][i[1][0][0][0]];
+                }
+            }
+        }
+        if(i[1][1][0]){
+            if(i[1][1][0][0] == "2"){
+                if(op[i[1][1][0].slice(1)][2] == "true" || op[i[1][1][0].slice(1)][2] == "false"){
+                    i[1][1][1] = op[i[1][1][0].slice(1)][2];
+                }
+            }
+            else{
+                if(op[i[1][1][0].slice(1)][2][i[1][1][0][0]] == "true" || op[i[1][1][0].slice(1)][2][i[1][1][0][0]] == "false"){
+                    i[1][1][1] = op[i[1][1][0].slice(1)][2][i[1][1][0][0]];
+                }
+            }
+        }
+        if(i[0] == "fa"){
+        if(i[1][2][0]){
+            if(i[1][2][0][0] == "2"){
+                if(op[i[1][2][0].slice(1)][2] == "true" || op[i[1][2][0].slice(1)][2] == "false"){
+                    i[1][2][1] = op[i[1][2][0].slice(1)][2];
+                }
+            }
+            else{
+                if(op[i[1][2][0].slice(1)][2][i[1][2][0][0]] == "true" || op[i[1][2][0].slice(1)][2][i[1][2][0][0]] == "false"){
+                    i[1][2][1] = op[i[1][2][0].slice(1)][2][i[1][2][0][0]];
+                }
+            }
+        }
+        }
+    }
+    if(i[0] == "end" || i[0] == "not"){
+        if(i[1][0]){
+            if(i[1][0][0] == "2"){
+                if(op[i[1][0].slice(1)][2] == "true" || op[i[1][0].slice(1)][2] == "false"){
+                    i[1][1] = op[i[1][0].slice(1)][2];
+                }
+            }
+            else{
+                if(op[i[1][0].slice(1)][2][i[1][0][0]] == "true" || op[i[1][0].slice(1)][2][i[1][0][0]] == "false"){
+                    i[1][1] = op[i[1][0].slice(1)][2][i[1][0][0]];
+                }
+            }
+        }
+    }
+    }
+}
+}
+}
+function NAND(i1, i2){
+    if(i1 == "true" && i2 == "true"){
+        return "false";
+    }
+    else{
+        return "true";
+    }
+}
+function NOR(i1, i2){
+    if(i1 == "false" && i2 == "false"){
+        return "true";
+    }
+    else{
+        return "false";
+    }
+}
+function NXOR(i1, i2){
+    if((i1 == "false" && i2 == "true") || (i1 == "true" && i2 == "false")){
+        return "false";
+    }
+    else{
+        return "true";
+    }
+}
+function AND(i1, i2){
+    if(i1 == "true" && i2 == "true"){
+        return "true";
+    }
+    else{
+        return "false";
+    }
+}
+function OR(i1, i2){
+    if(i1 == "false" && i2 == "false"){
+        return "false";
+    }
+    else{
+        return "true";
+    }
+}
+function XOR(i1, i2){
+    if((i1 == "false" && i2 == "true") || (i1 == "true" && i2 == "false")){
+        return "true";
+    }
+    else{
+        return "false";
+    }
+}
+    </script>
+    </div>
+</body>
+</html>

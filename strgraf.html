@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #body{
+            text-align: center;
+            display: flex;
+            margin: 3px;
+        }
+        #can{
+            border: 2px solid;
+        }
+        #par0{
+            text-align: right;
+        }
+        button{
+            border: 2px solid;
+            background-color:chartreuse;
+            border-radius: 2px;
+            width: 70px;
+            height: 30px;
+            margin: 3px;
+        }
+        button:hover{
+            background-color: rgba(128, 255, 0, 0.639);
+        }
+        button:active{
+            background-color: rgba(128, 255, 0, 0.427);
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgray;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div id="body">
+    <canvas id="can" width="500" height="500"></canvas>
+    <div id="par0">
+        <label>y=</label>
+        <input type="text" id="inp"><br>
+        <label>Zvětšení:</label>
+        <input type="text" id="m"><br>
+        <label>OsaX:</label>
+        <input type="text" id="osx"><br>
+        <label>OsaY:</label>
+        <input type="text" id="osy"><br>
+        <button id="vyk">Vykreslit</button>
+        <button id="sm">Smazat</button><br>
+        <label id="res"></label>
+    </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+
+const X = 500;
+const Y = 500;
+let fce;
+let fce2;
+let y;
+let m = 30;
+let xosy = 1;
+let yosy = 1;
+let rov;
+let rov0;
+let rov1;
+let x = -1;
+let dst = 100;
+let h = 0;
+
+document.getElementById("m").value = m;
+document.getElementById("osx").value = xosy;
+document.getElementById("osy").value = yosy;
+clear();
+document.getElementById("vyk").onclick = function(){
+    fce = document.getElementById("inp").value;
+    m = document.getElementById("m").value;
+    xosy = eval(document.getElementById("osx").value);
+    yosy = eval(document.getElementById("osy").value);
+    clear();
+    res(fce)
+    vykres();
+}
+document.getElementById("sm").onclick = function(){
+    clear(); 
+}
+
+
+function clear(){
+    x = -1;
+    cnx.beginPath();
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+    cnx.moveTo(250, 0);
+    cnx.lineTo(250, 500);
+    cnx.moveTo(0, 250);
+    cnx.lineTo(500, 250);
+    for(let i = X/2; i <= X; i += xosy*m){
+        cnx.moveTo(i, 248);
+        cnx.lineTo(i, 252);
+    }
+    for(let i = X/2; i >= 0; i -= xosy*m){
+        cnx.moveTo(i, 248);
+        cnx.lineTo(i, 252);
+    }
+    for(let i = Y/2; i <= Y; i += yosy*m){
+        cnx.moveTo(248, i);
+        cnx.lineTo(252, i);
+    }
+    for(let i = Y/2; i >= 0; i -= yosy*m){
+        cnx.moveTo(248, i);
+        cnx.lineTo(252, i);
+    }
+    cnx.stroke();
+}
+function vykres(){
+    cnx.beginPath();
+    move();
+    for(let i = -250/m; i <= 250/m; i += 1/m){
+        fce2 = fce.replaceAll("x", String(i));
+        y = eval(fce2)*m;
+        cnx.lineTo(i*m+250, 250-y);
+        cnx.stroke();
+    }
+}
+function move(){
+    fce2 = fce.replaceAll("x", "(-25)");
+    y = eval(fce2)*m;
+    cnx.moveTo((-25)*m+250, 250-y);
+}
+function res(rov){
+    while(true){
+        x++;
+        if(x > 100){
+            break;
+        }
+        rov0 = rov.replaceAll("x", "("+String(x)+")");
+        rov1 = rov.replaceAll("x", "("+String(x+1)+")");
+        if(Math.abs(eval(rov0)) < Math.abs(eval(rov1))){
+            if(Math.abs(eval(rov0)) == 0){
+                console.log(x);
+                break;
+            }
+            else if(x == 0){
+                x++;
+                zap();
+            }
+            else if(x > 0){
+                des();
+            }
+            break;
+        }
+    }
+    console.log("x = "+x);
+    console.log("L-P = "+eval(rov0));
+    document.getElementById("res").innerHTML = "x = "+x+"\n L-P = "+eval(rov0);
+    function zap(){
+        while(true){
+            x--;
+            rov0 = rov.replaceAll("x", "("+String(x)+")");
+            rov1 = rov.replaceAll("x", "("+String(x-1)+")");
+            if(Math.abs(eval(rov0)) < Math.abs(eval(rov1))){
+                if(Math.abs(eval(rov0)) == 0){
+                    console.log(x);
+                    break;
+                } 
+                else{
+                    des();
+                }
+                break;
+            }
+        }
+    }
+    function des(){
+        for(let i = 0; i < dst; i++){
+            x -= 1/(Math.pow(10, i));
+            for(let ii = 0; ii < 20; ii++){
+                x += Math.pow(10, -i-1);
+                rov0 = rov.replaceAll("x", "("+String(x)+")");
+                rov1 = rov.replaceAll("x", "("+String(x+Math.pow(10, -i-1))+")");
+                if(Math.abs(eval(rov0)) < Math.abs(eval(rov1))){
+                    if(Math.abs(eval(rov0)) == 0){
+                        console.log(x);
+                        h = 1;
+                        break;
+                    }
+                    else{
+                        console.log(x);
+                        break;
+                    }
+                } 
+            }
+            if(h == 1){
+                h = 0;
+                break;
+            }
+        }
+    }
+}
+    </script>
+</body>
+</html>

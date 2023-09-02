@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landauův vozíček</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <style>
+body{
+    margin: 0px;
+}
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgray;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+    <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
+    <div  style="width: 200px; padding: 5px;">
+        <div style="text-align: right;">
+            <label>\(x(0):\) </label><input id="x">
+            <label>\(\varphi(0):\) </label><input id="fi"><br>
+            <label>\(v_x(0):\) </label><input id="v">
+            <label>\(\omega(0):\) </label><input id="om"><br>
+            <br>
+            <label>\(m_\textrm{V}:\) </label><input id="mv">
+            <label>\(m_\textrm{K}:\) </label><input id="mk"><br>
+            <label>\(l:\) </label><input id="l"><br>
+            <label>\(g:\) </label><input id="g">
+        </div><br>
+        <label style="font-weight: bold;">Přesnost:</label><br>
+        <div>
+            <label>\(\Delta t:\) </label><input id="t">
+        </div>
+        <br>
+        <button id="but">Spustit</button><br>
+        <br>
+        <label>\(x\) = </label><label id="x1"></label><br>
+        <label>\(v_x\) = </label><label id="v1"></label><br>
+        <label>\(\varphi\) = </label><label id="fi1"></label><br>
+        <label>\(\omega\) = </label><label id="om1"></label><br>
+        <label>\(T\) = </label><label id="T"></label>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+const X = 800;
+const Y = 500;
+let y = 50;
+let m = 60;
+let timer = null;
+
+zapis();
+get();
+clear();
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    timer = setInterval(a, t);
+}
+
+function a(){
+    clear();
+    b();
+    v1 =  v+((mk*l*om*om*Math.sin((fi*Math.PI)/180)+mk*g*Math.sin((fi*Math.PI)/180)*Math.cos((fi*Math.PI)/180))/(mv+mk-mk*Math.cos((fi*Math.PI)/180)*Math.cos((fi*Math.PI)/180)))*dt;
+    om1 = om+((-mk*l*om*om*Math.sin((fi*Math.PI)/180)*Math.cos((fi*Math.PI)/180)-(mk+mv)*g*Math.sin((fi*Math.PI)/180))/(mv*l+mk*l-mk*l*Math.cos((fi*Math.PI)/180)*Math.cos((fi*Math.PI)/180)))*dt;
+    fi1 = fi+(om*dt*180)/Math.PI;
+    x1 = x+v*dt;
+    if(fi1 > fimax){
+        fimax = fi1;
+        T = T1*dt;
+    }
+    else{
+        if(T == T1*dt && fi1 < fi){T1 = 0;}
+        T1++;
+    }
+    v = v1; om = om1; fi = fi1; x = x1;
+    console.log("x: "+x);
+    console.log("fi: "+fi);
+    console.log("v: "+v);
+    console.log("om: "+om);
+    console.log("T: "+T);
+    document.getElementById("x1").innerHTML = Math.round(x*100)/100;
+    document.getElementById("v1").innerHTML = Math.round(v*100)/100;
+    document.getElementById("fi1").innerHTML = Math.round(fi*100)/100;
+    document.getElementById("om1").innerHTML = Math.round(om*100)/100;
+    document.getElementById("T").innerHTML = Math.round(T*100)/100;
+}
+function b(){
+    cnx.beginPath();
+    cnx.fillStyle = "grey";
+    cnx.arc(x*m-m*0.375+X/2+10,y+m/4-2, 6, 0, 2*Math.PI);
+    cnx.moveTo(x*m+m*0.375+X/2-4,y+m/4-2);
+    cnx.arc(x*m+m*0.375+X/2-10,y+m/4-2, 6, 0, 2*Math.PI);
+    cnx.fillRect(x*m-m*0.375+X/2, y-m/6, m*0.75, m/3);
+    cnx.moveTo(l*m*Math.sin((fi*Math.PI)/180)+x*m+X/2+7, l*m*Math.cos((fi*Math.PI)/180)+y);
+    cnx.arc(l*m*Math.sin((fi*Math.PI)/180)+x*m+X/2, l*m*Math.cos((fi*Math.PI)/180)+y, 7, 0, 2*Math.PI);
+    cnx.fill();
+    cnx.moveTo(x*m+X/2, y);
+    cnx.lineTo(l*m*Math.sin((fi*Math.PI)/180)+x*m+X/2, l*m*Math.cos((fi*Math.PI)/180)+y);
+    cnx.moveTo(0, y+m/4+4);
+    cnx.lineTo(X, y+m/4+4);
+    cnx.stroke();
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+}
+function zapis(){
+    document.getElementById("x").value = "0";
+    document.getElementById("v").value = "0";
+    document.getElementById("fi").value = "45";
+    document.getElementById("om").value = "0";
+    document.getElementById("mv").value = "1";
+    document.getElementById("mk").value = "1";
+    document.getElementById("l").value = "1";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("t").value = "4";
+}
+function get(){
+    x = Number(document.getElementById("x").value);
+    v = Number(document.getElementById("v").value);
+    fi = Number(document.getElementById("fi").value);
+    om = Number(document.getElementById("om").value);
+    mv = Number(document.getElementById("mv").value);
+    mk = Number(document.getElementById("mk").value);
+    l = Number(document.getElementById("l").value);
+    g = Number(document.getElementById("g").value);
+    t = Number(document.getElementById("t").value);
+    dt = t/1000;
+    fimax = 0;
+    T1 = 0;
+}
+
+    </script>
+    </div>
+</body>
+</html>

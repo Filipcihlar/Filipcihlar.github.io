@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Průměr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        input{
+            width: 15px;
+        }
+        .okolo{
+            margin: 3px;
+        }
+        div:not(.navbar, .dropdown-content, .dropdown, .okolo){
+            border: 2px solid;
+            vertical-align: top;
+            text-align: center;
+            border-radius: 5px;
+            width: 90px;
+            margin-top: 2px;
+            height: auto;
+            display: inline-block;
+        }
+        button:not(.dropbtn){
+            font-size: 10px;
+            width: 44px;
+            height: 20px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 1px;
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div class="okolo">
+    <input type="text" id="text" style="width: 185px; height: 30px; border-radius: 5px; border: 2px solid;">
+    <button id="start" style="width: 191px; height: 35px; border: 2px solid;  font-size: 18px;">Vypočítat</button>
+    <button id="res" style="width: 191px; height: 35px; border: 2px solid;  font-size: 18px;">Reset</button>
+    <a style="font-size: 20px; font-weight: bold;" href="https://bakalari.gymdom.cz/bakaweb1/next/prubzna.aspx?s=chrono" target="_blank">Bakaláři</a><br>
+    <br>
+    <div id="plus" style="width:auto; border: 0px; text-align: unset; display: unset; vertical-align: unset;">
+    </div>
+    <br>
+    <button id="grf" style="width: 191px; height: 35px; border: 2px solid;  font-size: 18px; margin-top: 2px;">Graf</button><br>
+    <div id="grf2"  style="display: none;border: 2px solid; width: 320px; border-radius: 5px; text-align: center; background-color: yellow;">
+        <button id="grf4" style="width: 25px; height: 16px; margin-right: -290px; background-color: red;">×</button><br>
+        <label style="font-weight: bold;">Vykreslit graf</label><br>
+        <label>Předmět:</label>
+        <select id="grf3">
+        </select><br>
+        <canvas id="can" width="300px" height="150px" style="margin: 5px; background: linear-gradient(red,yellow,rgb(0, 255, 0));"></canvas>
+    </div>
+    <button id="plus2" style="width: 191px; height: 35px; border: 2px solid;  font-size: 18px; margin-top: 2px;">Přidat předmět</button>
+    <button id="col" style="width: 191px; height: 35px; border: 2px solid;  font-size: 18px; margin-top: 2px;">Změnit barvu</button>
+    <button id="hint" style="width: 35px; height: 35px; border: 2px solid;  font-size: 18px;">?</button><br>
+    <div id="plus3" style="border: 2px solid; width: 187px; border-radius: 5px; text-align: center; background-color: yellow; visibility: hidden;">
+        <label style="font-weight: bold;">Přidat nový předmět</label><br>
+        <label>Název předmětu:</label><br>
+        <input id="iplus1" style="width: 170px;"><br>
+        <label>Zkratka:</label><br>
+        <input id="iplus2" style="width: 30px;"><br>
+        <button id="bplus" style="width: 100px; height: 30px; font-size: 15px; margin-top: 2px;">Přidat</button>
+    </div>
+    <div id="col2" style="border: 2px solid; width: 187px; border-radius: 5px; text-align: right; background-color: yellow; visibility: hidden;">
+        <label style="font-weight: bold;">Změna barvy</label><br>
+        <label>Pozadí:</label><input id="bgrgb" style="width: 102px;"><br>
+        <label>Tlačítka1:</label><input id="b1rgb" style="width: 102px;"><br>
+        <label>Tlačítka2:</label><input id="b2rgb" style="width: 102px;"><br>
+        <label>Předměty:</label><input id="sbrgb" style="width: 102px;"><br>
+        <button id="col3" style="width: 100px; height: 30px; font-size: 15px; margin-top: 2px;">Potvrdit</button>
+    </div>
+    <div id="hint2" style="border: 2px solid; width: 680px; border-radius: 5px; text-align: left; background-color: yellow; visibility: hidden; z-index: 1; position: absolute;">
+        <button id="hint3" style="width: 50px; height: 30px; font-size: 15px; margin-top: 2px;">Skrýt</button>
+        <label style="font-size: 25px; font-weight: bold;">Nápověda</label><br>
+        <label style="font-size: 16px; font-weight: bold;">Výpočet průměru</label>
+        <p>
+            Známky lze u&nbsp;jednotlivých předmětů přidávat a&nbsp;odebírat tlačítky v&nbsp;dolní části kolonky každého předmětu
+            a&nbsp;bílých kolonek, do kterých je třeba napsat známku a&nbsp;její váhu.<br>(z - známka, v - váha)<br>
+            Pro zjednodušení je zde také možnost vložit zkopírované známky ze stránky <a href="https://bakalari.gymdom.cz/bakaweb1/next/prubzna.aspx?s=chrono" target="_blank">Bakaláři</a>
+            do bílé kolonky<br>v levém horním rohu a&nbsp;následně kliknout na tlačítko "Vypočítat".<br>
+            Pro zkopírování známek stačí na stránce <a href="https://bakalari.gymdom.cz/bakaweb1/next/prubzna.aspx?s=chrono" target="_blank">Bakaláři</a>
+            jen stisknout klávesy CTRL+A a&nbsp;CTRL+C.
+        </p>
+        <label style="font-size: 16px; font-weight: bold;">Reset</label>
+        <p>
+            Jelikož se stav aplikace při každé změně ukládá, je zde tlačítko "Reset", které vrátí aplikaci do původního stavu.
+        </p>
+        <label style="font-size: 16px; font-weight: bold;">Přidání/Odebrání předmětu</label>
+        <p>
+            Jelikož nemají všichni uživatelé stejné předměty, je zde možnost předměty odebírat a&nbsp;přidávat.<br>
+            K odebrání předmětu slouží červené tlačítko v&nbsp;pravém horním rohu kolonky každého předmětu.<br>
+            K přidání předmětu slouží tlačítko "Přidat předmět", po jehož stisknutí se objeví okénko,
+            kam je třeba zadat takový název předmětu, jaký je na stránce <a href="https://bakalari.gymdom.cz/bakaweb1/next/prubzna.aspx?s=chrono" target="_blank">Bakaláři</a>
+            a&nbsp;libovolnou ještě nepoužitou zkratku.<br>
+            Tlačítko "Přidat" slouží k přidání předmětu a&nbsp;skrytí okénka. Pokud jsou zadány neplatné údaje, předmět se nepřidá.
+        </p>
+        <label style="font-size: 16px; font-weight: bold;">Změna barvy</label>
+        <p>
+            Ke změně barevného vzhledu aplikace slouží tlačítko "Změnit barvu", po jehož stisknutí se objeví okénko,
+            kam je možné zadat rgb kódy.<br>
+            Pozadí: barva pozadí aplikace,<br>
+            Tlačítka1: barva pozadí tlačítek,<br>
+            Tlačítka2: barva ohraničení tlačítek a&nbsp;písma v&nbsp;nich,<br>
+            Předměty: barva ohraničení kolonek předmětů a&nbsp;písma v&nbsp;nich.<br>
+            Tlačítko "Potvrdit" nastaví barevný vzhled aplikace dle zadaných rgb kódů.
+            Pokud jsou zadány neplatné rgb kódy, barevný vzhled aplikace se nezmění.
+        </p>
+        <label style="font-size: 16px; font-weight: bold;">Informace</label>
+        <p>
+            Autor: Filip Cihlář<br>
+            Verze: 1.1.0 <!--1.0.1: nezlomitelné mezery v nápovědě
+                        1.1.0: grafy-->
+        </p>
+    </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let z = 0;
+let v = 0;
+let g = 0;
+let r = 0;
+let t;
+let t0;
+let label;
+let date = new Date();
+let rok = String(date.getFullYear());
+let predm = [["Český jazyk a literatura", "..Čj"],["Anglický jazyk", "..Aj"],["Německý jazyk", "..Nj"],["Základy společenských věd", "..Zsv"],["Dějepis", "..D"],["Zeměpis", "..Z"],["Matematika", "..M"],["Fyzika", "..Fy"],["Chemie", "..Ch"],["Biologie", "..Bi"],["Informatika a výp. technika", "..Ivt"],["Výtvarná výchova", "..Vv"],["Hudební výchova", "..Hv"],["Tělesná výchova", "..Tv"]];
+let addz = [["Čj",[],[]],["Aj",[],[]],["Nj",[],[]],["Zsv",[],[]],["D",[],[]],["Z",[],[]],["M",[],[]],["Fy",[],[]],["Ch",[],[]],["Bi",[],[]],["Ivt",[],[]],["Vv",[],[]],["Hv",[],[]],["Tv",[],[]]];
+let colors = ["rgb(230,230,250)","rgb(32,178,170)","rgb(0,0,0)","rgb(0,0,0)"];
+
+e();
+d();
+window.addEventListener("click", d);
+
+document.getElementById("start").onclick = function(){
+    for(let i = 0; i < predm.length; i++){
+        addz[i][1] = [];
+        addz[i][2] = [];
+        document.getElementById(addz[i][0]+"l").innerHTML = "";
+    }
+    b();
+}
+document.getElementById("res").onclick = function(){
+    colors = ["rgb(230,230,250)","rgb(32,178,170)","rgb(0,0,0)","rgb(0,0,0)"];
+    predm = [["Český jazyk a literatura", "..Čj"],["Anglický jazyk", "..Aj"],["Německý jazyk", "..Nj"],["Základy společenských věd", "..Zsv"],["Dějepis", "..D"],["Zeměpis", "..Z"],["Matematika", "..M"],["Fyzika", "..Fy"],["Chemie", "..Ch"],["Biologie", "..Bi"],["Informatika a výp. technika", "..Ivt"],["Výtvarná výchova", "..Vv"],["Hudební výchova", "..Hv"],["Tělesná výchova", "..Tv"]];
+    addz = [["Čj",[],[]],["Aj",[],[]],["Nj",[],[]],["Zsv",[],[]],["D",[],[]],["Z",[],[]],["M",[],[]],["Fy",[],[]],["Ch",[],[]],["Bi",[],[]],["Ivt",[],[]],["Vv",[],[]],["Hv",[],[]],["Tv",[],[]]]
+    document.getElementById("plus").textContent = "";
+    f();
+    e();
+}
+
+document.getElementById("plus2").onclick = function(){
+    document.getElementById("plus2").style.visibility = "hidden";
+    document.getElementById("plus3").style.visibility = "visible";
+    document.getElementById("bplus").onclick = function(){
+        if(document.getElementById("iplus2").value != "" && document.getElementById("iplus1").value != ""){
+            blbost = true;
+            for(let i = 0; i < predm.length; i++){
+                if(predm[i][0] == document.getElementById("iplus1").value || predm[i][1] == ".."+document.getElementById("iplus2").value){
+                    blbost = false;
+                    break;
+                }
+            }
+            if(blbost){
+                predm.push([document.getElementById("iplus1").value, ".."+document.getElementById("iplus2").value]);
+                addz.push([document.getElementById("iplus2").value,[],[]]);
+                
+                grf2();
+
+                td = document.createElement("div");
+                td.id = addz[addz.length-1][0]+"t";
+                td.style = "margin-right: 4px"
+                document.getElementById("plus").appendChild(td);
+
+                elm = document.createElement("BUTTON");
+                elm.id = addz[addz.length-1][0]+"rem";
+                elm.style = "width: 20px; height: 14px; margin-right: -68px; background-color: red;";
+                elm.appendChild(document.createTextNode("×"));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(document.createElement("br"));
+
+                elm = document.createElement("label");
+                elm.id = addz[addz.length-1][0];
+                elm.style = "font-weight: bold";
+                elm.appendChild(document.createTextNode(addz[addz.length-1][0]+":"));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(document.createElement("br"));
+
+                elm = document.createElement("label");
+                elm.appendChild(document.createTextNode("z: "));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                elm = document.createElement("input");
+                elm.id = addz[addz.length-1][0]+"z";
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                elm = document.createElement("label");
+                elm.appendChild(document.createTextNode(" v: "));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                elm = document.createElement("input");
+                elm.id = addz[addz.length-1][0]+"v";
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(document.createElement("br"));
+
+                elm = document.createElement("label");
+                elm.id = addz[addz.length-1][0]+"l";
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                elm = document.createElement("BUTTON");
+                elm.id = addz[addz.length-1][0]+"ad";
+                elm.style = "width: 88px;";
+                elm.appendChild(document.createTextNode("Přidat známku"));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(document.createElement("br"));
+
+                elm = document.createElement("BUTTON");
+                elm.id = addz[addz.length-1][0]+"b";
+                elm.style = "width: 46px; margin-right: -4px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-right: 0px";
+                elm.innerText = "Smazat";
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                elm = document.createElement("BUTTON");
+                elm.id = addz[addz.length-1][0]+"b2";
+                elm.style = "width: 46px; border-top-left-radius: 0px; border-bottom-left-radius: 0px";
+                elm.appendChild(document.createTextNode("Vše"));
+                document.getElementById(addz[addz.length-1][0]+"t").appendChild(elm);
+
+                col();
+            }
+        }
+        document.getElementById("plus2").style.visibility = "visible";
+        document.getElementById("plus3").style.visibility = "hidden";
+    }
+    f()
+}
+document.getElementById("col").onclick = function(){
+    document.getElementById("col").style.visibility = "hidden";
+    document.getElementById("col2").style.visibility = "visible";
+    document.getElementById("col3").onclick = function(){
+        colors[0] = document.getElementById("bgrgb").value;
+        colors[1] = document.getElementById("b1rgb").value;
+        colors[2] = document.getElementById("b2rgb").value;
+        colors[3] = document.getElementById("sbrgb").value;
+        f();
+        col();
+        document.getElementById("col").style.visibility = "visible";
+        document.getElementById("col2").style.visibility = "hidden";
+    }
+}
+document.getElementById("hint").onclick = function(){
+    document.getElementById("hint").style.visibility = "hidden";
+    document.getElementById("hint2").style.visibility = "visible";
+    document.getElementById("hint3").onclick = function(){
+        document.getElementById("hint").style.visibility = "visible";
+        document.getElementById("hint2").style.visibility = "hidden";
+    }
+}
+document.getElementById("grf").onclick = function(){
+    document.getElementById("grf").style.visibility = "hidden";
+    document.getElementById("grf2").style.display = "block";
+    document.getElementById("grf4").onclick = function(){
+        document.getElementById("grf").style.visibility = "visible";
+        document.getElementById("grf2").style.display = "none";
+    }
+}
+
+function d(){
+    for(let i = 0; i < predm.length; i++){
+        document.getElementById(addz[i][0]+"ad").onclick = function(){
+            if(document.getElementById(addz[i][0]+"z").value > 0 && document.getElementById(addz[i][0]+"v").value > 0){
+                addz[i][1].push(document.getElementById(addz[i][0]+"z").value);
+                addz[i][2].push(document.getElementById(addz[i][0]+"v").value);
+                document.getElementById(addz[i][0]+"l").innerHTML += addz[i][1].slice(-1)+" "+addz[i][2].slice(-1)+"<br/>";
+            }
+            c();
+        }
+    }
+    for(let i = 0; i < predm.length; i++){
+        document.getElementById(addz[i][0]+"rem").onclick = function(){
+            document.getElementById(addz[i][0]+"t").remove();
+            predm.splice(i, 1);
+            addz.splice(i, 1);
+            console.log(predm);
+            console.log(addz);
+            console.log(predm.length);
+            grf2();
+        }
+    }
+    for(let i = 0; i < predm.length; i++){
+        console.log(i);
+        document.getElementById(addz[i][0]+"b").onclick = function(){
+            addz[i][1].pop();
+            addz[i][2].pop();
+            document.getElementById(addz[i][0]+"l").innerHTML = "";
+            for(let ii = 0; ii < addz[i][1].length; ii++){
+                document.getElementById(addz[i][0]+"l").innerHTML += addz[i][1][ii]+" "+addz[i][2][ii]+"<br/>";
+            }
+            c();
+        }
+    }
+    for(let i = 0; i < predm.length; i++){
+        document.getElementById(addz[i][0]+"b2").onclick = function(){
+            addz[i][1] = [];
+            addz[i][2] = [];
+            document.getElementById(addz[i][0]+"l").innerHTML = "";
+            c();
+        }
+    }
+    f();
+    grf();
+}
+
+function b(){
+    t0 = document.getElementById("text").value;
+    for(let i of predm){
+        t0 = t0.replaceAll(i[0], i[1]);
+    }
+    t1 = t0.split(" ..");
+    t1.splice(0, 1);
+    t1.forEach(a);
+}
+
+function a(t){
+    console.log(t);
+    t = t.replaceAll("-", ".5");
+    t2 = t.split("\t");
+    console.log(t2);
+    for(let i = 0; i < addz.length; i++){
+        if(addz[i][0] == t2[0]){
+            for(let i1 = 0; i1 < t2.length; i1++){
+                if(t2[i1].search("."+rok.slice(0, -1)) != -1){
+                    if(t2[1] > 0){
+                        addz[i][1].push(t2[1]);
+                        addz[i][2].push(t2[i1-1]);
+                    }
+                    document.getElementById(addz[i][0]+"l").innerHTML += t2[1]+" "+t2[i1-1]+"<br/>";
+                    break;
+                };
+            }
+
+        }
+    }
+    c();
+}
+function c(){
+    for(let i1 of addz){
+        for(let ii1 = 0; ii1 < i1[1].length; ii1++){
+            z += Number(i1[1][ii1]*i1[2][ii1]);
+            v += Number(i1[2][ii1]);
+        }
+        document.getElementById(i1[0]).innerHTML = i1[0]+": "+Math.round(z/v*1000)/1000;
+        if(z/v <= 3){
+            g = 255;
+            r = (z/v-1)*255/2;
+        }
+        else{
+            r = 255;
+            g = 255-(z/v-3)/2*255;
+        }
+        document.getElementById(i1[0]+"t").style.backgroundColor = "rgb("+r+","+g+","+"0)";
+        z = 0;
+        v = 0;
+    }
+}
+function e(){
+    predm = JSON.parse(localStorage.getItem("p")) ||  [["Český jazyk a literatura", "..Čj"],["Anglický jazyk", "..Aj"],["Německý jazyk", "..Nj"],["Základy společenských věd", "..Zsv"],["Dějepis", "..D"],["Zeměpis", "..Z"],["Matematika", "..M"],["Fyzika", "..Fy"],["Chemie", "..Ch"],["Biologie", "..Bi"],["Informatika a výp. technika", "..Ivt"],["Výtvarná výchova", "..Vv"],["Hudební výchova", "..Hv"],["Tělesná výchova", "..Tv"]];
+    addz = JSON.parse(localStorage.getItem("a")) || [["Čj",[],[]],["Aj",[],[]],["Nj",[],[]],["Zsv",[],[]],["D",[],[]],["Z",[],[]],["M",[],[]],["Fy",[],[]],["Ch",[],[]],["Bi",[],[]],["Ivt",[],[]],["Vv",[],[]],["Hv",[],[]],["Tv",[],[]]];
+    colors = JSON.parse(localStorage.getItem("c")) || ["rgb(230,230,250)","rgb(32,178,170)","rgb(0,0,0)","rgb(0,0,0)"];
+    for(let i = 0; i < addz.length; i++){
+        grf2();
+
+        td = document.createElement("div");
+        td.id = addz[i][0]+"t";
+        td.style = "margin-right: 4px"
+        document.getElementById("plus").appendChild(td);
+
+        elm = document.createElement("BUTTON");
+        elm.id = addz[i][0]+"rem";
+        elm.style = "width: 20px; height: 14px; margin-right: -68px; background-color: red;";
+        elm.appendChild(document.createTextNode("×"));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        document.getElementById(addz[i][0]+"t").appendChild(document.createElement("br"));
+
+        elm = document.createElement("label");
+        elm.id = addz[i][0];
+        elm.style = "font-weight: bold";
+        elm.appendChild(document.createTextNode(addz[i][0]+":"));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        document.getElementById(addz[i][0]+"t").appendChild(document.createElement("br"));
+
+        elm = document.createElement("label");
+        elm.appendChild(document.createTextNode("z: "));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        elm = document.createElement("input");
+        elm.id = addz[i][0]+"z";
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        elm = document.createElement("label");
+        elm.appendChild(document.createTextNode(" v: "));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        elm = document.createElement("input");
+        elm.id = addz[i][0]+"v";
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        document.getElementById(addz[i][0]+"t").appendChild(document.createElement("br"));
+
+        elm = document.createElement("label");
+        elm.id = addz[i][0]+"l";
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+        for(let ii = 0; ii < addz[i][1].length; ii++){
+            document.getElementById(addz[i][0]+"l").innerHTML += addz[i][1][ii]+" "+addz[i][2][ii]+"<br/>";
+        }
+
+        elm = document.createElement("BUTTON");
+        elm.id = addz[i][0]+"ad";
+        elm.style = "width: 88px;";
+        elm.appendChild(document.createTextNode("Přidat známku"));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        document.getElementById(addz[i][0]+"t").appendChild(document.createElement("br"));
+
+        elm = document.createElement("BUTTON");
+        elm.id = addz[i][0]+"b";
+        elm.style = "width: 46px; margin-right: -4px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-right: 0px";
+        elm.innerText = "Smazat";
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+
+        elm = document.createElement("BUTTON");
+        elm.id = addz[i][0]+"b2";
+        elm.style = "width: 46px; border-top-left-radius: 0px; border-bottom-left-radius: 0px";
+        elm.appendChild(document.createTextNode("Vše"));
+        document.getElementById(addz[i][0]+"t").appendChild(elm);
+    }
+    col();
+    c();
+}
+function f(){
+    localStorage.setItem("p", JSON.stringify(predm));
+    localStorage.setItem("a", JSON.stringify(addz));
+    localStorage.setItem("c", JSON.stringify(colors));
+}
+function col(){
+    document.getElementById("bgrgb").value = colors[0];
+    document.getElementById("b1rgb").value = colors[1];
+    document.getElementById("b2rgb").value = colors[2];
+    document.getElementById("sbrgb").value = colors[3];
+    document.body.style.backgroundColor = colors[0];
+    $("button:not(.dropbtn, #grf4)").css("background-color", colors[1]);
+    $("button:not(.dropbtn, #grf4)").css("color", colors[2]);
+    $("div:not(:not(.navbar, .dropdown-content))").css("color", colors[3]);
+    for(let i of addz){
+        document.getElementById(i[0]+"rem").style = "width: 20px; height: 14px; margin-right: -68px; background-color: red;";
+    }
+}
+function grf(){
+    z2 = 0;
+    v2 = 0;
+    sub = document.getElementById("grf3").value;
+    cnx.beginPath();
+    cnx.strokeStyle = "black";
+    cnx.lineWidth = 1;
+    cnx.clearRect(0, 0, 300, 150);
+    cnx.moveTo(0, 0);
+    for(let i = 0; i < 5; i++){
+        cnx.lineTo(3, 37.5*i);
+        cnx.moveTo(0, 37.5*i);
+        cnx.lineTo(0, 37.5*(i+1));
+    }
+    for(i of addz){
+        if(i[0] == sub){
+            for(let ii = 0; ii < i[1].length; ii++){
+                cnx.lineTo(300/i[1].length*ii, 150);
+                cnx.lineTo(300/i[1].length*ii, 147);
+                cnx.moveTo(300/i[1].length*ii, 150);
+            }
+            cnx.stroke();
+            cnx.beginPath();
+            cnx.strokeStyle = "blue";
+            cnx.lineWidth = 2;
+            cnx.moveTo(0,150-37.5*(i[1][0]-1));
+            for(let ii = 1; ii < i[1].length; ii++){
+                for(let iii = 0; iii <= ii; iii++){
+                    z2 += i[1][iii]*i[2][iii];
+                    v2 += Number(i[2][iii]);
+                }
+                cnx.lineTo(300/i[1].length*ii, 150-37.5*(z2/v2-1));
+                cnx.stroke();
+                console.log(v2);
+                z2 = 0;
+                v2 = 0;
+            }
+            cnx.stroke();
+        }
+    }
+}
+function grf2(){
+    while(document.getElementById("grf3").firstChild){
+        document.getElementById("grf3").firstChild.remove();
+    }
+    for(i of addz){
+        sel = document.createElement("option");
+        sel.value = i[0];
+        sel.appendChild(document.createTextNode(i[0]));
+        document.getElementById("grf3").appendChild(sel);
+    }
+}
+</script>
+</body>
+</html>

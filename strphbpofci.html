@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pohyb po funkci</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        input{
+            width: 41px;
+        }
+        button{
+            border: 2px solid;
+            background-color:chartreuse;
+            border-radius: 2px;
+            width: 70px;
+            height: 30px;
+        }
+        button:hover{
+            background-color: rgba(128, 255, 0, 0.639);
+        }
+        button:active{
+            background-color: rgba(128, 255, 0, 0.427);
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgray;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+    <canvas id="can" width="700" height="500" style="border: 1px solid;"></canvas>
+    <div style="width: 290px; padding: 5px;">
+    <div style="text-align: right;">
+        <label>\(f(x):\) </label><input id="fce" title="Funkce" style="width: 220px;"><br>
+        <label>\(x(0):\) </label><input id="x">
+        <label>\(v_x(0):\) </label><input id="v">
+        <label>\(g:\) </label><input id="g"><br>
+    </div><br>
+    <label style="font-weight: bold;">Přesnost:</label><br>
+    <div style="text-align: right;">
+        <label>\(f^\prime(x):\) </label><input id="y1" title="1. derivace" placeholder="(Nepovinné)" style="width: 220px;"><br>
+        <label>\(f^{\prime\prime}(x):\) </label><input id="y2" title="2. derivace" placeholder="(Nepovinné)" style="width: 220px;"><br>
+        <label>\(\Delta t\)[ms]: </label><input id="t">
+        <label>\(h:\) </label><input id="h"><br>
+    </div>
+    <label style="font-weight: bold;">Graf:</label>
+    <div style="text-align: right">
+        <label>\(X:\) </label><input id="X">
+        <label>\(Y:\) </label><input id="Y">
+        <label>Zvětšení: </label><input id="m"><br>
+        <label>Přesnost: </label><input id="p">
+    </div>
+    <button id="but">Spustit</button>
+    <button id="demo">Demo</button><br>
+    <br>
+    <label>\(x\) = </label><label id="xx"></label><br>
+    <label>\(v_x\) = </label><label id="vx"></label><br>
+    <label>\(y\) = </label><label id="yy"></label><br>
+    <label>\(v_y\) = </label><label id="vy"></label><br>
+    <label>\(v\) = </label><label id="vv"></label><br>
+    <label>\(T\) = </label><label id="T"></label>
+    <br>
+    <label style="font-weight: bold;">Diferenční schéma:</label><br>
+    <label>
+        $$
+        v_x(t_{n+1})=v_x(t_n)-\frac{v_x^2(t_n)\cdot f^\prime(x)\cdot f^{\prime\prime}(x)+g\cdot f^\prime(x)}{1+(f^\prime(x))^2}\cdot\Delta t
+        $$
+        $$
+        x(t_{n+1})=x(t_n)+v_x(t_n)\cdot\Delta t
+        $$
+    </label>
+    </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let xosy = 1;
+let yosy = 1;
+let timer = null;
+let T1 = 0;
+
+zapis();
+get();
+cnx.fillStyle = "white";
+cnx.fillRect(0, 0, X, Y);
+
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    vyp = "(-v*v*"+y2+"*"+y1+"-"+g+"*"+y1+")/(1+"+y1+"*"+y1+")";
+    timer = setInterval(a, t);
+}
+document.getElementById("demo").onclick = function(){
+    zapis();
+}
+
+function a(){
+    clear(); vykres(); b();
+    v1 = v+eval(vyp)*dt; x1 = x+v*dt;
+    if(x1 > xmax){
+        xmax = x1;
+        T = T1*dt;
+    }
+    else{
+        if(T == T1*dt && x1 < x){T1 = 0;}
+        T1++;
+    }
+    x = x1; v = v1;
+    document.getElementById("xx").innerHTML = Math.round(x*100)/100;
+    document.getElementById("vx").innerHTML = Math.round(v*100)/100;
+    document.getElementById("yy").innerHTML = Math.round(eval(fce)*100)/100;
+    document.getElementById("vy").innerHTML = Math.round(eval(y1)*v*100)/100;
+    document.getElementById("vv").innerHTML = Math.round(Math.pow((v*v+Math.pow((eval(y1)*v), 2)), 0.5)*100)/100;
+    document.getElementById("T").innerHTML = Math.round(T*100)/100;
+    console.log(x+" "+v);
+}
+function b(){
+    cnx.beginPath();
+    cnx.arc(x*m+X/2, -eval(fce)*m+Y/2, 5, 0, 2*Math.PI);
+    cnx.stroke();
+}
+function clear(){
+    cnx.beginPath();
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+    cnx.moveTo(X/2, 0);
+    cnx.lineTo(X/2, Y);
+    cnx.moveTo(0, Y/2);
+    cnx.lineTo(X, Y/2);
+    for(let i = X/2; i <= X; i += xosy*m){
+        cnx.moveTo(i, Y/2-2);
+        cnx.lineTo(i, Y/2+2);
+    }
+    for(let i = X/2; i >= 0; i -= xosy*m){
+        cnx.moveTo(i, Y/2-2);
+        cnx.lineTo(i, Y/2+2);
+    }
+    for(let i = Y/2; i <= Y; i += yosy*m){
+        cnx.moveTo(X/2-2, i);
+        cnx.lineTo(X/2+2, i);
+    }
+    for(let i = Y/2; i >= 0; i -= yosy*m){
+        cnx.moveTo(X/2-2, i);
+        cnx.lineTo(X/2+2, i);
+    }
+    cnx.stroke();
+}
+function vykres(){
+    cnx.beginPath();
+    for(let i = -X/(2*m); i <= X/(2*m); i += p/m){
+        fce2 = fce.replaceAll("x", "("+String(i)+")");
+        y = eval(fce2)*m;
+        cnx.lineTo(i*m+X/2, Y/2-y);
+    }
+    cnx.stroke();
+}
+function zapis(){
+    document.getElementById("fce").value = "(-3*Math.pow(1-0.1*x*x, 0.5))";
+    y1 = document.getElementById("y1").value = "";
+    y1 = document.getElementById("y2").value = "";
+    document.getElementById("x").value = "0.5";
+    document.getElementById("v").value = "3.5";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("t").value = "4";
+    document.getElementById("h").value = "0.00001";
+    document.getElementById("X").value = "700";
+    document.getElementById("Y").value = "500";
+    document.getElementById("m").value = "30";
+    document.getElementById("p").value = "1";
+}
+function get(){
+    fce = "("+document.getElementById("fce").value+")";
+    y1 = document.getElementById("y1").value || "("+fce.replaceAll("x", "(x+"+h+")")+"-"+fce+")/"+h;
+    y2 = document.getElementById("y2").value || "("+y1.replaceAll("x", "(x+"+h+")")+"-"+y1+")/"+h;
+    y1 = "("+y1+")"; y2 = "("+y2+")"
+    x = Number(document.getElementById("x").value);
+    v = Number(document.getElementById("v").value);
+    g = Number(document.getElementById("g").value);
+    t = Number(document.getElementById("t").value);
+    h = Number(document.getElementById("h").value);
+    X = Number(document.getElementById("X").value);
+    Y = Number(document.getElementById("Y").value);
+    document.getElementById("can").height = Y;
+    document.getElementById("can").width = X;
+    m = Number(document.getElementById("m").value);
+    p = Number(document.getElementById("p").value);
+    dt = t/1000;
+    xmax = x;
+    T1 = 0;
+}
+    </script>
+</body>
+</html>

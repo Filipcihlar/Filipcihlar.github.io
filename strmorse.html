@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morseovka</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid;
+    background-color: chartreuse;
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="margin: 3px;">
+        <textarea id="text" rows="5" cols="50"></textarea><br>
+        <button id="b1">Přeložit</button><br>
+        <textarea id="text2" rows="5" cols="50"></textarea><br>
+        <button id="b2">Přeložit</button>
+    </div>
+    
+
+    <script>
+
+let mors = [[["ch","CH","Ch"],["----/"]],[["a","á","A","Á"],[".-/"]],[["b","B"],["-.../"]],[["c","č","C","Č"],["-.-./"]],
+[["d","ď","D","Ď"],["-../"]],[["e","é","ě","E","É","Ě"],["./"]],[["f","F"],["..-./"]],[["g","G"],["--./"]],
+[["h","H"],["..../"]],[["i","í","I","Í"],["../"]],[["j","J"],[".---/"]],
+[["k","K"],["-.-/"]],[["l","L"],[".-../"]],[["m","M"],["--/"]],[["n","ň","N","Ň"],["-./"]],
+[["o","ó","O","Ó"],["---/"]],[["p","P"],[".--./"]],[["q","Q"],["--.-/"]],[["r","ř","R","Ř"],[".-./"]],
+[["s","š","S","Š"],[".../"]],[["t","ť","T","Ť"],["-/"]],[["u","ú","U","Ú"],["..-/"]],[["v","V"],["...-/"]],
+[["w","W"],[".--/"]],[["x","X"],["-..-/"]],[["y","ý","Y","Ý"],["-.--/"]],[["z","ž","Z","Ž"],["--../"]],[[" "],["/"]]];
+
+document.getElementById("b1").onclick = function(){
+    let text = String(document.getElementById("text").value);
+    console.log(text);
+    for(let i of mors){
+        for(let ii of i[0]){
+            text = text.replaceAll(ii, i[1]);
+        }
+    }
+    document.getElementById("text2").value = text;
+}
+document.getElementById("b2").onclick = function(){
+    let text2 = String(document.getElementById("text2").value);
+    console.log(text);
+    text2 = "/"+text2;
+    for(let i of mors){
+        text2 = text2.replaceAll("/"+i[1], "/"+i[0][0]+"/");
+    }
+    text2 = text2.replaceAll("/", "");
+    document.getElementById("text").value = text2;
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Hledání min</title>
+    <style>
+        .pol{
+            background-color: rgba(65, 255, 1, 0.621);
+            border: 1px solid gray;
+            height: 30px;
+            width: 30px;
+            font-size: 30px;
+            text-align: center;
+        }
+        input{
+            width: 50px;
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid;
+            background-color: chartreuse;
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="text-align: center; background-color: lightslategrey">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div id="menu" style="text-align: center;">
+        <label style="font-weight: bold; font-size: 40px;">Hledání min</label><br>
+        <label>Čas: </label><label id="score" style="font-size: 30px; font-weight: bold;"></label><br>
+        <button id="vlast">Vlastní</button>
+        <button id="leh">Lehká</button>
+        <button id="str">Střední</button>
+        <button id="tez">Těžká</button><br>
+        <div id="inf" style="display: none;">
+            <label>Počet sloupců: </label><label id="rowz"></label><br>
+            <label>Počet řádků: </label><label id="colz"></label><br>
+            <label>Počet min: </label><label id="poc1z"></label><br>
+        </div>
+        <div id="vlast1" style="display: none;">
+            <label>Počet sloupců: </label><input id="row" value="20"><br>
+            <label>Počet řádků: </label><input id="col" value="10"><br>
+            <label>Počet min: </label><input id="poc1" value="20"><br> 
+        </div>
+        <label>Nejlepší čas: </label><label id="hscore" style="font-weight: bold; font-size: 40px;"></label><br>
+        <button id="play" style="visibility: hidden;">Spustit hru</button>
+    </div>
+    <div id="hra" style="text-align: left; display: none; padding: 3px;">
+        <button id="zpet">Zpět</button><br>
+        <label style="font-size: 20px;">Zbývá: </label><label id="poc" style="font-size: 50px;"></label>
+        <label id="time" style="font-size: 50px; font-weight: bold; margin-left: 100px;"></label>
+        <br>
+        <div id="frame" oncontextmenu="return false" style="display:grid; align-content: center; width: 0px;"></div>
+    </div>
+    <script>
+let timer = null;
+let time = 0;
+ttime1 = localStorage.getItem("ttime1") || -1;
+ttime2 = localStorage.getItem("ttime2") || -1;
+ttime3 = localStorage.getItem("ttime3") || -1;
+ttime4 = localStorage.getItem("ttime4") || -1;
+document.getElementById("leh").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("col").value = 10;
+    document.getElementById("row").value = 20;
+    document.getElementById("poc1").value = 20;
+    document.getElementById("rowz").innerHTML = 20;
+    document.getElementById("colz").innerHTML = 10;
+    document.getElementById("poc1z").innerHTML = 20;
+    document.getElementById("play").style.visibility = "visible";
+    ob = "leh";
+    if(ttime1 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime1/60)+":"+ttime1%60}else{document.getElementById("hscore").innerHTML = "-:--"};
+    console.log(ttime1+" "+ttime2);
+}
+document.getElementById("str").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("col").value = 13;
+    document.getElementById("row").value = 30;
+    document.getElementById("poc1").value = 70;
+    document.getElementById("rowz").innerHTML = 30;
+    document.getElementById("colz").innerHTML = 13;
+    document.getElementById("poc1z").innerHTML = 70;
+    document.getElementById("play").style.visibility = "visible";
+    ob = "str";
+    if(ttime2 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime2/60)+":"+ttime2%60}else{document.getElementById("hscore").innerHTML = "-:--"};
+}
+document.getElementById("tez").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("col").value = 15;
+    document.getElementById("row").value = 40;
+    document.getElementById("poc1").value = 150;
+    document.getElementById("rowz").innerHTML = 40;
+    document.getElementById("colz").innerHTML = 15;
+    document.getElementById("poc1z").innerHTML = 150;
+    document.getElementById("play").style.visibility = "visible";
+    ob = "tez";
+    if(ttime3 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime3/60)+":"+ttime3%60}else{document.getElementById("hscore").innerHTML = "-:--"};
+}
+document.getElementById("vlast").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("inf").style.display = "none";
+    document.getElementById("vlast1").style.display = "block";
+    document.getElementById("play").style.visibility = "visible";
+    ob = "vlast";
+    if(ttime4 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime4/60)+":"+ttime4%60}else{document.getElementById("hscore").innerHTML = "-:--"};
+}
+document.getElementById("play").onclick = function(){
+    col = Number(document.getElementById("col").value);
+    row = Number(document.getElementById("row").value);
+    poc = Number(document.getElementById("poc1").value);
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("hra").style.display = "block";
+    start();
+    
+}
+document.getElementById("zpet").onclick = function(){
+    reset();
+}
+function start(){
+    timer = setInterval(cas, 1000);
+    pocmin = 0;
+    pocmin1 = 0;
+    pocozn = 0;
+    first = true;
+    minen = new Array(col);
+    for(let i = 0; i < col; i++){
+        minen[i] = new Array(row);
+    }
+    nakres();
+    a();
+    miny();
+    klik();
+}
+function nakres(){
+    for(let i = 1; i <= col; i++){
+        for(let ii = 1; ii <= row; ii++){
+            minen[i-1][ii-1] = Array("0");
+            pol = document.createElement("div");
+            pol.id = String(ii)+","+String(i);
+            pol.className = "pol";
+            pol.style = "grid-row:"+i+";"+"grid-column:"+ii;
+            document.getElementById("frame").appendChild(pol);
+        }
+    }
+}
+function miny(){
+    for(let i3 = 1; i3 <= col; i3++){
+        for(let ii3 = 1; ii3 <= row; ii3++){
+            minen[i3-1][ii3-1][0] = "0";
+        }
+    }
+    for(let i2 = 0; i2 < poc; i2++){
+        x = Math.floor(Math.random()*row);
+        y = Math.floor(Math.random()*col);
+        while(minen[y][x][0] == "1"){
+            x = Math.floor(Math.random()*row);
+            y = Math.floor(Math.random()*col);
+        }
+        minen[y][x][0] = "1";
+    }
+}
+function klik(){
+    for(let i = 1; i <= col; i++){
+        for(let ii = 1; ii <= row; ii++){
+            document.getElementById(String(ii)+","+String(i)).addEventListener("click", function(e){
+                if(e.button == 0){
+                    if(first){
+                        for(let y = -1; y <= 1; y++){
+                            for(let x = -1; x <= 1; x++){
+                                if(i-1+y >= 0 && ii-1+x >= 0 && i-1+y < col && ii-1+x < row){
+                                    if(minen[i-1+y][ii-1+x][0] == "1"){
+                                        pocmin++
+                                    }
+                                }
+                            }
+                        }
+                        while(minen[i-1][ii-1][0] == "1" || pocmin != 0){
+                            miny();
+                            pocmin = 0;
+                            for(let y = -1; y <= 1; y++){
+                                for(let x = -1; x <= 1; x++){
+                                    if(i-1+y >= 0 && ii-1+x >= 0 && i-1+y < col && ii-1+x < row){
+                                        if(minen[i-1+y][ii-1+x][0] == "1"){
+                                            pocmin++
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        pocmin = 0;
+                        first = false;
+                    }
+                    if(minen[i-1][ii-1][0] == "1" && minen[i-1][ii-1][1] != "0"){
+                        end();
+                    }
+                    else if(minen[i-1][ii-1][1] != "0"){
+                        document.getElementById(String(ii)+","+String(i)).style.backgroundColor = "lightgrey";
+                        for(let y = -1; y <= 1; y++){
+                            for(let x = -1; x <= 1; x++){
+                                if(i-1+y >= 0 && ii-1+x >= 0 && i-1+y < col && ii-1+x < row){
+                                    if(minen[i-1+y][ii-1+x][0] == "1"){
+                                        pocmin++;
+                                    }
+                                }
+                            }
+                        }
+                        if(pocmin != 0 && minen[i-1][ii-1][0] != "2"){
+                            document.getElementById(String(ii)+","+String(i)).appendChild(document.createTextNode(pocmin));
+
+                        }
+                        pocmin = 0;
+                        minen[i-1][ii-1][0] = "2";
+                        for(let p = 0; p < 100; p++){
+                        for(let j = 1; j <= col; j++){
+                            for(let jj = 1; jj <= row; jj++){
+                                if(minen[j-1][jj-1][0] == "2" && document.getElementById(String(jj)+","+String(j)).hasChildNodes() == false){
+                                    for(let y = -1; y <= 1; y++){
+                                        for(let x = -1; x <= 1; x++){
+                                            if(j-1+y >= 0 && jj-1+x >= 0 && j-1+y < col && jj-1+x < row){
+                                                document.getElementById(String(jj+x)+","+String(j+y)).style.backgroundColor = "lightgrey";
+                                                for(let y1 = -1; y1 <= 1; y1++){
+                                                    for(let x1 = -1; x1 <= 1; x1++){
+                                                        if(j+y-1+y1 >= 0 && jj+x-1+x1 >= 0 && j+y-1+y1 < col && jj+x-1+x1 < row){
+                                                            if(minen[j+y-1+y1][jj+x-1+x1][0] == "1"){
+                                                                pocmin++;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                if(pocmin != 0 && minen[j+y-1][jj+x-1][0] != "2"){
+                                                    document.getElementById(String(jj+x)+","+String(j+y)).appendChild(document.createTextNode(pocmin));
+                        
+                                                }
+                                                pocmin = 0;
+                                                minen[j-1+y][jj-1+x][0] = "2";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        }
+                    }
+                }
+            })
+            document.getElementById(String(ii)+","+String(i)).addEventListener("contextmenu", function(){
+                if(minen[i-1][ii-1][1] == "0"){
+                    document.getElementById(String(ii)+","+String(i)).removeChild(this.lastChild);
+                    minen[i-1][ii-1][1] = "";
+                    pocozn--;
+                    a();
+                }
+                else if(minen[i-1][ii-1][0] != "2"){
+                    document.getElementById(String(ii)+","+String(i)).appendChild(document.createTextNode("!"));
+                    minen[i-1][ii-1][1] = "0";
+                    pocozn++;
+                    a();
+                }
+            })
+        }
+    }
+}
+function end(){
+    for(let i = 1; i <= col; i++){
+        for(let ii = 1; ii <= row; ii++){
+            if(minen[i-1][ii-1][0] == "1"){
+                document.getElementById(String(ii)+","+String(i)).style = "background-color: red"
+                document.getElementById(String(ii)+","+String(i)).appendChild(document.createTextNode("×"))
+            }
+        }
+    }
+    setTimeout(() => {
+        reset();
+    }, 1000);
+}
+function a(){
+    document.getElementById("poc").innerHTML = poc-pocozn;
+    b();
+}
+function b(){
+    pocmin1 = 0;
+    for(let i = 1; i <= col; i++){
+        for(let ii = 1; ii <= row; ii++){
+            if(minen[i-1][ii-1][0] == "1" && minen[i-1][ii-1][1] == "0"){
+                pocmin1++;
+            }
+        }
+    }
+    if(pocmin1 == poc){
+        console.log("konec");
+        setTimeout(() => {
+            score();
+            reset();
+        }, 1000);
+    }
+}
+function reset(){
+    while (document.getElementById("frame").lastElementChild) {
+        document.getElementById("frame").removeChild(document.getElementById("frame").lastElementChild);
+    }
+    document.getElementById("hra").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+    clearInterval(timer);
+    time = 0;
+}
+function cas(){
+    time++;
+    document.getElementById("time").innerHTML = Math.floor(time/60)+":"+time%60;
+}
+function score(){
+    document.getElementById("score").innerHTML = Math.floor(time/60)+":"+time%60;
+    if(ob == "leh"){
+        if(time < ttime1){
+            ttime1 = time;
+        }
+        else if(ttime1 == -1){
+            ttime1 = time;
+        }
+        if(ttime1 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime1/60)+":"+ttime1%60}
+    }
+            
+    if(ob == "str"){
+        if(time < ttime2){
+            ttime2 = time;
+        }
+        else if(ttime2 == -1){
+            ttime2 = time;
+        }
+        if(ttime2 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime2/60)+":"+ttime2%60}
+    };
+    if(ob == "tez"){
+        if(time < ttime3){
+            ttime3 = time;
+        }
+        else if(ttime3 == -1){
+            ttime3 = time;
+        }
+        if(ttime3 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime3/60)+":"+ttime3%60}
+    }
+    if(ob == "vlast"){
+        if(time < ttime4){
+            ttime4 = time;
+        }
+        else if(ttime4 == -1){
+            ttime4 = time;
+        }
+        if(ttime4 != -1){document.getElementById("hscore").innerHTML = Math.floor(ttime4/60)+":"+ttime4%60}
+    }
+    localStorage.setItem("ttime1", ttime1);
+    localStorage.setItem("ttime2", ttime2);
+    localStorage.setItem("ttime3", ttime3);
+    localStorage.setItem("ttime4", ttime4);
+}
+    </script>
+</body>
+</html>

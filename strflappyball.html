@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlappyBall</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        input{
+            width: 50px;
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid;
+            background-color: chartreuse;
+        }
+body{
+  margin: 0;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="text-align: center; background-color: lightslategray;">
+    <div class="navbar" id="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div id="menu" style="text-align: center;">
+        <label style="font-weight: bold; font-size: 40px;">FlappyBall</label><br>
+        <label id="score" style="font-size: 30px; font-weight: bold;"></label><br>
+        <button id="vlast">Vlastní</button>
+        <button id="leh">Lehká</button>
+        <button id="str">Střední</button>
+        <button id="tez">Těžká</button><br>
+        <div id="inf" style="display: none;">
+            <label>Rychlost: </label><label id="vz"></label><br>
+            <label>Poloměr: </label><label id="rz"></label><br>
+            <label>Výška mezery: </label><label id="hz"></label><br>
+            <label>Šířka sloupu: </label><label id="dz"></label><br>
+        </div>
+        <div id="vlast1" style="display: none;">
+            <label>Rychlost: </label><input id="v" value="40"><br>
+            <label>Poloměr: </label><input id="r" value="6"><br>
+            <label>Výška mezery: </label><input id="h" value="60"><br> 
+            <label>Šířka sloupu: </label><input id="d" value="15"><br> 
+        </div>
+        <label style="font-weight: bold; font-size: 20px;">Nejlepší score: </label><label id="hscore" style="font-weight: bold; font-size: 40px;"></label><br>
+        <button id="play" style="visibility: hidden;">Spustit hru</button>
+    </div>
+    <div id="can0" style="display: none;">
+        <label id="score1" style="font-size: 40px; font-weight: bold;"></label><br>
+        <canvas id="can" height="500" width="500" style="border:2px solid;"></canvas>
+    </div>
+    <script>
+tsc1 = localStorage.getItem("tsc1") || 0;
+tsc2 = localStorage.getItem("tsc2") || 0;
+tsc3 = localStorage.getItem("tsc3") || 0;
+tsc4 = localStorage.getItem("tsc4") || 0;
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer = null;
+let t = 0.01;
+let v = 0;
+let g = 9.81;
+let x = 100;
+let y = 250;
+let x1 = x;
+let m = 30;
+let rn0 = [];
+let sc = 0;
+let wdr = 100;
+let ns = 1000;
+let blbost = 0;
+
+
+document.getElementById("leh").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("v").value = 40;
+    document.getElementById("r").value = 6;
+    document.getElementById("h").value = 80;
+    document.getElementById("d").value = 15;
+    document.getElementById("vz").innerHTML = 40;
+    document.getElementById("rz").innerHTML = 6;
+    document.getElementById("hz").innerHTML = 80;
+    document.getElementById("dz").innerHTML = 15;
+    document.getElementById("play").style.visibility = "visible";
+    window.addEventListener("keydown", entr);
+    ob = "leh";
+    document.getElementById("hscore").innerHTML = tsc1;
+}
+document.getElementById("str").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("v").value = 40;
+    document.getElementById("r").value = 6;
+    document.getElementById("h").value = 60;
+    document.getElementById("d").value = 15;
+    document.getElementById("vz").innerHTML = 40;
+    document.getElementById("rz").innerHTML = 6;
+    document.getElementById("hz").innerHTML = 60;
+    document.getElementById("dz").innerHTML = 15;
+    document.getElementById("play").style.visibility = "visible";
+    window.addEventListener("keydown", entr);
+    ob = "str";
+    document.getElementById("hscore").innerHTML = tsc2;
+}
+document.getElementById("tez").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("vlast1").style.display = "none";
+    document.getElementById("inf").style.display = "block";
+    document.getElementById("v").value = 35;
+    document.getElementById("r").value = 8;
+    document.getElementById("h").value = 60;
+    document.getElementById("d").value = 20;
+    document.getElementById("vz").innerHTML = 35;
+    document.getElementById("rz").innerHTML = 8;
+    document.getElementById("hz").innerHTML = 60;
+    document.getElementById("dz").innerHTML = 20;
+    document.getElementById("play").style.visibility = "visible";
+    window.addEventListener("keydown", entr);
+    ob = "tez";
+    document.getElementById("hscore").innerHTML = tsc3;
+}
+document.getElementById("vlast").onclick = function(){
+    $("button").css("border", "2px solid");
+    this.style.border = "4px solid";
+    document.getElementById("inf").style.display = "none";
+    document.getElementById("vlast1").style.display = "block";
+    document.getElementById("play").style.visibility = "visible";
+    window.addEventListener("keydown", entr);
+    ob = "vlast";
+    document.getElementById("hscore").innerHTML = tsc4;
+}
+document.getElementById("play").onclick = function(){
+    hra();
+    
+}
+
+
+function entr(event){
+    if(event.key == "Enter" && blbost == 0){
+        hra()
+    }
+}
+function hra(){
+    blbost = 1;
+    vs = Number(document.getElementById("v").value);
+    wdk = Number(document.getElementById("r").value);
+    wdm = Number(document.getElementById("h").value);
+    wds = Number(document.getElementById("d").value);
+    document.getElementById("can0").style.display = "block";
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("navbar").style.display = "none";
+    for(let i = 2; i <= ns; i++){
+        rn = 100+Math.floor(Math.random()*200);
+        rn0.push(rn);
+    }
+    timer = setInterval(game, t*1000);
+}
+function game(){
+    clear();
+    window.addEventListener("keypress", ovl2);
+    window.addEventListener("mousedown", ovl3)
+    move();
+    sloup(); 
+    sc = Math.floor(Math.abs(x1-wdk)/wdr)
+    if(x1 < -90 && x1-wdk+sc*wdr > -wds-2*wdk && (y <= rn0[sc-1]+wdk || y >= rn0[sc-1]+wdm-wdk)){
+        end();
+    }
+    document.getElementById("score1").innerHTML = "Score: "+sc;
+}
+function ovl2(event){
+    if(event.key == " " || event.key == "w"){
+        v = 5;
+    }
+}
+function ovl3(){
+    v = 5;
+}
+function move(){
+    if(y >= 0 && y <= 500){
+        v -= g*t;
+        y -= v*t*m-0.5*g*t*t*m;
+        cnx.beginPath();
+        cnx.fillStyle = "black";
+        cnx.arc(x, y, wdk, 0, 2*Math.PI);
+        cnx.fill();
+        cnx.stroke();
+    }
+    else{
+        end();
+    }
+}
+function clear(){
+    cnx.fillStyle = "chartreuse";
+    cnx.fillRect(0, 0, 500, 500);
+}
+function end(){
+    clearInterval(timer);
+    x1 = x;
+    rn0 = [];
+    y = 250;
+    v = 0;
+    blbost = 0;
+    document.getElementById("can0").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("navbar").style.display = "block";
+    score();
+}
+function sloup(){
+    x1 -= vs*t;
+    cnx.fillStyle = "black";
+    for(let i = 2; i <= ns; i++){
+        cnx.fillRect(x1+i*wdr, 0, wds, rn0[i-2]);
+        cnx.fillRect(x1+i*wdr, rn0[i-2]+wdm, wds, 500);
+    }
+}
+function score(){
+    document.getElementById("score").innerHTML = "Score: "+sc;
+    if(ob == "leh"){
+        if(sc > tsc1){
+            tsc1 = sc;
+        }
+        document.getElementById("hscore").innerHTML = tsc1;
+    }
+            
+    if(ob == "str"){
+        if(sc > tsc2){
+            tsc2 = sc;
+        }
+        document.getElementById("hscore").innerHTML = tsc2;
+    };
+    if(ob == "tez"){
+        if(sc > tsc3){
+            tsc3 = sc;
+        }
+        document.getElementById("hscore").innerHTML = tsc3;
+    }
+    if(ob == "vlast"){
+        if(sc > tsc4){
+            tsc4 = sc;
+        }
+        document.getElementById("hscore").innerHTML = tsc4;
+    }
+    localStorage.setItem("tsc1", tsc1);
+    localStorage.setItem("tsc2", tsc2);
+    localStorage.setItem("tsc3", tsc3);
+    localStorage.setItem("tsc4", tsc4);
+}
+    </script>
+</body>
+</html>
