@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Lissajousovy obrazce</title>
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="500" height="500" style="border: 1px solid;"></canvas>
+        <div  style="width: 180px; padding: 5px;">
+            <div style="text-align: right;">
+                <label>\(\omega_1:\) </label><input id="om1">
+                <label>&nbsp&nbsp\(\omega_2:\) </label><input id="om2"><br>
+                <label>\(\Delta\varphi:\) </label><input id="fi" style="width: 26px;"><label>\(\cdot\pi\)</label><br>
+                <label>\(y_{m1}:\) </label><input id="xm">
+                <label>\(y_{m2}:\) </label><input id="ym"><br>
+            </div><br>
+            <label style="font-weight: bold;">Přesnost:</label><br>
+            <div>
+                <label>\(\Delta t:\) </label><input id="t">
+            </div>
+            <br>
+            <button id="but">Vykreslit</button><br>
+            <br>
+            <label>
+                \(x=y_{m1}\sin{\omega_1t}\)
+                \(y=y_{m2}\sin{(\omega_2t+\Delta\varphi)}\)
+            </label>
+        </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+document.getElementById("om1").value = 11;
+document.getElementById("om2").value = 10;
+document.getElementById("fi").value = 0.3;
+document.getElementById("xm").value = 248;
+document.getElementById("ym").value = 248;
+document.getElementById("t").value = 0.005;
+zapis();
+a();
+document.getElementById("but").onclick = function(){
+    zapis();
+    a();
+}
+
+function a(){
+    cnx.beginPath();
+    y = ym*Math.sin(fi);
+    cnx.moveTo(250,y+250);
+    for(let t = 0; t <= 10; t += dt){
+        x = xm*Math.sin(om1*t);
+        y = ym*Math.sin(om2*t+fi);
+        cnx.lineTo(x+250,y+250);
+    }
+    cnx.stroke();
+}
+function zapis(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, 500, 500);
+    om1 = document.getElementById("om1").value;
+    om2 = document.getElementById("om2").value;
+    fi = eval(document.getElementById("fi").value)*Math.PI;
+    xm = document.getElementById("xm").value;
+    ym = document.getElementById("ym").value;
+    dt = Number(document.getElementById("t").value);
+}
+    </script>
+</body>
+</html>
