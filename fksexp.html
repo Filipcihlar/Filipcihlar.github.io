@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<canvas id="can" width="500" height="500"></canvas>
+<body>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer = null;
+
+let data = [0.23, 0.45, 0.19, 0.24, 0.11, 0.15];
+let odch = [0.37, 0.37, 0.37, 0.37, 0.37, 0.37];
+let m = 1;
+
+let u = 0;
+//a()
+timer = setInterval(a, 100);
+
+function a(){
+    clear();
+    cnx.beginPath();
+    cnx.moveTo(250, 240);
+    cnx.lineTo(250, 260);
+    cnx.moveTo(240, 250);
+    cnx.lineTo(260, 250);
+
+
+    for(let i = 0; i < data.length; i++){
+        u += 2*Math.PI/data.length;
+        cnx.moveTo(250+m*data[i]*250*Math.cos(u), 250-m*data[i]*250*Math.sin(u));
+        cnx.arc(250+m*data[i]*250*Math.cos(u), 250-m*data[i]*250*Math.sin(u), 2, 0, 2*Math.PI);
+        cnx.fill();
+        cnx.stroke();
+    }
+    for(let i = 0; i < data.length; i++){
+        u += 2*Math.PI/data.length;
+        cnx.beginPath();
+        cnx.moveTo(250+m*data[i]*250*Math.cos(u)+m*odch[i]*250, 250-m*data[i]*250*Math.sin(u));
+        cnx.arc(250+m*data[i]*250*Math.cos(u), 250-m*data[i]*250*Math.sin(u), m*odch[i]*250, 0, 2*Math.PI);
+        cnx.fillStyle = "rgb("+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+","+Math.floor(Math.random() * 255)+",0.2)";
+        cnx.fill();
+        cnx.stroke();
+    }
+}
+function clear(){
+    cnx.fillStyle =  "white";
+    cnx.fillRect(0,0,500,500);
+}
+    </script>
+</body>
+</html>
