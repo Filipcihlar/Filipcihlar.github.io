@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Kapitzovo kyvadlo</title>
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
+        <div style="width: 200px; padding: 5px;">
+            <div style="text-align: right;">
+                <label>\(\varphi(0):\) </label><input id="fi">
+                <label>\(\omega(0):\) </label><input id="om"><br>
+                <label>\(A:\) </label><input id="a" style="margin-right: 21px;">
+                <label>\(\nu:\) </label><input id="ny"><br><br>
+                <label>\(l:\) </label><input id="l"><br>
+                <label>\(g:\) </label><input id="g">
+            </div><br>
+            <label style="font-weight: bold;">Přesnost:</label><br>
+            <div>
+                <label>\(\Delta t:\) </label><input id="t">
+                <label>Zvětšení: </label><input id="met">
+            </div>
+            <br>
+            <button id="but">Spustit</button><br>
+            <br>
+            <label>\(\varphi\) = </label><label id="fi1"></label><br>
+            <label>\(\omega\) = </label><label id="om1"></label><br>
+        </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer = null;
+const X = 800;
+const Y = 500;
+
+let x = 0; let y = 0; let t = 0;
+
+zapis();
+get();
+clear();
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    timer = setInterval(vyp, dt*1000);
+}
+
+function vyp(){
+    cnx.beginPath();
+    clear();
+    om1 = om;
+    om1 += -((Math.sin(fi)*(g+a*ny*ny*Math.cos(ny*t)))/l)*dt;
+    fi += om*dt;
+    om = om1;
+    console.log(fi);
+    document.getElementById("fi1").innerHTML = Math.round(fi*18000/Math.PI)/100;
+    document.getElementById("om1").innerHTML = Math.round(om*100)/100;
+    x = l*Math.sin(fi);
+    y = l*Math.cos(fi)+a*Math.sin(ny*t);
+    cnx.moveTo(x*met+X/2+10,Y/2+y*met);
+    cnx.arc(x*met+X/2,Y/2+y*met, 10, 0, 2*Math.PI);
+    cnx.moveTo(X/2,Y/2+a*Math.sin(ny*t)*met);
+    cnx.lineTo(x*met+X/2,Y/2+y*met);
+    cnx.stroke();
+    t += dt;
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y); 
+    cnx.moveTo(X/2, Y/2-a*met);
+    cnx.lineTo(X/2,Y/2+a*met);
+    cnx.moveTo(X/2-10,Y/2+a*Math.sin(ny*t)*met);
+    cnx.lineTo(X/2+10,Y/2+a*Math.sin(ny*t)*met);
+}
+function zapis(){
+    document.getElementById("fi").value = "170";
+    document.getElementById("om").value = "0";
+    document.getElementById("ny").value = "30";
+    document.getElementById("a").value = "1";
+    document.getElementById("l").value = "10";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("t").value = "5";
+    document.getElementById("met").value = "20";
+}
+function get(){
+    fi = Number(document.getElementById("fi").value)*Math.PI/180;
+    om = Number(document.getElementById("om").value);
+    ny = Number(document.getElementById("ny").value);
+    a = Number(document.getElementById("a").value);
+    l = Number(document.getElementById("l").value);
+    g = Number(document.getElementById("g").value);
+    dt = Number(document.getElementById("t").value)/1000;
+    met = Number(document.getElementById("met").value);
+    t = 0;
+}
+    </script>
+    </div>
+</body>
+</html>
