@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Gravitace 2</title>
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.telesa, .saves{
+    border-radius: 5px;
+    border: 1px solid;
+    margin: 2px;
+    padding: 3px;
+    background-color:orange;
+    font-size: 10px;
+}
+.telesa label, .saves label{
+    font-weight: bold;
+    font-size: 20px;
+}
+.telesa button, .saves button{
+    padding: 0px;
+    width: 30px;
+    height: 26px;
+    border: 1px solid;
+    margin: 1px;
+}
+.telesa button:hover, .saves button:hover{
+    border: 2px solid;
+}
+.seznam{
+    background-color: cadetblue; 
+    padding: 3px; 
+    border-radius: 3px;
+}
+.seznam:hover{
+    border: 1px solid;
+}
+.plustel{
+    width: 86px;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <div>
+            <canvas id="can" width="700" height="500" style="border: 1px solid; background-color: white;"></canvas>
+        </div>
+        <div style="width: 280px; padding: 5px;">
+            <label style="font-weight: bold;">Zobrazení:</label><br>
+            <div style="text-align: right;">
+                <label>\(X:\) </label><input id="X"><label>&nbsp;\(Y:\) </label><input id="Y"><label>&nbsp;Zvětšení: </label><input id="met"><br>
+                <button id="osy" style="border: 1px solid; height: 25px; width: 130px; margin-top: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Zobrazit osy</button>
+                <button id="drahy" style="border: 1px solid; height: 25px; width: 140px; margin-top: 5px; margin-left: -4px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Zobrazit dráhy těles</button>
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přesnost:</label>
+            <div style="text-align: left;">
+                <label>\(\Delta t:\) </label><input id="dt">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Gravitační konstanta:</label>
+            <div style="text-align: left;">
+                <label>\(G:\) </label><input id="G">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přidat těleso:</label>
+            <div>
+                <label> Název: </label><input id="name" style="width: 88px;"><br>
+                <label>&nbsp;Barva: </label><input id="barva" style="width: 87px;"><br>
+                <label style="margin-left: 21px;">\(x_0:\) </label><input class="plustel" id="x"><label>&nbsp; \(y_0:\) </label><input class="plustel" id="y"><br>
+                <label style="margin-left: 16px;">\(v_{x_0}:\) </label><input class="plustel" id="vx"><label> \(v_{y_0}:\) </label><input class="plustel" id="vy"><br>
+                <label style="margin-left: 23px;">\(m:\) </label><input class="plustel" id="m"><br>
+                <button id="add" style="height: 22px; width: 100px; margin: 1px;">Přidat</button>
+            </div>
+            <br><br>
+            <button id="start">Spustit</button>
+            <button id="rst">Reset</button>
+            <button id="stop"><i id="ic" class="fa fa-pause"></i></button><br>
+        </div>
+        <div style="width: 250px; padding: 5px; margin-left: 8px;">
+            <div class="seznam" id="telsez">
+                <label id="tellab" style="font-weight: bold;">Tělesa <i id="sipkatel" class="fa fa-caret-up"></i></label>
+                <div id="telesa" style="display: block;">
+                </div>
+            </div>
+            <div class="seznam" id="savesez" style="margin-top: 8px;">
+                <label id="savelab" style="font-weight: bold;">Uložit/Nahrát <i id="sipkasave" class="fa fa-caret-up"></i></label>
+                <div id="saves" style="display: block;">
+                   <label>Název: </label><input id="save" style="width: 80px;"> <button id="savebut" style="height: 23px;">Uložit</button><br>
+                   <div class="saves">
+                        <button id="demo1" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Slunce, Země, Měsíc</label>
+                    </div>
+                    <div class="saves">
+                        <button id="demo2" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Obrazec 1</label>
+                    </div>
+                    <div class="saves">
+                        <button id="demo3" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Obrazec 2</label>
+                    </div>
+                    <div id="saves2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer; pause = 0;
+let sett = {"drahy": true, "osy": true};
+
+demo1 = [[700, 500, 0.000000001, 60*60, 6.67408*Math.pow(10,-11)],[[384403000, -149597870700, 30000, 1000, 7.3*Math.pow(10,22), "orange","Měsíc"],[0, -149597870700, 30000, 0, 5.972*Math.pow(10,24), "blue","Země"],[0, 0, 0, 0, 1.989*Math.pow(10,30), "yellow","Slunce"]]];
+demo2 = [[700, 500, 1, 0.5, 10000],[[0, -100, -50, 0, 100, "red",""],[0, 100, 50, 0, 100, "blue",""]]];
+demo3 = [[700, 500, 0.8, 0.005, 10000],[[-8, -197, 7, 0, 0, "blue",""],[-25, -177, 70, 0, 10, "red",""],[-20, 32, -7, 0, 100, "green",""],[-24, -44, 100, 0, 0, "yellow",""]]];
+demo = [demo1, demo2, demo3];
+saves = JSON.parse(localStorage.getItem("saves")) || [];
+
+startapp()
+window.addEventListener("click", app);
+
+function app(){
+    for(let i = 1; i <= demo.length; i++){
+        document.getElementById("demo"+i).onclick = function(){
+            clearInterval(timer);
+            clear();
+            par = JSON.parse(JSON.stringify(demo[i-1][0])); telesa0 = JSON.parse(JSON.stringify(demo[i-1][1]));
+            telesa = JSON.parse(JSON.stringify(telesa0));
+            zapis();
+        }
+    }
+    buts()
+    document.getElementById("savebut").onclick = function(){
+        saves.push([[document.getElementById("save").value],[X,Y,met,dt,G],telesa0]);
+        localStorage.setItem("saves", JSON.stringify(saves));
+        savezapis();
+    };
+    document.getElementById("add").onclick = function(){
+        clearInterval(timer);
+        newtel = [];
+        newtel.push(Number(document.getElementById("x").value));
+        newtel.push(Number(document.getElementById("y").value));
+        newtel.push(Number(document.getElementById("vx").value));
+        newtel.push(Number(document.getElementById("vy").value));
+        newtel.push(Number(document.getElementById("m").value));
+        newtel.push(document.getElementById("barva").value);
+        newtel.push(document.getElementById("name").value);
+        telesa.push(newtel);
+        telesa0.push(newtel);
+        telesazapis();
+        pause = 0;
+        clearInterval(timer);
+        clear();
+    }
+    document.getElementById("tellab").onclick = function(){
+        if(document.getElementById("telesa").style.display == "block"){
+            document.getElementById("telesa").style.display = "none";
+            document.getElementById("sipkatel").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("telesa").style.display = "block";
+            document.getElementById("sipkatel").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("savelab").onclick = function(){
+        if(document.getElementById("saves").style.display == "block"){
+            document.getElementById("saves").style.display = "none";
+            document.getElementById("sipkasave").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("saves").style.display = "block";
+            document.getElementById("sipkasave").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("osy").onclick = function(){
+        if(sett.osy == true){
+            sett.osy = false;
+            this.style.border = "1px solid"
+        }
+        else{
+            sett.osy = true;
+            this.style.border = "3px solid"
+        }
+    }
+    document.getElementById("drahy").onclick = function(){
+        if(sett.drahy == true){
+            sett.drahy = false;
+            this.style.border = "1px solid"
+        }
+        else{
+            sett.drahy = true;
+            this.style.border = "3px solid"
+        }
+    }
+    document.getElementById("rst").onclick = function(){
+        pause = 0;
+        clearInterval(timer);
+        clear();
+    }
+    document.getElementById("stop").onclick = function(){
+        if(pause == 1){
+            clearInterval(timer);
+            pause = 2;
+            document.getElementById("ic").className = "fa fa-play";
+        }
+        else if(pause != 0){
+            timer = setInterval(vypocet, 1);
+            pause = 1;
+            document.getElementById("ic").className = "fa fa-pause";
+        }
+    }
+    document.getElementById("start").onclick = function(){
+        clearInterval(timer);
+        start()
+    }
+}
+function startapp(){
+    par = [700, 500, 1, 0.005, 10000];
+    telesa0 = []; telesa = JSON.parse(JSON.stringify(telesa0));
+    savezapis();
+    zapis();
+    clear();
+    app();
+}
+
+function start(){
+    pause = 1;
+    get();
+    timer = setInterval(vypocet, 1);
+    clear();
+}
+function vypocet(){
+    zrych = [];
+    for(let i = 0; i < telesa.length; i++){
+        zrych.push(Array(telesa.length));
+    }
+    if(sett.drahy == false){clear()}
+    for(let i = 0; i < telesa.length; i++){
+        for(let ii = 0; ii < telesa.length; ii++){
+            if(i != ii){
+                ax += -(G*telesa[ii][4]*(telesa[i][0]-telesa[ii][0]))/Math.pow(Math.pow((telesa[i][0]-telesa[ii][0]),2)+Math.pow((telesa[i][1]-telesa[ii][1]),2),3/2);
+                ay += -(G*telesa[ii][4]*(telesa[i][1]-telesa[ii][1]))/Math.pow(Math.pow((telesa[i][0]-telesa[ii][0]),2)+Math.pow((telesa[i][1]-telesa[ii][1]),2),3/2);
+            }
+        }
+        zrych[i][0] = ax; zrych[i][1] = ay;
+        ax = 0; ay = 0;
+    }
+    for(let i = 0; i < zrych.length; i++){
+        vx1 = telesa[i][2]; vy1 = telesa[i][3]; x1 = telesa[i][0]; y1 = telesa[i][1];
+        x1 += vx1*dt+zrych[i][0]*dt*dt;
+        y1 += vy1*dt+zrych[i][1]*dt*dt;
+
+        document.getElementById("stavx"+i).innerHTML = Math.round(x1);
+        document.getElementById("stavy"+i).innerHTML = Math.round(y1);
+        document.getElementById("stavvx"+i).innerHTML = Math.round(vx1+zrych[i][0]*dt);
+        document.getElementById("stavvy"+i).innerHTML = Math.round(vy1+zrych[i][1]*dt);
+
+        cnx.beginPath();
+        cnx.strokeStyle = telesa[i][5];
+        if(sett.drahy == true){
+            cnx.moveTo(telesa[i][0]*met+X/2,-telesa[i][1]*met+Y/2);
+            cnx.lineTo(x1*met+X/2, -y1*met+Y/2);
+        }
+        else{
+            cnx.fillStyle = telesa[i][5];
+            cnx.arc(x1*met+X/2, -y1*met+Y/2, 2, 0, 2*Math.PI);
+            cnx.fill();
+        }
+        cnx.stroke();
+
+        telesa[i][2] = vx1+zrych[i][0]*dt; telesa[i][3] = vy1+zrych[i][1]*dt; telesa[i][0] = x1; telesa[i][1] = y1;
+        
+    }
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, Y);
+    if(sett.osy == true){
+        cnx.strokeStyle = "black";
+        cnx.moveTo(X/2, 0); cnx.lineTo(X/2, Y);
+        cnx.moveTo(0, Y/2); cnx.lineTo(X, Y/2);
+        for(let i = 0; i <= X/2; i += 100){
+            cnx.moveTo(i+X/2, Y/2); cnx.lineTo(i+X/2, 4+Y/2);
+            cnx.moveTo(-i+X/2, Y/2); cnx.lineTo(-i+X/2, 4+Y/2);
+        }
+        for(let i = 0; i <= Y/2; i += 100){
+            cnx.moveTo(X/2, i+Y/2); cnx.lineTo(X/2-4, i+Y/2);
+            cnx.moveTo(X/2, -i+Y/2); cnx.lineTo(X/2-4, -i+Y/2);
+        }
+        cnx.stroke();
+    }
+    
+}
+function zapis(){
+    telesazapis();
+    X = par[0]; Y = par[1]; met = par[2]; dt = par[3]; G = par[4];
+    document.getElementById("X").value = X;
+    document.getElementById("Y").value = Y;
+    document.getElementById("met").value = met;
+    document.getElementById("dt").value = dt;
+    document.getElementById("G").value = G;
+    document.getElementById("barva").value = "orange";
+    if(sett.osy == true){
+        document.getElementById("osy").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("osy").style.border = "1px solid";
+    }
+    if(sett.drahy == true){
+        document.getElementById("drahy").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("drahy").style.border = "1px solid";
+    }
+}
+function get(){
+    telesa = JSON.parse(JSON.stringify(telesa0));
+    X = document.getElementById("X").value;
+    Y = document.getElementById("Y").value;
+    met = document.getElementById("met").value;
+    dt = document.getElementById("dt").value;
+    G = document.getElementById("G").value;
+    document.getElementById("can").width = X;
+    document.getElementById("can").height = Y;
+    ax = 0; ay = 0;
+    timer = null;
+}
+function telesazapis(){
+    while(document.getElementById("telesa").lastChild){
+        document.getElementById("telesa").removeChild(document.getElementById("telesa").lastChild)
+    }
+    for(let i = 0; i < telesa0.length; i++){
+        div = document.createElement("div");
+        div.className = "telesa";
+        div.id = "teleso"+i;
+        div.style = "background-color:"+telesa0[i][5];
+        
+        rmv = document.createElement("button");
+        rmv.id = "telrmv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        nst = document.createElement("button");
+        nst.id = "telsett"+i;
+        nst.style = "background-color: lightblue";
+        isett = document.createElement("i");
+        isett.className = "material-icons";
+        isett.appendChild(document.createTextNode("settings"));
+        nst.appendChild(isett);
+        div.appendChild(nst);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(telesa0[i][6]));
+        div.appendChild(nzv);
+
+        div.appendChild(document.createElement("br"));
+
+        div.appendChild(document.createTextNode("\\(x_0="+telesa0[i][0]+"; y_0="+telesa0[i][1]+"; \\)\\(v_{x_0}="+telesa0[i][2]+"; v_{y_0}="+telesa0[i][3]+"; m="+telesa0[i][4]+"\\)"))
+        
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(x= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavx"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(y= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavy"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(v_x= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavvx"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(v_y= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavvy"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+        
+
+        document.getElementById("telesa").appendChild(div);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    }
+}
+function buts(){
+    for(let i = 0; i < telesa0.length; i++){
+        document.getElementById("telrmv"+i).onclick = function(){
+            telesa0.splice(i, 1);
+            telesa.splice(i, 1);
+            telesazapis();
+        }
+        document.getElementById("telsett"+i).onclick = function(){
+            document.getElementById("name").value = telesa0[i][6];
+            document.getElementById("barva").value = telesa0[i][5];
+            document.getElementById("x").value = telesa0[i][0];
+            document.getElementById("y").value = telesa0[i][1];
+            document.getElementById("vx").value = telesa0[i][2];
+            document.getElementById("vy").value = telesa0[i][3];
+            document.getElementById("m").value = telesa0[i][4];
+            telesa0.splice(i, 1);
+            telesa.splice(i, 1);
+            telesazapis();
+        }
+    }
+    for(let i = 0; i < saves.length; i++){
+        document.getElementById("savermv"+i).onclick = function(){
+            saves.splice(i, 1);
+            localStorage.setItem("saves", JSON.stringify(saves));
+            savezapis();
+        }
+        document.getElementById("saveupl"+i).onclick = function(){
+            clearInterval(timer);
+            clear();
+            par = saves[i][1];
+            telesa0 = saves[i][2]; telesa = JSON.parse(JSON.stringify(telesa0));
+            zapis();
+        }
+    }
+}
+function savezapis(){
+    while(document.getElementById("saves2").lastChild){
+        document.getElementById("saves2").removeChild(document.getElementById("saves2").lastChild);
+    }
+    for(let i = 0; i < saves.length; i++){
+        div = document.createElement("div");
+        div.className = "saves";
+        div.id = "save"+i;
+        
+        rmv = document.createElement("button");
+        rmv.id = "savermv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        upl = document.createElement("button");
+        upl.id = "saveupl"+i;
+        upl.style = "background-color: lightblue";
+        iupl = document.createElement("i");
+        iupl.className = "material-icons";
+        iupl.appendChild(document.createTextNode("upload"));
+        upl.appendChild(iupl);
+        div.appendChild(upl);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(saves[i][0]));
+        div.appendChild(nzv);
+
+        document.getElementById("saves2").appendChild(div);
+    }
+}
+
+    </script>
+</body>
+</html>
