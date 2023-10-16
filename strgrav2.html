@@ -87,6 +87,11 @@ button:active{
             <label style="font-weight: bold;">Zobrazení:</label><br>
             <div style="text-align: right;">
                 <label>\(X:\) </label><input id="X"><label>&nbsp;\(Y:\) </label><input id="Y"><label>&nbsp;Zvětšení: </label><input id="met"><br>
+                
+            </div>
+            <div>
+                <label>Posun:</label><br>
+                <label>\(\Delta X:\) </label><input id="dX"><label>&nbsp;\(\Delta Y:\) </label><input id="dY">
                 <button id="osy" style="border: 1px solid; height: 25px; width: 130px; margin-top: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Zobrazit osy</button>
                 <button id="drahy" style="border: 1px solid; height: 25px; width: 140px; margin-top: 5px; margin-left: -4px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Zobrazit dráhy těles</button>
             </div>
@@ -114,6 +119,7 @@ button:active{
             <button id="start">Spustit</button>
             <button id="rst">Reset</button>
             <button id="stop"><i id="ic" class="fa fa-pause"></i></button><br>
+            <label>\(t=\)</label><label id="time"></label>
         </div>
         <div style="width: 250px; padding: 5px; margin-left: 8px;">
             <div class="seznam" id="telsez">
@@ -144,11 +150,12 @@ button:active{
 let can = document.getElementById("can");
 let cnx = can.getContext("2d");
 let timer; pause = 0;
+let timer2; time = 0;
 let sett = {"drahy": true, "osy": true};
 
-demo1 = [[700, 500, 0.000000001, 60*60, 6.67408*Math.pow(10,-11)],[[384403000, -149597870700, 30000, 1000, 7.3*Math.pow(10,22), "orange","Měsíc"],[0, -149597870700, 30000, 0, 5.972*Math.pow(10,24), "blue","Země"],[0, 0, 0, 0, 1.989*Math.pow(10,30), "yellow","Slunce"]]];
-demo2 = [[700, 500, 1, 0.5, 10000],[[0, -100, -50, 0, 100, "red",""],[0, 100, 50, 0, 100, "blue",""]]];
-demo3 = [[700, 500, 0.8, 0.005, 10000],[[-8, -197, 7, 0, 0, "blue",""],[-25, -177, 70, 0, 10, "red",""],[-20, 32, -7, 0, 100, "green",""],[-24, -44, 100, 0, 0, "yellow",""]]];
+demo1 = [[700, 500, 0.000000001, 60*60, 6.67408*Math.pow(10,-11), 0, 0],[[384403000, -149597870700, 30000, 1000, 7.3*Math.pow(10,22), "orange","Měsíc"],[0, -149597870700, 30000, 0, 5.972*Math.pow(10,24), "blue","Země"],[0, 0, 0, 0, 1.989*Math.pow(10,30), "yellow","Slunce"]]];
+demo2 = [[700, 500, 1, 0.5, 10000, 0, 0],[[0, -100, -50, 0, 100, "red",""],[0, 100, 50, 0, 100, "blue",""]]];
+demo3 = [[700, 500, 0.8, 0.005, 10000, 0, 0],[[-8, -197, 7, 0, 0, "blue",""],[-25, -177, 70, 0, 10, "red",""],[-20, 32, -7, 0, 100, "green",""],[-24, -44, 100, 0, 0, "yellow",""]]];
 demo = [demo1, demo2, demo3];
 saves = JSON.parse(localStorage.getItem("saves")) || [];
 
@@ -167,7 +174,7 @@ function app(){
     }
     buts()
     document.getElementById("savebut").onclick = function(){
-        saves.push([[document.getElementById("save").value],[X,Y,met,dt,G],telesa0]);
+        saves.push([[document.getElementById("save").value],[X,Y,met,dt,G,dX,dY],telesa0]);
         localStorage.setItem("saves", JSON.stringify(saves));
         savezapis();
     };
@@ -231,27 +238,33 @@ function app(){
     document.getElementById("rst").onclick = function(){
         pause = 0;
         clearInterval(timer);
+        clearInterval(timer2);
+        time = 0;
+        document.getElementById("time").innerHTML = "0 s";
         clear();
     }
     document.getElementById("stop").onclick = function(){
         if(pause == 1){
             clearInterval(timer);
+            clearInterval(timer2);
             pause = 2;
             document.getElementById("ic").className = "fa fa-play";
         }
         else if(pause != 0){
             timer = setInterval(vypocet, 1);
+            timer2 = setInterval(stopwatch, 100);
             pause = 1;
             document.getElementById("ic").className = "fa fa-pause";
         }
     }
     document.getElementById("start").onclick = function(){
         clearInterval(timer);
+        clearInterval(timer2);
         start()
     }
 }
 function startapp(){
-    par = [700, 500, 1, 0.005, 10000];
+    par = [700, 500, 1, 0.005, 10000, 0, 0];
     telesa0 = []; telesa = JSON.parse(JSON.stringify(telesa0));
     savezapis();
     zapis();
@@ -260,8 +273,10 @@ function startapp(){
 }
 
 function start(){
+    time = 0;
     pause = 1;
     get();
+    timer2 = setInterval(stopwatch, 100);
     timer = setInterval(vypocet, 1);
     clear();
 }
@@ -294,12 +309,12 @@ function vypocet(){
         cnx.beginPath();
         cnx.strokeStyle = telesa[i][5];
         if(sett.drahy == true){
-            cnx.moveTo(telesa[i][0]*met+X/2,-telesa[i][1]*met+Y/2);
-            cnx.lineTo(x1*met+X/2, -y1*met+Y/2);
+            cnx.moveTo(telesa[i][0]*met+X/2+dX,-telesa[i][1]*met+Y/2-dY);
+            cnx.lineTo(x1*met+X/2+dX, -y1*met+Y/2-dY);
         }
         else{
             cnx.fillStyle = telesa[i][5];
-            cnx.arc(x1*met+X/2, -y1*met+Y/2, 2, 0, 2*Math.PI);
+            cnx.arc(x1*met+X/2+dX, -y1*met+Y/2-dY, 2, 0, 2*Math.PI);
             cnx.fill();
         }
         cnx.stroke();
@@ -313,15 +328,15 @@ function clear(){
     cnx.fillRect(0, 0, X, Y);
     if(sett.osy == true){
         cnx.strokeStyle = "black";
-        cnx.moveTo(X/2, 0); cnx.lineTo(X/2, Y);
-        cnx.moveTo(0, Y/2); cnx.lineTo(X, Y/2);
-        for(let i = 0; i <= X/2; i += 100){
-            cnx.moveTo(i+X/2, Y/2); cnx.lineTo(i+X/2, 4+Y/2);
-            cnx.moveTo(-i+X/2, Y/2); cnx.lineTo(-i+X/2, 4+Y/2);
+        cnx.moveTo(X/2+dX, 0); cnx.lineTo(X/2+dX, Y);
+        cnx.moveTo(0, Y/2-dY); cnx.lineTo(X, Y/2-dY);
+        for(let i = 0; i <= X; i += 100){
+            cnx.moveTo(i+X/2+dX, Y/2-dY); cnx.lineTo(i+X/2+dX, 4+Y/2-dY);
+            cnx.moveTo(-i+X/2+dX, Y/2-dY); cnx.lineTo(-i+X/2+dX, 4+Y/2-dY);
         }
-        for(let i = 0; i <= Y/2; i += 100){
-            cnx.moveTo(X/2, i+Y/2); cnx.lineTo(X/2-4, i+Y/2);
-            cnx.moveTo(X/2, -i+Y/2); cnx.lineTo(X/2-4, -i+Y/2);
+        for(let i = 0; i <= Y; i += 100){
+            cnx.moveTo(X/2+dX, i+Y/2-dY); cnx.lineTo(X/2-4+dX, i+Y/2-dY);
+            cnx.moveTo(X/2+dX, -i+Y/2-dY); cnx.lineTo(X/2-4+dX, -i+Y/2-dY);
         }
         cnx.stroke();
     }
@@ -329,12 +344,14 @@ function clear(){
 }
 function zapis(){
     telesazapis();
-    X = par[0]; Y = par[1]; met = par[2]; dt = par[3]; G = par[4];
+    X = par[0]; Y = par[1]; met = par[2]; dt = par[3]; G = par[4]; dX = par[5]; dY = par[6];
     document.getElementById("X").value = X;
     document.getElementById("Y").value = Y;
     document.getElementById("met").value = met;
     document.getElementById("dt").value = dt;
     document.getElementById("G").value = G;
+    document.getElementById("dX").value = dX;
+    document.getElementById("dY").value = dY;
     document.getElementById("barva").value = "orange";
     if(sett.osy == true){
         document.getElementById("osy").style.border = "3px solid";
@@ -356,6 +373,8 @@ function get(){
     met = document.getElementById("met").value;
     dt = document.getElementById("dt").value;
     G = document.getElementById("G").value;
+    dX = Number(document.getElementById("dX").value);
+    dY = Number(document.getElementById("dY").value);
     document.getElementById("can").width = X;
     document.getElementById("can").height = Y;
     ax = 0; ay = 0;
@@ -512,6 +531,10 @@ function savezapis(){
 
         document.getElementById("saves2").appendChild(div);
     }
+}
+function stopwatch(){
+    time++;
+    document.getElementById("time").innerHTML = time/10+" s";
 }
 
     </script>
