@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Pružina</title>
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
+        <div  style="width: 200px; padding: 5px;">
+            <div style="text-align: right;">
+                <label>\(x(0):\) </label><input id="x"><label> \(\dot{x}(0):\) </label><input id="v"><br>
+                <br>
+                <label>\(l_0:\) </label><input id="l"><label style="margin-left: 21px;"> \(k:\) </label><input id="k"><br>
+                <label>\(m:\) </label><input id="m"><label style="margin-left: 21px;"> \(g:\) </label><input id="g">
+            </div><br>
+            <label style="font-weight: bold;">Přesnost:</label><br>
+            <div>
+                <label>\(\Delta t:\) </label><input id="t">
+            </div>
+            <br>
+            <button id="but">Spustit</button><br>
+            <br>
+            <label>\(x\) = </label><label id="x1"></label><br>
+            <label>\(\dot{x}\) = </label><label id="v1"></label>
+        </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer = null;
+let X = 800;
+
+let n = 15;
+let r = 0.2;
+
+let met = 50;
+
+zapis();
+get();
+clear();
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    timer = setInterval(a, dt*1000);
+}
+
+function a(){
+    v1 = v;
+    v1 += (g-(k/m)*x)*dt;
+    x += v*dt;
+    clear();
+    b();
+    v = v1;
+    document.getElementById("x1").innerHTML = Math.round(x*100)/100;
+    document.getElementById("v1").innerHTML = Math.round(v*100)/100;
+}
+function b(){
+    cnx.beginPath();
+    cnx.moveTo(X/2-50, 50);
+    cnx.lineTo(X/2+50, 50);
+    cnx.moveTo(X/2, 50);
+    for(let i = 0; i <= l+x; i += 1/met){
+        cnx.lineTo(X/2+r*Math.sin(i*Math.PI*(2*n/(l+x)))*met, 50+i*met);
+        cnx.stroke();
+    }
+    cnx.lineTo(X/2, 50+(l+x)*met);
+    cnx.lineTo(X/2, 50+(l+x)*met+20);
+    cnx.moveTo(X/2+10, 50+(l+x)*met+20);
+    cnx.stroke();
+    cnx.beginPath();
+    cnx.arc(X/2, 50+(l+x)*met+20, 10, 0, 2*Math.PI);
+    cnx.fillStyle = "black";
+    cnx.fill();
+    
+    cnx.stroke();
+}
+function clear(){
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, X, 500);
+}
+function zapis(){
+    document.getElementById("x").value = "1";
+    document.getElementById("v").value = "0";
+    document.getElementById("l").value = "3";
+    document.getElementById("k").value = "15";
+    document.getElementById("m").value = "1";
+    document.getElementById("g").value = "9.81";
+    document.getElementById("t").value = "0.004";
+}
+function get(){
+    x = Number(document.getElementById("x").value);
+    v = Number(document.getElementById("v").value);
+    l = Number(document.getElementById("l").value);
+    k = Number(document.getElementById("k").value);
+    m = Number(document.getElementById("m").value);
+    g = Number(document.getElementById("g").value);
+    dt = Number(document.getElementById("t").value);
+}
+
+    </script>
+</body>
+</html>
