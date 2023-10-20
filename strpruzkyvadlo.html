@@ -47,6 +47,7 @@ button:active{
     </div>
     <div style="display: flex; margin: 3px;">
         <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
+        <canvas id="can2" width="800" height="500" style="border: 1px solid; margin-left: -801px;"></canvas>
         <div  style="width: 200px; padding: 5px;">
             <div style="text-align: right;">
                 <label>\(\varphi(0):\) </label><input id="fi"><label> \(\omega(0):\) </label><input id="om"><br>
@@ -60,7 +61,8 @@ button:active{
                 <label>\(\Delta t:\) </label><input id="t">
             </div>
             <br>
-            <button id="but">Spustit</button><br>
+            <button id="but">Spustit</button>
+            <button id="drahy" style="width: 110px;">Vykreslit dráhu</button><br>
             <br>
             <label>\(x\) = </label><label id="x1"></label><br>
             <label>\(\dot{x}\) = </label><label id="v1"></label><br>
@@ -71,8 +73,11 @@ button:active{
     <script>
 let can = document.getElementById("can");
 let cnx = can.getContext("2d");
+let can2 = document.getElementById("can2");
+let cnx2 = can2.getContext("2d");
 let timer = null;
 let X = 800;
+let drahy = false;
 
 let n = 15;
 let r = 0.2;
@@ -85,8 +90,19 @@ clear();
 document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
+    cnx2.clearRect(0, 0, X, 500);
     timer = setInterval(a, dt*1000);
 }
+document.getElementById("drahy").onclick = function(){
+        if(drahy == true){
+            drahy = false;
+            this.style.border = "2px solid"
+        }
+        else{
+            drahy = true;
+            this.style.border = "4px solid"
+        }
+    }
 
 function a(){
     fi1 = fi; x1 = x; om1 = om; v1 = v;
@@ -94,6 +110,7 @@ function a(){
     v1 += ((l*m*om*om+m*x*om*om-k*x+m*g*Math.cos(fi))/m)*dt;
     fi1 += om*dt;
     x1 += v*dt;
+    if(drahy == true){c()};
     fi = fi1; x = x1; om = om1; v = v1;
     clear();
     b();
@@ -122,6 +139,12 @@ function b(){
     cnx.fill();
     
     cnx.stroke();
+}
+function c(){
+    cnx2.beginPath();
+    cnx2.moveTo(X/2+(l+x+20/met)*Math.sin(fi)*met, 50+(l+x+20/met)*Math.cos(fi)*met);
+    cnx2.lineTo(X/2+(l+x1+20/met)*Math.sin(fi1)*met, 50+(l+x1+20/met)*Math.cos(fi1)*met);
+    cnx2.stroke();
 }
 function clear(){
     cnx.fillStyle = "white";
