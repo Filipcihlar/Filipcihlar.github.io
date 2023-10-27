@@ -199,10 +199,10 @@ function hod(hrac){
                 if(pos[hrac][i] < 0 && pos[hrac][i]-val == ii){
                     document.getElementById("fig"+(i+1)+"but").disabled = true;
                 }
-                if(hrac == 0 && max(hrac)-pos[hrac][i]-val == ii){
+                if(hrac == 0 && max(hrac)-pos[hrac][i]-val == ii && ii < 0){
                     document.getElementById("fig"+(i+1)+"but").disabled = true;
                 }
-                if(hrac != 0 && max(hrac)-pos[hrac][i]-val == ii && pos[hrac][i] <= hrac*10){
+                if(hrac != 0 && max(hrac)-pos[hrac][i]-val == ii && pos[hrac][i] <= hrac*10 && ii < 0){
                     document.getElementById("fig"+(i+1)+"but").disabled = true;
                 }
             }
