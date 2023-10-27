@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Člověče, nezlob se</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+.buts{
+    margin-left: 5px;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 10px;
+    width: 240px;
+}
+button{
+    margin: 1px;
+    border: 3px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 100px;
+    height: 30px;
+}
+button:disabled, button[disabled]:hover, button[disabled]:active{
+    background-color:chartreuse;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active {
+    background-color: rgba(128, 255, 0, 0.427);
+}
+#can{
+    background-color: chartreuse;
+    border: 1px solid;
+    margin-right: 3px;
+}
+.hodit{
+    background-color: lightslategray; 
+    width: 100px; 
+    height: 140px; 
+    border-radius: 5px;
+    padding: 10px;
+}
+.hodit div{
+    text-align: center;
+    background-color: lightgray;
+    border-radius: 5px;
+    height: 90px;
+    width: 90px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.hodit label{
+    font-size: 90px;
+    margin-left: 5px;
+}
+.figurky{
+    background-color: lightslategray; 
+    width: 220px; 
+    height: 110px; 
+    border-radius: 5px;
+    padding: 10px;
+}
+.figurky button{
+    margin: 3px;
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
+}
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: none;
+}
+.navbar a:hover{
+  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
+}
+    </style>
+</head>
+
+<body style="background-color: lightslategray; margin: 0px;">
+    <div class="navbar">
+        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+    </div>
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="500" height="500"></canvas>
+        <div class="buts">
+            <label id="hrac" style="font-size: 30px;"></label><br><br>
+            <div style="display: flex;">
+                <div class="hodit">
+                    <div><label id="val"></label></div><button id="hod">Hodit</button>
+                </div>
+                <button id="next" style="margin-left: 5px;">Další hráč</button>
+            </div>
+            
+            <br>
+            <div class="figurky">
+                <button id="fig1but">Figurka 1</button><button id="fig2but">Figurka 2</button><br>
+                <button id="fig3but">Figurka 3</button><button id="fig4but">Figurka 4</button><br>
+                <button id="addfig">Přidat figurku</button><br>
+            </div>
+            <br><br>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+
+let hrac = 0;
+let timer = null;
+
+let pos = JSON.parse(localStorage.getItem("clobrdo")) || [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+let barvy = ["blue", "red", "green", "yellow"];
+let barvy2 = ["modrý", "červený", "zelený", "žlutý"];
+
+hra();
+
+function hra(){
+    kolo(hrac);
+    document.getElementById("next").onclick = function(){
+        document.getElementById("val").innerHTML = "";
+        hrac++;
+        if(hrac >= pos.length){
+            hrac = 0;
+        }
+        kolo(hrac);
+    }
+    document.getElementById("reset").onclick = function(){
+        hrac = 0;
+        pos = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+        kolo(hrac);
+    }
+}
+
+function kolo(hrac){
+    vykres()
+    zkryt();
+    document.getElementById("hod").disabled = false;
+    document.getElementById("hrac").innerHTML = "Hraje "+barvy2[hrac]+" hráč";
+    document.getElementById("hrac").style.color = barvy[hrac];
+    if(pos[hrac][0]+pos[hrac][1]+pos[hrac][2]+pos[hrac][3] == 0){
+        trojhod(hrac);
+    }
+    else{hod(hrac)}
+    localStorage.setItem("clobrdo", JSON.stringify(pos));
+}
+function los(){
+    clearInterval(timer);
+    val = Math.ceil(Math.random()*6);
+    timer = setInterval(function(){document.getElementById("val").innerHTML = Math.ceil(Math.random()*6)}, 5);
+    setTimeout(() => {
+        clearInterval(timer);
+        document.getElementById("val").innerHTML = val;
+    }, 100);   
+}
+function trojhod(hrac){
+    hody = 3;
+    document.getElementById("hod").onclick = function(){
+        hody--;
+        los();
+        if(val == 6){
+            pos[hrac][0] = 1+hrac*10;
+            vyhodit(hrac, 0);
+            kolo(hrac);
+        }
+        if(hody == 0 && val != 6){
+            zkryt();
+        }
+    }
+}
+function hod(hrac){
+    document.getElementById("hod").onclick = function(){
+        los();
+        zkryt();
+        for(let i = 0; i < pos[hrac].length; i++){
+            if(pos[hrac][i] == 0 && val == 6){
+                document.getElementById("addfig").disabled = false;
+            }
+            if(pos[hrac][i] != 0){
+                document.getElementById("fig"+(i+1)+"but").disabled = false;
+            }
+            if(hrac == 0 && pos[hrac][i]+val > 44){
+                document.getElementById("fig"+(i+1)+"but").disabled = true;
+            }
+            if(hrac != 0 && pos[hrac][i]+val > hrac*10+4 && pos[hrac][i] <= hrac*10){
+                document.getElementById("fig"+(i+1)+"but").disabled = true;
+            }
+            if(pos[hrac][i] < 0 && pos[hrac][i]-val < -4){
+                document.getElementById("fig"+(i+1)+"but").disabled = true;
+            }
+            for(let ii of pos[hrac]){
+                if(pos[hrac][i] < 0 && pos[hrac][i]-val == ii){
+                    document.getElementById("fig"+(i+1)+"but").disabled = true;
+                }
+                if(hrac == 0 && max(hrac)-pos[hrac][i]-val == ii){
+                    document.getElementById("fig"+(i+1)+"but").disabled = true;
+                }
+                if(hrac != 0 && max(hrac)-pos[hrac][i]-val == ii && pos[hrac][i] <= hrac*10){
+                    document.getElementById("fig"+(i+1)+"but").disabled = true;
+                }
+            }
+        }
+        vyber(val, hrac);
+    }
+}
+function vyber(val, hrac){
+    document.getElementById("addfig").onclick = function(){
+        for(let i = 0; i < pos[hrac].length; i++){
+            if(pos[hrac][i] == 0){
+                pos[hrac][i] = 1+hrac*10;
+                vyhodit(hrac, i);
+                break;
+            }
+        }
+        kolo(hrac);
+    }
+    document.getElementById("fig"+1+"but").onclick = function(){posun(0, hrac)};
+    document.getElementById("fig"+2+"but").onclick = function(){posun(1, hrac)};
+    document.getElementById("fig"+3+"but").onclick = function(){posun(2, hrac)};
+    document.getElementById("fig"+4+"but").onclick = function(){posun(3, hrac)};
+    function posun(fig, hrac){
+        if(pos[hrac][fig] < 0){
+            pos[hrac][fig] -= val
+        }
+        if(hrac != 0 && pos[hrac][fig] + val > max(hrac) && pos[hrac][fig] <= hrac*10 && pos[hrac][fig] + val <= max(hrac)+4){
+            pos[hrac][fig] = max(hrac)-pos[hrac][fig]-val;
+        }
+        if(hrac == 0 && pos[hrac][fig] + val > max(hrac)  && pos[hrac][fig] + val <= max(hrac)+4){
+            pos[hrac][fig] = max(hrac)-pos[hrac][fig]-val;
+        }
+        if(hrac != 0 && pos[hrac][fig] > 0){
+            pos[hrac][fig] += val;
+        }
+        if(hrac == 0 && pos[hrac][fig] > 0 && pos[hrac][fig]+val <= 40){
+            pos[hrac][fig] += val;
+        }
+        vyhodit(hrac, fig);
+        vykres();
+        zkryt();
+        if(val == 6){
+            kolo(hrac);
+        }
+    }
+}
+function max(hrac){
+    if(hrac*10 == 0){return 40}else{return hrac*10}
+}
+function zkryt(){
+    document.getElementById("hod").disabled = true;
+    document.getElementById("addfig").disabled = true;
+    document.getElementById("fig"+1+"but").disabled = true; 
+    document.getElementById("fig"+2+"but").disabled = true;
+    document.getElementById("fig"+3+"but").disabled = true;
+    document.getElementById("fig"+4+"but").disabled = true;
+}
+function vyhodit(hrac, fig){
+    for(let i = 0; i < pos[hrac].length; i++){
+        if(pos[hrac][i] > 40){pos[hrac][i] -= 40;}
+    }
+    for(let i = 0; i < pos.length; i++){
+        for(let ii = 0; ii < pos[i].length; ii++){
+            if(pos[i][ii] > 0 && pos[i][ii] == pos[hrac][fig]){
+                if(hrac == i && ii != fig){
+                    pos[i][ii] = 0;
+                    console.log("a");
+                }
+                if(hrac != i){
+                    pos[i][ii] = 0;
+                    console.log("a");
+                }
+                    
+            }
+        }
+    }
+}
+
+function vykres(){
+    cnx.clearRect(0, 0, 500, 500);
+    for(let i = 1; i <= 40; i++){
+        if(i < 6){
+            x = 210; y = 500-40*i-10
+        }
+        if(i > 5 && i < 10){
+            x = 210-(i-5)*40; y = 290;
+        }
+        if(i == 10){x = 50; y = 250}
+        if(i > 10 && i < 16){
+            x = 10+(i-10)*40; y = 210;
+        }
+        if(i > 15 && i < 20){
+            x = 210; y = 500-40*(i-15)-290;
+        }
+        if(i == 20){x = 250; y = 50}
+        if(i > 20 && i < 26){
+            x = 290; y = (i-20)*40+10;
+        }
+        if(i > 25 && i < 30){
+            x = 290+(i-25)*40; y = 210;
+        }
+        if(i == 30){x = 450; y = 250}
+        if(i > 30 && i < 36){
+            x = 490-(i-30)*40; y = 290;
+        }
+        if(i > 35 && i < 40){
+            x = 290; y = 290+(i-35)*40;
+        }
+        if(i == 40){x = 250; y = 450}
+
+        cnx.beginPath();
+        cnx.fillStyle = "white";
+        if(i == 1 || i == 11 || i == 21 || i == 31){
+            cnx.fillStyle = barvy[(i-1)/10];
+        }
+        cnx.arc(x, y, 18, 0, 2*Math.PI);
+        cnx.fill();
+        cnx.stroke();
+        cnx.beginPath();
+        for(let ii = 0; ii < pos.length; ii++){
+            for(let iii = 0; iii < pos[ii].length; iii++){
+                if(pos[ii][iii] == i){
+                    cnx.arc(x, y, 15, 0, 2*Math.PI);
+                    cnx.fillStyle = barvy[ii];
+                    cnx.fill();
+                    cnx.font = "20px Arial"
+                    cnx.fillStyle = "black";
+                    cnx.textAlign = "center";
+                    cnx.fillText(iii+1, x, y+7);
+                    
+                }
+            }
+        }
+        cnx.stroke();
+    }
+    for(let i = -1; i > -5; i--){
+        for(let ii = 0; ii < pos.length; ii++){
+            if(ii == 0){x = 250; y = 450+i*40}
+            if(ii == 1){x = 50-i*40; y = 250}
+            if(ii == 2){x = 250; y = 50-i*40}
+            if(ii == 3){x = 450+i*40; y = 250}
+
+            cnx.beginPath();
+            cnx.arc(x, y, 10, 0, 2*Math.PI);
+            cnx.fillStyle = barvy[ii];
+            cnx.fill();
+            cnx.stroke();
+            cnx.beginPath();
+            for(let iii = 0; iii < pos[ii].length; iii++){
+                if(pos[ii][iii] == i){
+                    cnx.arc(x, y, 15, 0, 2*Math.PI);
+                    cnx.fillStyle = barvy[ii];
+                    cnx.fill();
+                    cnx.font = "20px Arial"
+                    cnx.fillStyle = "black";
+                    cnx.textAlign = "center";
+                    cnx.fillText(iii+1, x, y+7);
+                }
+            }
+        }
+    }
+    for(let i = 0; i < pos.length; i++){
+        uhel = -0.5*Math.PI*i-0.25*Math.PI
+        for(let ii = 0; ii < pos[i].length; ii++){
+            uhel -= Math.PI*0.2;
+            cnx.beginPath();
+            x = 250+230*Math.cos(-0.5*Math.PI*i-0.75*Math.PI)+60*Math.cos(uhel);
+            y = 250-230*Math.sin(-0.5*Math.PI*i-0.75*Math.PI)-60*Math.sin(uhel);
+            cnx.arc(x, y, 10, 0, 2*Math.PI);
+            cnx.fillStyle = barvy[i];
+            cnx.fill();
+            cnx.stroke();
+            cnx.beginPath();
+            if(pos[i][ii] == 0){
+                cnx.arc(x, y, 15, 0, 2*Math.PI);
+                cnx.fillStyle = barvy[i];
+                cnx.fill();
+                cnx.font = "20px Arial"
+                cnx.fillStyle = "black";
+                cnx.textAlign = "center";
+                cnx.fillText(ii+1, x, y+7);
+            }
+        }
+    }
+}
+
+    </script>
+</body>
+</html>
