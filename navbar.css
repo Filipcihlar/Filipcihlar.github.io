@@ -1,0 +1,42 @@
+.navbar {
+    overflow: hidden;
+    background-color: #034772;
+    display: flex;
+}
+.navbar a:not(.logo){
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border: none;
+}
+.navbar a div{
+    margin: 3px;
+    background-color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 300px;    
+    transition-duration: 0.7s;
+    transition-property: transform;
+}
+.navbar a div img{
+    border-radius: 200px;
+    margin-top: 5px;
+    margin-left: 1px;
+}
+.navbar a div:hover{
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+}
+.navbar a:hover:not(.logo){
+    background-color: #033b5e;
+}
+.navtimediv{
+    text-align: right; 
+    color: white; 
+    margin-top: -40px; 
+    margin-bottom: 15px; 
+    margin-right: 10px;
+}

@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Had</title>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         button:not(.dropbtn){
@@ -17,72 +19,15 @@
           text-align: center;
           background-color:lightslategrey;
         }
-        .navbar {
-          overflow: hidden;
-          background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
-        }
-        
-        .navbar a {
-          float: left;
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-          font-size: 17px;
-          border: none;
-        }
-        .dropdown {
-          float: left;
-          overflow: hidden;
-        }
-        
-        .dropdown .dropbtn {
-          cursor: pointer;
-          font-size: 17px;  
-          border: none;
-          outline: none;
-          color: white;
-          padding: 14px 16px;
-          background-color: inherit;
-          font-family: inherit;
-          margin: 0;
-        }
-        
-        .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-          background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
-        }
-        
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background: white;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-        
-        .dropdown-content a {
-          float: none;
-          color: black;
-          padding: 8px 16px;
-          text-decoration: none;
-          display: block;
-          text-align: left;
-        }
-        
-        .dropdown-content a:hover {
-          background-color: white;
-        }
-        
-        .show {
-          display: block;
-        }
     </style>
 </head>
 <body id="body">
     <div class="navbar" id="navbar">
-        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
     </div>
+    <div class="navtimediv" id="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
     <label id="score">Score:0</label>
     <div id="ressc">
         <button type="submit" id="resscore" style="height: 25px;">Reset HS</button>
@@ -626,7 +571,8 @@ function reset(){
     document.getElementById("eggs").style.display = "none";
     document.getElementById("menu").style.display = "block";
     document.getElementById("ressc").style.display = "block";
-    document.getElementById("navbar").style.display = "block";
+    document.getElementById("navbar").style.display = "flex";
+    document.getElementById("navtimediv").style.display = "block";
     clearInterval(timer);
     switch(dif){
         case 1:
@@ -776,6 +722,7 @@ function reset2(){
     document.getElementById("ressc").style.display = "none";
     document.getElementById("menu").style.display = "none";
     document.getElementById("navbar").style.display = "none";
+    document.getElementById("navtimediv").style.display = "none";
     if(dim == 0){
         document.getElementById("game").style.display = "block";
         document.getElementById("can2").style.visibility = "hidden";

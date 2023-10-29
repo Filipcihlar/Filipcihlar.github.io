@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="navbar.css">
     <script src="navbar.js"></script>
-    <title>Filip Cihlář</title>
-</head>
-<style>
+    <title>Zajímavosti</title>
+    <style>
 .navbar {
   position: fixed;
   top: 0;
@@ -59,7 +57,8 @@
 #kontakt:hover label::before{
     content: "alberte.otr@gmail.com";
 }
-</style>
+    </style>
+</head>
 <body style="background-color:lemonchiffon; margin: 0px;">
     <div class="navbar">
         <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
@@ -67,34 +66,37 @@
         <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
     </div>
     <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
-    
+
     <div style=" margin-top: 50px; width: 100%; display: flex;">
         <div style="text-align: center; width: 100%;">
             <div class="nadpis" style="display: inline-block; height: 60px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; margin: 50px;">
-                <label style="font-size: 50px;">Vítejte na mé stránce</label>
+                <label style="font-size: 50px;">Zajímavosti</label>
             </div><br>
 
             <div style="display: inline-block; margin-top: 30px;">
-                <div class="nadpis"><label>Co zde najdete</label></div>
+                <div class="nadpis" id="zajimavost2"><label>Delfíni a matematika</label></div>
                 <div class="obsah">
                     <p>
-                        Hlavním obsahem této stránky jsou HTML5 aplikace, které jsou převážně fyzikální, ale je mezi nimi i několik her nebo výpočet průměru známek.
-                        Dále jsou zde k&nbsp;nalezení různé zajímavosti ze světa vědy i nevědy.
+                        Pokud jsou delfíni schopni zpracovat echolokační signály při rozptýlení různými ruchy,
+                        měli by ovládat nelineární matematiku. Při lovu totiž vytváří mnoho bublin,
+                        které způsobují rušivé signály, a k rozlišení ryb od těchto bublin pomocí echolokace je třeba nelineární matematika.<br>
+                        Jsou-li tedy tohoto delfíni schopni, možná by dokázali například i derivovat.
                     </p>
                 </div>
             </div><br>
             <div style="display: inline-block; margin-top: 30px;">
-                <a href="aplikace.html" style="text-decoration: none;"><div class="nadpis"><label>HTML5 aplikace</label></div></a>
+                <div class="nadpis" id="zajimavost1"><label>Holubi umí napočítat do 9</label></div>
                 <div class="obsah">
                     <p>
-                        Z fyzikálních aplikací většina vykresluje pohyby různých těles či bodů.
-                        Polohy jsou vypočítávány z pohybových rovnic, které bývají často řešeny numericky pomocí diferenčního schématu.<br>
-                        Pro uživatele školou povinné je zde aplikace pro výpočet průměru známek, kde stačí vložit data ze systému Bakaláři a průměry se automaticky spočítají.
+                        Zjištění, že holubi jsou schopni napočítat do devíti, bylo dosaženo tak, 
+                        že byly holubům předloženy obrázky s různými počty objektů,
+                        které pak holubi dle počtu objektů vzestupně řadili.<br>
+                        Výzkum provedl psycholog Dr. Damian Scarf z University of Otago.
                     </p>
                 </div>
             </div><br>
         </div>
-        
+
         <div class="novinky" >
             <div class="obsah" style="margin-top: 10px; width: 270px; display: inline-block; border-top-left-radius: 10px;border-top-right-radius: 10px;">
                 <i class="material-icons">calendar_today</i><label id="datum"></label><br>
@@ -104,59 +106,14 @@
                 <label><span>Kontakt</span></label>
             </div>
             <div style="display: inline-block; margin-top: 30px;">
-                <div class="nadpis" style="width: 290px; font-size: 25px; height: 30px;"><label>Náhodná informace</label></div>
-                <div class="obsah" style="width: 270px;">
-                    <label id="randinfo"></label>
-                </div>
-            </div>
-            <div style="display: inline-block; margin-top: 30px;">
-                <div class="nadpis" style="width: 290px; font-size: 25px; height: 30px;"><label>Novinky</label></div>
+                <div class="nadpis" style="width: 290px; font-size: 25px; height: 30px;"><label>Seznam</label></div>
                 <div class="obsah" style="width: 270px;">
                     <label>29. 10. 2023</label><br>
-                    <label>Zveřejnění noné stránky</label>
+                    <a style="text-decoration: none;" href="#zajimavost2">Delfíni a matematika</a><br>
+                    <a style="text-decoration: none;" href="#zajimavost1">Holubi umí napočítat do 9</a>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-randinfo();
-function randinfo(){
-    info = ["Muž žena skopce do kopce si píská.", 
-    "Mnohodimenzionální melouny mají více šlupky než dužiny.", 
-    " \\(\\textrm{rot rot}\\textbf{A}=\\textrm{grad div}\\textbf{A}-\\Delta\\textbf{A}\\)"];
-
-    clobrdoinfo(); hadinfo(); hledaniinfo(); flappyinfo();
-
-    document.getElementById("randinfo").innerHTML = info[Math.floor(Math.random()*info.length)]
-    
-    function clobrdoinfo(){
-        test = false;
-        store = JSON.parse(localStorage.getItem("clobrdo"));
-        for(let i of store){
-            for(let ii of i){
-                if(ii != 0){test = true}
-            }
-        }
-        if(test){info.push("Máte rozehrané Člověče, nezlob se.")}
-    }
-    function hadinfo(){
-        if(localStorage.getItem("exhs") > 0){
-            info.push("Vaše nejlepší skóre ve hře Had (obtížnost expert) je "+localStorage.getItem("exhs")+".")
-        }
-    }
-    function hledaniinfo(){
-        if(localStorage.getItem("ttime1")){
-            info.push("Váš nejlepší čas ve hře Hledání min (obtížnost lehká) je "+localStorage.getItem("ttime1")+" s.")
-        }
-    }
-    function flappyinfo(){
-        if(localStorage.getItem("tsc1")){
-            if(localStorage.getItem("tsc1") > 0){
-                info.push("Vaše nejlepší skóre ve hře FlappyBall (obtížnost lehká) je "+localStorage.getItem("tsc1")+".")
-            }
-        }
-    }
-}
-    </script>
 </body>
 </html>

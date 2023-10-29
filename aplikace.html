@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 aplikace</title>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <style>
+.od{
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 3px;
+  padding: 5px;
+  background: linear-gradient(to left, lightgrey,  #034772);
+}
+.od:hover{
+  background: linear-gradient(to left, lightgrey,  #03314e);
+}
+.kol{
+  border: 1px solid;
+  width: fit-content;
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  float: left;
+  margin: 2px;
+  height: 110px;
+  background-color:greenyellow;
+}
+.odd{
+  margin-top: 5px;
+  margin-left: 10px;
+  overflow: hidden;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.navtimediv{
+  color: white;
+  top: 0;
+  margin-top: 12px;
+  position: fixed;
+  right: 0;
+}
+    </style>
+</head>
+<body style="background-color:lemonchiffon; margin: 0px;">
+
+  <div class="navbar">
+    <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+    <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+    <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
+  </div>
+  <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
+
+    <div style="margin: 5px; margin-top: 60px; ">
+      <div class="od" id="od1">
+        <label>Průměr </label><i id="iod1" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd1" style="display: none;">
+          <div class="kol" title="Slouží k výpočtu průměru známek.">
+            <label>Průměr</label><br>
+            <a href="strprumer.html"><img src="prumerobr.png" width="200px"></a>
+          </div>
+      </div>
+
+      <div class="od" id="od2">
+        <label>Hry </label><i id="iod2" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd2" style="display: none;">
+          <div class="kol" title="Had">
+            <label>Had</label><br>
+            <a href="strhad.html"><img src="hadobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Hledání min">
+            <label>Hledání min</label><br>
+            <a href="strhledanimin.html"><img src="hledaniminobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="FlappyBall">
+            <label>FlappyBall</label><br>
+            <a href="strflappyball.html"><img src="flappyballobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Člověče, nezlob se">
+            <label>Člověče, nezlob se</label><br>
+            <a href="strclobrdo.html"><img src="clobrdoobr.png" width="200px"></a>
+          </div>
+      </div>
+
+      <div class="od" id="od3">
+        <label>Fyzika a matematika </label><i id="iod3" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd3" style="display: none;">
+          <div class="kol" title="Simulátor gravitace">
+            <label>Gravitace</label><br>
+            <a href="strgrav.html"><img src="gravobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Více těles, více zábavy.">
+            <label>Gravitace 2</label><br>
+            <a href="strgrav2.html"><img src="grav2obr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Grafy">
+            <label>Grafy</label><br>
+            <a href="strgraf.html"><img src="grafobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Vykresluje pohyb bodu po grafu funkce v tíhovém poli.">
+            <label>Pohyb po funkci</label><br>
+            <a href="strphbpofci.html"><img src="phbpofciobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Vozík s kyvadlem">
+            <label>Landauův vozíček</label><br>
+            <a href="strlanvozik.html"><img src="lanvozikobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Vykresluje dráhu vrhu.">
+            <label>Vrhy</label><br>
+            <a href="strvrhy.html"><img src="vrhyobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Matematické kyvadlo">
+            <label>Matematické kyvadlo</label><br>
+            <a href="strmatkyvadlo.html"><img src="matkyvadloobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Lissajousovy obrazce">
+            <label>Lissajousovy obrazce</label><br>
+            <a href="strlissajous.html"><img src="lissajousobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Převrácené kyvadlo">
+            <label>Kapitzovo kyvadlo</label><br>
+            <a href="strkapitze.html"><img src="kapitzeobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Pružina">
+            <label>Pružina</label><br>
+            <a href="strpruzina.html"><img src="pruzinaobr.png" width="200px"></a>
+          </div>
+          <div class="kol" title="Kyvadlo s pružinou">
+            <label>Pružné kyvadlo</label><br>
+            <a href="strpruzkyvadlo.html"><img src="pruzkyvadloobr.png" width="200px"></a>
+          </div>
+      </div>
+
+      <div class="od" id="od4">
+        <label>Ostatní </label><i id="iod4" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd4" style="display: none;">
+        <div class="kol" title="Logic gates">
+          <label>Logic gates</label><br>
+          <a href="strlogic.html"><img src="logicobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Pomůže při řešení sudoku.">
+          <label>Sudoku</label><br>
+          <a href="strsudoku.html"><img src="sudokuobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Překladač z/do morseovky.">
+          <label>Morseovka</label><br>
+          <a href="strmorse.html"><img src="morseobr.png" width="200px"></a>
+        </div>
+      </div>
+
+      <div class="od" id="od5">
+        <label>Ke stažení </label><i id="iod5" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd5" style="display: none;">
+        <div class="kol" style="text-align: center;">
+          <label>HTML5 aplikace (zip)</label><br>
+          <a href="HTML5aplikace.zip" download><img src="zipobr.png" width="90px"></a>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      for(let i = 1; i < 6; i++){
+        document.getElementById("od"+i).onclick = function(){
+          if(document.getElementById("odd"+i).style.display == "block"){
+            document.getElementById("odd"+i).style.display = "none";
+            document.getElementById("iod"+i).className = "fa fa-caret-down";
+            block = false;
+          }
+          else{
+            document.getElementById("odd"+i).style.display = "block";
+            document.getElementById("iod"+i).className = "fa fa-caret-up";
+            block = true;
+          }
+        }
+      }
+    </script>
+</body>

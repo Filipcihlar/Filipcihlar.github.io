@@ -6,6 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hledání min</title>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
     <style>
         .pol{
             background-color: rgba(65, 255, 1, 0.621);
@@ -28,28 +30,15 @@
 body{
   margin: 0;
 }
-.navbar {
-  overflow: hidden;
-  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
-}
-.navbar a {
-  float: left;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border: none;
-}
-.navbar a:hover{
-  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
-}
     </style>
 </head>
 <body style="text-align: center; background-color: lightslategrey">
     <div class="navbar">
-        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
     </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
     <div id="menu" style="text-align: center;">
         <label style="font-weight: bold; font-size: 40px;">Hledání min</label><br>
         <label>Čas: </label><label id="score" style="font-size: 30px; font-weight: bold;"></label><br>

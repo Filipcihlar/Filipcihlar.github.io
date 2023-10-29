@@ -6,6 +6,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Lissajousovy obrazce</title>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
     <style>
 input{
     width: 41px;
@@ -23,28 +25,15 @@ button:hover{
 button:active{
     background-color: rgba(128, 255, 0, 0.427);
 }
-.navbar {
-  overflow: hidden;
-  background: linear-gradient(to bottom, #025589 0%, #12ffb4 200%);
-}
-.navbar a {
-  float: left;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border: none;
-}
-.navbar a:hover{
-  background: linear-gradient(to bottom, #034772 0%, #10c088 200%);
-}
     </style>
 </head>
 <body style="background-color: lightgrey; margin: 0px;">
     <div class="navbar">
-        <a href="./index.html" style="font-size: 20px; font-weight: bold;"><i class="fa fa-bars"></i> Menu</a>
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
     </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
     <div style="display: flex; margin: 3px;">
         <canvas id="can" width="500" height="500" style="border: 1px solid;"></canvas>
         <div  style="width: 180px; padding: 5px;">
