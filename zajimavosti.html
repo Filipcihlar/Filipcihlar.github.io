@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
     <link rel="shortcut icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,7 +27,7 @@
     float: right;
     background-color: rgb(255, 246, 169);
     width: 450px;
-    height: 100vh;
+    height: 200vh;
     text-align: center;
 }
 .nadpis{
@@ -74,6 +75,25 @@
             </div><br>
 
             <div style="display: inline-block; margin-top: 30px;">
+                <div class="nadpis" id="zajimavost3"><label>Mnohodimenzionální melouny</label></div>
+                <div class="obsah">
+                    <p>
+                        Jedna z náhodných informací na této stránce tvrdí, že mnohodimenzionální melouny mají více slupky než dužiny.
+                        To lze snadno dokázat. Mějme dokonale kulatý 3D meloun o poloměru \(R\) a&nbsp;tloušťce slupky \(d\) \((\frac{d}{R}=\epsilon)\),
+                        zastoupení slupky v melounu pak bude 
+                        $$
+                        \eta=1-\frac{(R-d)^3}{R^3}=1-(1-\epsilon)^3,
+                        $$
+                        to můžeme po zobecnění na n-tou dimenzi psát jako
+                        $$
+                        \eta=1-(1-\epsilon)^n.
+                        $$
+                        Pokud je například \(\epsilon=10~\%\), platí pro 3D meloun \(\eta=27,1~\%\), ale pro 10D meloun \(\eta\doteq65,13~\%\).
+                        Slupky tedy může být skutečně více než dužiny.
+                    </p>
+                </div>
+            </div><br>
+            <div style="display: inline-block; margin-top: 30px;">
                 <div class="nadpis" id="zajimavost2"><label>Delfíni a matematika</label></div>
                 <div class="obsah">
                     <p>
@@ -108,6 +128,8 @@
             <div style="display: inline-block; margin-top: 30px;">
                 <div class="nadpis" style="width: 290px; font-size: 25px; height: 30px;"><label>Seznam</label></div>
                 <div class="obsah" style="width: 270px;">
+                    <label>31. 10. 2023</label><br>
+                    <a style="text-decoration: none;" href="#zajimavost3">Mnohodimenzionální melouny</a><br>
                     <label>29. 10. 2023</label><br>
                     <a style="text-decoration: none;" href="#zajimavost2">Delfíni a matematika</a><br>
                     <a style="text-decoration: none;" href="#zajimavost1">Holubi umí napočítat do 9</a>
