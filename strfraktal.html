@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <title>Mandelbrot set</title>
+    <style>
+input{
+    width: 80px;
+}
+button{
+    margin: 1px;
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.slider{
+    width: 200px;
+    height: 10px;
+    
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
+    </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
+
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="500" height="500" style="border: 1px solid;"></canvas>
+        <canvas id="can2" width="500" height="500" style="border: 1px solid; margin-left: -501px;"></canvas>
+        <div  style="width: 300px; padding: 5px;">
+            <label id="func">\(f(z)=z^2+c\)</label><br>
+            <button id="set1" class="sets" style="border: 3px solid;">\(z^2+c\)</button><button id="set2" class="sets" style="border: 1px solid;">\(z^3+c\)</button><button id="set3" class="sets" style="border: 1px solid;">\(z^4+c\)</button><br>
+            <br>
+            <label style="font-weight: bold;">Posun:</label><br>
+            <label>\(x: \)</label><input class="slider" type="range" id="xpos" min="-500" max="500" value="0"><br>
+            <label>\(y: \)</label><input class="slider" type="range" id="ypos" min="-500" max="500" value="0"><br>
+            <br>
+            <label style="font-weight: bold;">Zvětšení: </label><input id="met1"><br>
+            <input class="slider" type="range" id="met" min="10" max="500" value="10"><br>
+            <button id="zoomtr" style="border: 3px solid; height: 25px; width: 100px; margin-top: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Přiblížit</button>
+            <button id="zoomfa" style="margin-left: -5px;border: 1px solid; height: 25px; width: 100px; margin-top: 5px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Oddálit</button><br>
+            <br>
+            <label>Maximální počet iterací: </label><input id="maxit"><br>
+            <br>
+            <label style="font-weight: bold;">Barva:</label><br>
+            <div style="text-align: right; width: 150px;">
+                <label>Červená: </label><input id="red"><br>
+                <label>Zelená: </label><input id="green"><br>
+                <label>Modrá: </label><input id="blue"><br>
+                <label>Sytost: </label><input id="syt">
+            </div>
+            <br>
+            <button id="vykres">Vykreslit</button><button style="width: 100px;" id="selclear">Skrýt selektor</button>
+        </div>
+    </div>
+    
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let can2 = document.getElementById("can2");
+let cnx2 = can2.getContext("2d");
+
+let X = 500;
+let Y = 500;
+let px = 1; let py = 1; 
+
+
+let xpos = 0;
+let ypos = 0;
+let zvet = true;
+let set = 1;
+
+zapis();
+get();
+vykres();
+window.addEventListener("input",zoom);
+window.addEventListener("mousemove", function(){
+    for(let i = 1; i <= 3; i++){
+        document.getElementById("set"+i).onclick = function(){
+            for(let ii of document.getElementsByClassName("sets")){ii.style.border = "1px solid"}
+            this.style.border = "3px solid";
+            xpos = 0;
+            ypos = 0;
+            zvet = true;
+            set = i;
+            document.getElementById("func").innerHTML = "\\(f(z)=z^"+(i+1)+"+c\\)";
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("func")]);
+            zapis();
+            get();
+        }
+    }
+})
+
+document.getElementById("vykres").onclick = function(){
+    zoom();
+    cnx2.clearRect(0, 0, 500, 500);
+    document.getElementById("xpos").value = 0;
+    document.getElementById("ypos").value = 0;
+    document.getElementById("met").value = 10;
+    xpos += met*xpos1; ypos -= met*ypos1;
+    if(zvet == true){met = met*met1}else{met = met/met1}
+    get()
+    vykres();
+}
+
+document.getElementById("zoomtr").onclick = function(){
+    zvet = true;
+    document.getElementById("met").value = 10;
+    document.getElementById("zoomfa").style.border = "1px solid";
+    this.style.border = "3px solid";
+}
+document.getElementById("zoomfa").onclick = function(){
+    zvet = false;
+    document.getElementById("met").value = 10;
+    document.getElementById("zoomtr").style.border = "1px solid";
+    this.style.border = "3px solid";
+}
+document.getElementById("selclear").onclick = function(){cnx2.clearRect(0, 0, 500, 500);}
+
+function zoom(){
+    xpos1 = document.getElementById("xpos").value/500;
+    ypos1 = document.getElementById("ypos").value/500;
+    met1 = 10/document.getElementById("met").value;
+    if(zvet == true){document.getElementById("met1").value = met*met1}else{document.getElementById("met1").value = met/met1}
+    cnx2.beginPath();
+    cnx2.clearRect(0, 0, 500, 500);
+    cnx2.strokeStyle = "red";
+    cnx2.moveTo(xpos1*X/2+X/2, 0);
+    cnx2.lineTo(xpos1*X/2+X/2, 500);
+    cnx2.moveTo(0, -ypos1*Y/2+Y/2);
+    cnx2.lineTo(500, -ypos1*Y/2+Y/2);
+    cnx2.moveTo(xpos1*X/2+X/2-(X*met1)/2, -ypos1*Y/2+Y/2-(Y*met1)/2);
+    cnx2.lineTo(xpos1*X/2+X/2+(X*met1)/2, -ypos1*Y/2+Y/2-(Y*met1)/2);
+    cnx2.lineTo(xpos1*X/2+X/2+(X*met1)/2, -ypos1*Y/2+Y/2+(Y*met1)/2);
+    cnx2.lineTo(xpos1*X/2+X/2-(X*met1)/2, -ypos1*Y/2+Y/2+(Y*met1)/2);
+    cnx2.lineTo(xpos1*X/2+X/2-(X*met1)/2, -ypos1*Y/2+Y/2-(Y*met1)/2);
+    cnx2.stroke();
+    
+}
+function vykres(){
+    cnx.beginPath();
+    cnx.fillStyle = "white";
+    cnx.fillRect(0, 0, 500, 500);
+    for(let i = 0; i < X; i += px){
+        for(let ii = 0; ii < Y; ii += py){
+            x = -met+i*((met*2)/(X))+xpos;//-1.0015; 
+            y = -met+ii*((met*2)/(Y))+ypos;//-0.304;
+            cx = x;
+            cy = y;
+            iteration = 0;
+            while(iteration < maxit){
+                if(set == 1){
+                    x1 = x*x-y*y;
+                    y1 = x*y*2;
+                }
+                if(set == 2){
+                    x1 = x*x*x-3*x*y*y;
+                    y1 = 3*x*x*y-y*y*y;
+                }
+                if(set == 3){
+                    x1 = x*x*x*x+y*y*y*y-6*x*x*y*y;
+                    y1 = 4*x*y*(x*x-y*y);
+                }
+                if(Math.abs(x+y) > 16){
+                    break;
+                }
+                x = x1+cx;
+                y = y1+cy;
+                iteration++;
+            }
+            cnx.fillStyle = "rgb("+iteration/maxit*red+","+iteration/maxit*green+","+iteration/maxit*blue+","+iteration/maxit*syt+")";
+            if(iteration == maxit){cnx.fillStyle = "black"}
+            cnx.fillRect(i, ii, px, py);
+        }
+    }
+}
+function zapis(){
+    document.getElementById("maxit").value = 100;
+    document.getElementById("met1").value = 1;
+    document.getElementById("met").value = 10;
+    document.getElementById("red").value = 0;
+    document.getElementById("green").value = 500;
+    document.getElementById("blue").value = 1000;
+    document.getElementById("syt").value = 30;
+}
+function get(){
+    met = document.getElementById("met1").value;
+    maxit = document.getElementById("maxit").value;
+    red = document.getElementById("red").value;
+    green = document.getElementById("green").value;
+    blue = document.getElementById("blue").value;
+    syt = document.getElementById("syt").value;
+
+}
+    </script>
+</body>
+</html>
