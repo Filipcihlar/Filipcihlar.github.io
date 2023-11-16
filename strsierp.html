@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <title>Sierpińského trojúhelník</title>
+    <style>
+input{
+    width: 41px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
+    </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
+    
+    <div style="display: flex; margin: 3px;">
+        <canvas id="can" width="500" height="500" style="border: 1px solid; background-color: white;"></canvas>
+        <div style="width: 400px; padding: 5px;">
+            <label style="font-weight: bold;">Počet iterací:</label><br>
+            <label>Počáteční: </label><input id="iter"><label> Koncový: </label><input id="iter_m"><label> Krok: </label><input id="iter_k">
+            <br><br>
+            <label style="font-weight: bold;">Animace:</label><br>
+            <label>\(\Delta t:\) </label><input id="t"><labe> ms</labe>
+            <br><br>
+            <button id="but">Spustit</button>
+        </div>
+    </div>
+    
+    <script>
+let can = document.getElementById("can");
+let cnx = can.getContext("2d");
+let timer = null;
+
+zapis();
+get();
+document.getElementById("but").onclick = function(){
+    clearInterval(timer);
+    get();
+    timer = setInterval(a, t);
+}
+
+function a(){
+    cnx.clearRect(0,0,500,500);
+    let body = [[[0,500],[500,500],[250,500-Math.pow(500*500-250*250, 0.5)]]];
+    let body2 = [];
+    cnx.beginPath();
+    cnx.moveTo(body[0][0][0], body[0][0][1]);
+    cnx.lineTo(body[0][1][0], body[0][1][1]);
+    cnx.lineTo(body[0][2][0], body[0][2][1]);
+    cnx.lineTo(body[0][0][0], body[0][0][1]);
+    for(let i = 0; i < iter; i++){
+        for(let ii = 0; ii < body.length; ii++){
+            sx1 = (body[ii][0][0]+body[ii][1][0])/2; sy1 = (body[ii][0][1]+body[ii][1][1])/2;
+            sx2 = (body[ii][1][0]+body[ii][2][0])/2; sy2 = (body[ii][1][1]+body[ii][2][1])/2;
+            sx3 = (body[ii][2][0]+body[ii][0][0])/2; sy3 = (body[ii][2][1]+body[ii][0][1])/2;
+            cnx.moveTo(sx1, sy1);
+            cnx.lineTo(sx2, sy2);
+            cnx.lineTo(sx3, sy3);
+            cnx.lineTo(sx1, sy1);
+            cnx.stroke();
+            body2.push([[body[ii][0][0],body[ii][0][1]],[sx1,sy1],[sx3,sy3]]);
+            body2.push([[body[ii][1][0],body[ii][1][1]],[sx1,sy1],[sx2,sy2]]);
+            body2.push([[body[ii][2][0],body[ii][2][1]],[sx2,sy2],[sx3,sy3]]);
+        }
+        body = body2;
+        body2 = [];
+    }
+    if((iter_k > 0 && iter < iter_m) || (iter_k < 0 && iter > iter_m)){iter += iter_k}else{clearInterval(timer)};
+}
+function zapis(){
+    document.getElementById("iter").value = "6";
+    document.getElementById("iter_m").value = "0";
+    document.getElementById("iter_k").value = "0";
+    document.getElementById("t").value = "0";
+}
+function get(){
+    iter = Number(document.getElementById("iter").value);
+    iter_m = Number(document.getElementById("iter_m").value);
+    iter_k = Number(document.getElementById("iter_k").value);
+    t = Number(document.getElementById("t").value);
+}
+    </script>
+</body>
+</html>

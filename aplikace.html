@@ -95,7 +95,7 @@
       </div>
 
       <div class="od" id="od3">
-        <label>Fyzika a matematika </label><i id="iod3" class="fa fa-caret-down"></i>
+        <label>Fyzika </label><i id="iod3" class="fa fa-caret-down"></i>
       </div>
       <div class="odd" id="odd3" style="display: none;">
           <div class="kol" title="Simulátor gravitace">
@@ -105,10 +105,6 @@
           <div class="kol" title="Více těles, více zábavy.">
             <label>Gravitace 2</label><br>
             <a href="strgrav2.html"><img src="grav2obr.png" width="200px"></a>
-          </div>
-          <div class="kol" title="Grafy">
-            <label>Grafy</label><br>
-            <a href="strgraf.html"><img src="grafobr.png" width="200px"></a>
           </div>
           <div class="kol" title="Vykresluje pohyb bodu po grafu funkce v tíhovém poli.">
             <label>Pohyb po funkci</label><br>
@@ -142,16 +138,38 @@
             <label>Pružné kyvadlo</label><br>
             <a href="strpruzkyvadlo.html"><img src="pruzkyvadloobr.png" width="200px"></a>
           </div>
-          <div class="kol" title="Generátor fraktálů">
-            <label>Mandelbrot set</label><br>
-            <a href="strfraktal.html"><img src="fraktalobr.png" width="200px"></a>
-          </div>
       </div>
 
       <div class="od" id="od4">
-        <label>Ostatní </label><i id="iod4" class="fa fa-caret-down"></i>
+        <label>Matematika </label><i id="iod4" class="fa fa-caret-down"></i>
       </div>
       <div class="odd" id="odd4" style="display: none;">
+        <div class="kol" title="Grafy">
+          <label>Grafy</label><br>
+          <a href="strgraf.html"><img src="grafobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Mandelbrotova množina">
+            <label>Mandelbrot set</label><br>
+            <a href="strfraktal.html"><img src="fraktalobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Fractal tree">
+          <label>Fractal tree</label><br>
+          <a href="strfractaltree.html"><img src="fractaltreeobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Sierpińského trojúhelník">
+          <label>Sierpińského trojúhelník</label><br>
+          <a href="strsierp.html"><img src="sierpobr.png" width="200px"></a>
+        </div>
+        <div class="kol" title="Sierpińského koberec">
+          <label>Sierpińského koberec</label><br>
+          <a href="strkoberec.html"><img src="koberecobr.png" width="200px"></a>
+        </div>
+      </div>
+
+      <div class="od" id="od5">
+        <label>Ostatní </label><i id="iod5" class="fa fa-caret-down"></i>
+      </div>
+      <div class="odd" id="odd5" style="display: none;">
         <div class="kol" title="Logic gates">
           <label>Logic gates</label><br>
           <a href="strlogic.html"><img src="logicobr.png" width="200px"></a>
@@ -166,10 +184,10 @@
         </div>
       </div>
 
-      <div class="od" id="od5">
-        <label>Ke stažení </label><i id="iod5" class="fa fa-caret-down"></i>
+      <div class="od" id="od6">
+        <label>Ke stažení </label><i id="iod6" class="fa fa-caret-down"></i>
       </div>
-      <div class="odd" id="odd5" style="display: none;">
+      <div class="odd" id="odd6" style="display: none;">
         <div class="kol" style="text-align: center;">
           <label>HTML5 aplikace (zip)</label><br>
           <a href="HTML5aplikace.zip" download><img src="zipobr.png" width="90px"></a>
@@ -178,7 +196,7 @@
 
     </div>
     <script>
-      for(let i = 1; i < 6; i++){
+      for(let i = 1; i < 7; i++){
         document.getElementById("od"+i).onclick = function(){
           if(document.getElementById("odd"+i).style.display == "block"){
             document.getElementById("odd"+i).style.display = "none";
