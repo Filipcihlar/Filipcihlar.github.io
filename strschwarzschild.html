@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <title>Schwarzschildova metrika</title>
+    <style>
+input{
+    width: 70px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.telesa, .saves{
+    border-radius: 5px;
+    border: 1px solid;
+    margin: 2px;
+    padding: 3px;
+    background-color:orange;
+    font-size: 10px;
+}
+.telesa label, .saves label{
+    font-weight: bold;
+    font-size: 20px;
+}
+.telesa button, .saves button{
+    padding: 0px;
+    width: 30px;
+    height: 26px;
+    border: 1px solid;
+    margin: 1px;
+}
+.telesa button:hover, .saves button:hover{
+    border: 2px solid;
+}
+.seznam{
+    background-color: cadetblue; 
+    padding: 3px; 
+    border-radius: 3px;
+}
+.seznam:hover{
+    border: 1px solid;
+}
+.plustel{
+    width: 86px;
+}
+canvas{
+    grid-row: 1;
+    grid-column: 1;
+    border: 1px solid;
+}
+    </style>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
+    </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
+    
+    <div style="display: flex; margin: 3px;">
+        <div style="display: grid;">
+            <canvas id="can3" width="700" height="500" style="background-color: white;"></canvas>
+            <canvas id="can" width="700" height="500"></canvas>
+            <canvas id="can2" width="700" height="500"></canvas>
+        </div>
+        <div style="width: 280px; padding: 5px;">
+            <label style="font-weight: bold;">Zobrazení:</label><br>
+            <div style="text-align: right;">
+                <label>\(X:\) </label><input style="width: 30px;" id="X"><label>&nbsp;\(Y:\) </label><input style="width: 30px;" id="Y"><label>&nbsp;Zvětšení: </label><input id="met"><br>
+            </div>
+            <div>
+                <button id="osy" style="border: 1px solid; height: 25px; width: 133px; margin-top: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Zobrazit osy</button>
+                <button id="drahy" style="border: 1px solid; height: 25px; width: 143px; margin-top: 5px; margin-left: -4px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Zobrazit dráhy částic</button>
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přesnost:</label>
+            <div style="text-align: left;">
+                <label>\(\Delta\tau:\) </label><input id="dt">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Konstanty:</label>
+            <div style="text-align: left;">
+                <label>\(c:\) </label><input id="c"><label> \(G:\) </label><input id="G">
+            </div><br>
+            <label style="font-weight: bold;">Hmotnost černé díry:</label>
+            <div style="text-align: left;">
+                <label>\(M:\) </label><input id="M">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přidat částici:</label>
+            <div>
+                <label>Název: </label><input id="name" style="width: 88px;"><br>
+                <label style="margin-left: 3px;">Barva: </label><input id="barva" style="width: 87px;"><br>
+                <label style="margin-left: 25px;">\(\varphi:\) </label><input class="plustel" id="fi"><label style="margin-left: 5px;">\(\dot\varphi:\) </label><input class="plustel" id="om"><br>
+                <label style="margin-left: 27px;">\(r:\) </label><input class="plustel" id="r"><label style="margin-left: 8px;">\(\dot r:\) </label><input class="plustel" id="v"><br>
+                <label style="margin-left: 28px;">\(t:\) </label><input class="plustel" id="t"><label style="margin-left: 7px;">\(\dot t:\) </label><input class="plustel" id="vt"><br>
+                <button id="add" style="height: 22px; width: 100px; margin: 1px;">Přidat</button>
+            </div>
+            <br><br>
+            <button id="start">Spustit</button>
+            <button id="rst">Reset</button>
+            <button id="stop"><i id="ic" class="fa fa-pause"></i></button><br>
+        </div>
+        <div style="width: 250px; padding: 5px; margin-left: 8px;">
+            <div class="seznam" id="telsez">
+                <label id="tellab" style="font-weight: bold;">Částice <i id="sipkatel" class="fa fa-caret-up"></i></label>
+                <div id="telesa" style="display: block;">
+                </div>
+            </div>
+            <div class="seznam" id="savesez" style="margin-top: 8px;">
+                <label id="savelab" style="font-weight: bold;">Uložit/Nahrát <i id="sipkasave" class="fa fa-caret-up"></i></label>
+                <div id="saves" style="display: block;">
+                   <label>Název: </label><input id="save" style="width: 80px;"> <button id="savebut" style="height: 23px;">Uložit</button><br>
+                   <div class="saves">
+                        <button id="demo1" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Stáčení perihelia</label>
+                    </div>
+                    <div class="saves">
+                        <button id="demo2" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Blízko černé díry</label>
+                    </div>
+                    <div class="saves">
+                        <button id="demo3" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Slunce a Země</label>
+                    </div>
+                    <div id="saves2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+let cnx = document.getElementById("can").getContext("2d");
+let cnx2 = document.getElementById("can2").getContext("2d");
+let cnx3 = document.getElementById("can3").getContext("2d");
+
+let timer; pause = 0;
+let sett = {"drahy": true, "osy": true};
+
+demo1 = [[700, 500, 0.00001, 0.001, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 7000000, 0, 7.6, 0, 1, "blue", ""],[2, 8000000, 0, 6, 0, 1, "lime", ""],[0.6, 20000000, 0, 1, 0, 1, "orangered", ""]]];
+demo2 = [[700, 500, 0.0001, 0.00003, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 800000, 0, 163, 0, 1, "orange", ""]]];
+demo3 = [[700, 500, 0.000000001, 5000, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)],[[3.14, 149597870700, 0, 2e-7, 0, 1, "blue", "Země"]]];
+demo = [demo1, demo2, demo3];
+saves = JSON.parse(localStorage.getItem("savesotr")) || [];
+
+startapp()
+window.addEventListener("click", app);
+
+function app(){
+    for(let i = 1; i <= demo.length; i++){
+        document.getElementById("demo"+i).onclick = function(){
+            clearInterval(timer);
+            clear();
+            par = JSON.parse(JSON.stringify(demo[i-1][0])); telesa0 = JSON.parse(JSON.stringify(demo[i-1][1]));
+            telesa = JSON.parse(JSON.stringify(telesa0));
+            zapis();
+        }
+    }
+    buts()
+    document.getElementById("savebut").onclick = function(){
+        saves.push([[document.getElementById("save").value],[X,Y,met,dt,G,c,M],telesa0]);
+        localStorage.setItem("savesotr", JSON.stringify(saves));
+        savezapis();
+    };
+    document.getElementById("add").onclick = function(){
+        clearInterval(timer);
+        newtel = [];
+        newtel.push(Number(document.getElementById("fi").value));
+        newtel.push(Number(document.getElementById("r").value));
+        newtel.push(Number(document.getElementById("t").value));
+        newtel.push(Number(document.getElementById("om").value));
+        newtel.push(Number(document.getElementById("v").value));
+        newtel.push(Number(document.getElementById("vt").value));
+        newtel.push(document.getElementById("barva").value);
+        newtel.push(document.getElementById("name").value);
+        telesa.push(newtel);
+        telesa0.push(newtel);
+        telesazapis();
+        pause = 0;
+        clearInterval(timer);
+        clear();
+    }
+    document.getElementById("tellab").onclick = function(){
+        if(document.getElementById("telesa").style.display == "block"){
+            document.getElementById("telesa").style.display = "none";
+            document.getElementById("sipkatel").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("telesa").style.display = "block";
+            document.getElementById("sipkatel").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("savelab").onclick = function(){
+        if(document.getElementById("saves").style.display == "block"){
+            document.getElementById("saves").style.display = "none";
+            document.getElementById("sipkasave").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("saves").style.display = "block";
+            document.getElementById("sipkasave").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("osy").onclick = function(){
+        if(sett.osy == true){
+            sett.osy = false;
+            this.style.border = "1px solid"
+            cnx2.clearRect(0, 0, X, Y);
+            
+        }
+        else{
+            sett.osy = true;
+            this.style.border = "3px solid"
+            osynakres();
+        }
+    }
+    document.getElementById("drahy").onclick = function(){
+        if(sett.drahy == true){
+            sett.drahy = false;
+            this.style.border = "1px solid";
+            document.getElementById("can").style.backgroundColor = "white";
+        }
+        else{
+            sett.drahy = true;
+            this.style.border = "3px solid";
+            document.getElementById("can").style.backgroundColor = "unset";
+        }
+    }
+    document.getElementById("rst").onclick = function(){
+        pause = 0;
+        clearInterval(timer);
+        clear();
+    }
+    document.getElementById("stop").onclick = function(){
+        if(pause == 1){
+            clearInterval(timer);
+            pause = 2;
+            document.getElementById("ic").className = "fa fa-play";
+        }
+        else if(pause != 0){
+            timer = setInterval(vypocet, 1);
+            pause = 1;
+            document.getElementById("ic").className = "fa fa-pause";
+        }
+    }
+    document.getElementById("start").onclick = function(){
+        clearInterval(timer);
+        if(telesa[0]){start()}
+    }
+}
+function startapp(){
+    par = [700, 500, 1, 0.005, 6.67408e-11, 299792458, Math.pow(10,32)];
+    telesa0 = []; telesa = JSON.parse(JSON.stringify(telesa0));
+    savezapis();
+    zapis();
+    clear();
+    osynakres();
+    app();
+}
+
+function start(){
+    pause = 1;
+    get();
+    timer = setInterval(vypocet, 1);
+    clear();
+}
+function dira(){
+    cnx.beginPath();
+    cnx.arc(X/2, Y/2, rg*met, 0, 2*Math.PI);
+    cnx.fillStyle = "black";
+    cnx.fill();
+    cnx.stroke();
+}
+function vypocet(){
+    cnx.clearRect(0, 0, X, Y);
+    dira();
+    for(let i = 0; i < telesa.length; i++){
+        t = telesa[i][2]; fi = telesa[i][0]; r = telesa[i][1]; vt = telesa[i][5]; om = telesa[i][3]; v = telesa[i][4];
+        t1 = t; fi1 = fi; r1 = r; vt1 = vt; om1 = om; v1 = v;
+
+        vt1 += -(v*vt*rg*dt)/(r*r*(1-rg/r));
+        om1 += -(2*v*om*dt)/r;
+        v1 += ((v*v*rg)/(2*r*r-2*rg*r)+(1-rg/r)*(r*om*om-(c*c*vt*vt*rg)/(2*r*r)))*dt;
+        t1 += vt*dt;
+        fi1 += om*dt;
+        r1 += v*dt;
+
+        document.getElementById("stavfi"+i).innerHTML = Math.round(fi1*100)/100;
+        document.getElementById("stavr"+i).innerHTML = Math.round(r1);
+        document.getElementById("stavt"+i).innerHTML = Math.round(t1);
+        document.getElementById("stavom"+i).innerHTML = Math.round(om1*100)/100;
+        document.getElementById("stavv"+i).innerHTML = Math.round(v1*100)/100;
+        document.getElementById("stavvt"+i).innerHTML = Math.round(vt1*10000)/10000;
+
+        cnx3.beginPath();
+        cnx3.strokeStyle = telesa[i][6];
+        cnx3.moveTo(X/2+r*Math.cos(fi)*met, Y/2-r*Math.sin(fi)*met);
+        cnx3.lineTo(X/2+r1*Math.cos(fi1)*met, Y/2-r1*Math.sin(fi1)*met);
+        cnx3.stroke();
+
+        cnx.beginPath();
+        cnx.fillStyle = telesa[i][6];
+        cnx.arc(X/2+r1*Math.cos(fi1)*met, Y/2-r1*Math.sin(fi1)*met, 2, 0, 2*Math.PI);
+        cnx.fill();
+        cnx.stroke();
+
+        telesa[i][0] = fi1; telesa[i][1] = r1; telesa[i][2] = t1; telesa[i][3] = om1; telesa[i][4] = v1; telesa[i][5] = vt1;
+    }
+    
+}
+function clear(){
+    cnx3.fillStyle = "white";
+    cnx.clearRect(0, 0, X, Y); cnx3.fillRect(0, 0, X, Y);
+}
+function osynakres(){
+    cnx2.strokeStyle = "black";
+    cnx2.moveTo(X/2, 0); cnx2.lineTo(X/2, Y);
+    cnx2.moveTo(0, Y/2); cnx2.lineTo(X, Y/2);
+    for(let i = 0; i <= X; i += 100){
+        cnx2.moveTo(i+X/2, Y/2); cnx2.lineTo(i+X/2, 4+Y/2);
+        cnx2.moveTo(-i+X/2, Y/2); cnx2.lineTo(-i+X/2, 4+Y/2);
+    }
+    for(let i = 0; i <= Y; i += 100){
+        cnx2.moveTo(X/2, i+Y/2); cnx2.lineTo(X/2-4, i+Y/2);
+        cnx2.moveTo(X/2, -i+Y/2); cnx2.lineTo(X/2-4, -i+Y/2);
+    }
+    cnx2.stroke();
+}
+function zapis(){
+    telesazapis();
+    X = par[0]; Y = par[1]; met = par[2]; dt = par[3]; G = par[4]; c = par[5]; M = par[6];
+    document.getElementById("X").value = X;
+    document.getElementById("Y").value = Y;
+    document.getElementById("met").value = met;
+    document.getElementById("dt").value = dt;
+    document.getElementById("G").value = G;
+    document.getElementById("c").value = c;
+    document.getElementById("M").value = M;
+    document.getElementById("barva").value = "orange";
+    document.getElementById("fi").value = "0";
+    document.getElementById("t").value = "0";
+    document.getElementById("v").value = "0";
+    document.getElementById("vt").value = "1";
+    if(sett.osy == true){
+        document.getElementById("osy").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("osy").style.border = "1px solid";
+    }
+    if(sett.drahy == true){
+        document.getElementById("drahy").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("drahy").style.border = "1px solid";
+    }
+}
+function get(){
+    telesa = JSON.parse(JSON.stringify(telesa0));
+    X = document.getElementById("X").value;
+    Y = document.getElementById("Y").value;
+    met = document.getElementById("met").value;
+    dt = document.getElementById("dt").value;
+    G = document.getElementById("G").value;
+    c = Number(document.getElementById("c").value);
+    M = Number(document.getElementById("M").value);
+    document.getElementById("can").width = X; document.getElementById("can2").width = X; document.getElementById("can3").width = X;
+    document.getElementById("can").height = Y; document.getElementById("can2").height = Y; document.getElementById("can3").height = Y;
+    if(sett.osy == true){osynakres()}
+    timer = null;
+    rg = (2*G*M)/(c*c);
+}
+function telesazapis(){
+    while(document.getElementById("telesa").lastChild){
+        document.getElementById("telesa").removeChild(document.getElementById("telesa").lastChild)
+    }
+    for(let i = 0; i < telesa0.length; i++){
+        div = document.createElement("div");
+        div.className = "telesa";
+        div.id = "teleso"+i;
+        div.style = "background-color:"+telesa0[i][6];
+        
+        rmv = document.createElement("button");
+        rmv.id = "telrmv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        nst = document.createElement("button");
+        nst.id = "telsett"+i;
+        nst.style = "background-color: lightblue";
+        isett = document.createElement("i");
+        isett.className = "material-icons";
+        isett.appendChild(document.createTextNode("settings"));
+        nst.appendChild(isett);
+        div.appendChild(nst);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(telesa0[i][7]));
+        div.appendChild(nzv);
+
+        div.appendChild(document.createElement("br"));
+
+        div.appendChild(document.createTextNode("\\(\\varphi_0="+telesa0[i][0]+"; r_0="+telesa0[i][1]+"; t_0="+telesa0[i][2]+";\\)\n\\(\\dot\\varphi_0="+telesa0[i][3]+"; \\dot r_0="+telesa0[i][4]+"; \\dot t_0="+telesa0[i][5]+"\\)"))
+        
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(\\varphi= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavfi"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(r= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavr"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(t= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavt"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(\\dot\\varphi= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavom"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(\\dot r= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavv"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+
+        stavlbl = document.createElement("label");
+        stavlbl.style = "font-size: 15px";
+        stavlbl.appendChild(document.createTextNode("\\(\\dot t= \\)"));
+        div.appendChild(stavlbl);
+        stavlbl = document.createElement("label");
+        stavlbl.id = "stavvt"+i;
+        stavlbl.style = "font-size: 15px";
+        div.appendChild(stavlbl);
+        div.appendChild(document.createElement("br"));
+        
+
+        document.getElementById("telesa").appendChild(div);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    }
+}
+function buts(){
+    for(let i = 0; i < telesa0.length; i++){
+        document.getElementById("telrmv"+i).onclick = function(){
+            telesa0.splice(i, 1);
+            telesa.splice(i, 1);
+            telesazapis();
+        }
+        document.getElementById("telsett"+i).onclick = function(){
+            document.getElementById("name").value = telesa0[i][7];
+            document.getElementById("barva").value = telesa0[i][6];
+            document.getElementById("fi").value = telesa0[i][0];
+            document.getElementById("r").value = telesa0[i][1];
+            document.getElementById("t").value = telesa0[i][2];
+            document.getElementById("om").value = telesa0[i][3];
+            document.getElementById("v").value = telesa0[i][4];
+            document.getElementById("vt").value = telesa0[i][5];
+            telesa0.splice(i, 1);
+            telesa.splice(i, 1);
+            telesazapis();
+        }
+    }
+    for(let i = 0; i < saves.length; i++){
+        document.getElementById("savermv"+i).onclick = function(){
+            saves.splice(i, 1);
+            localStorage.setItem("savesotr", JSON.stringify(saves));
+            savezapis();
+        }
+        document.getElementById("saveupl"+i).onclick = function(){
+            clearInterval(timer);
+            clear();
+            par = saves[i][1];
+            telesa0 = saves[i][2]; telesa = JSON.parse(JSON.stringify(telesa0));
+            zapis();
+        }
+    }
+}
+function savezapis(){
+    while(document.getElementById("saves2").lastChild){
+        document.getElementById("saves2").removeChild(document.getElementById("saves2").lastChild);
+    }
+    for(let i = 0; i < saves.length; i++){
+        div = document.createElement("div");
+        div.className = "saves";
+        div.id = "save"+i;
+        
+        rmv = document.createElement("button");
+        rmv.id = "savermv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        upl = document.createElement("button");
+        upl.id = "saveupl"+i;
+        upl.style = "background-color: lightblue";
+        iupl = document.createElement("i");
+        iupl.className = "material-icons";
+        iupl.appendChild(document.createTextNode("upload"));
+        upl.appendChild(iupl);
+        div.appendChild(upl);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(saves[i][0]));
+        div.appendChild(nzv);
+
+        document.getElementById("saves2").appendChild(div);
+    }
+}
+
+    </script>
+</body>
+</html>
