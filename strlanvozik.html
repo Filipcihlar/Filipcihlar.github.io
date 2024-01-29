@@ -53,7 +53,7 @@ button:active{
         </div><br>
         <label style="font-weight: bold;">Přesnost:</label><br>
         <div>
-            <label>\(\Delta t:\) </label><input id="t">
+            <label>\(\Delta t\)[ms]: </label><input id="t">
         </div>
         <br>
         <button id="but">Spustit</button><br>
@@ -79,7 +79,7 @@ clear();
 document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
-    timer = setInterval(a, t);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 10/t; nvypoctu++){a()}}, 10);
 }
 
 function a(){
@@ -138,7 +138,7 @@ function zapis(){
     document.getElementById("mk").value = "1";
     document.getElementById("l").value = "1";
     document.getElementById("g").value = "9.81";
-    document.getElementById("t").value = "4";
+    document.getElementById("t").value = "0.04";
 }
 function get(){
     x = Number(document.getElementById("x").value);

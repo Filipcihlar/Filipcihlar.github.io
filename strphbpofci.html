@@ -98,7 +98,7 @@ document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
     vyp = "(-v*v*"+y2+"*"+y1+"-"+g+"*"+y1+")/(1+"+y1+"*"+y1+")";
-    timer = setInterval(a, t);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 10/t; nvypoctu++){a()}}, 10);
 }
 document.getElementById("demo").onclick = function(){
     zapis();
@@ -171,7 +171,7 @@ function zapis(){
     document.getElementById("x").value = "0.5";
     document.getElementById("v").value = "3.5";
     document.getElementById("g").value = "9.81";
-    document.getElementById("t").value = "4";
+    document.getElementById("t").value = "0.4";
     document.getElementById("h").value = "0.00001";
     document.getElementById("X").value = "700";
     document.getElementById("Y").value = "500";

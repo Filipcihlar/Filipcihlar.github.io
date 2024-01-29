@@ -47,7 +47,7 @@ button:active{
             </div><br>
             <label style="font-weight: bold;">Přesnost:</label><br>
             <div>
-                <label>\(\Delta t:\) </label><input id="t">
+                <label>\(\Delta t\)[ms]: </label><input id="t">
             </div>
             <br>
             <button id="but">Spustit</button>
@@ -80,7 +80,7 @@ document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
     cnx2.clearRect(0, 0, X, 500);
-    timer = setInterval(a, dt*1000);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 10/(dt*1000); nvypoctu++){a()}}, 10);
 }
 document.getElementById("drahy").onclick = function(){
         if(drahy == true){
@@ -148,7 +148,7 @@ function zapis(){
     document.getElementById("k").value = "15";
     document.getElementById("m").value = "1";
     document.getElementById("g").value = "9.81";
-    document.getElementById("t").value = "0.004";
+    document.getElementById("t").value = "0.4";
 }
 function get(){
     fi = Number(document.getElementById("fi").value)*Math.PI/180;
@@ -159,7 +159,7 @@ function get(){
     k = Number(document.getElementById("k").value);
     m = Number(document.getElementById("m").value);
     g = Number(document.getElementById("g").value);
-    dt = Number(document.getElementById("t").value);
+    dt = Number(document.getElementById("t").value)/1000;
 }
 
     </script>

@@ -151,9 +151,9 @@ let cnx3 = document.getElementById("can3").getContext("2d");
 let timer; pause = 0;
 let sett = {"drahy": true, "osy": true};
 
-demo1 = [[700, 500, 0.00001, 0.001, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 7000000, 0, 7.6, 0, 1, "blue", ""],[2, 8000000, 0, 6, 0, 1, "lime", ""],[0.6, 20000000, 0, 1, 0, 1, "orangered", ""]]];
-demo2 = [[700, 500, 0.0001, 0.00003, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 800000, 0, 163, 0, 1, "orange", ""]]];
-demo3 = [[700, 500, 0.000000001, 5000, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)],[[3.14, 149597870700, 0, 2e-7, 0, 1, "blue", "Země"]]];
+demo1 = [[700, 500, 0.00001, 0.0001, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 7000000, 0, 7.6, 0, 1, "blue", ""],[2, 8000000, 0, 6, 0, 1, "lime", ""],[0.6, 20000000, 0, 1, 0, 1, "orangered", ""]]];
+demo2 = [[700, 500, 0.0001, 0.000003, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)*100],[[0, 800000, 0, 163, 0, 1, "orange", ""]]];
+demo3 = [[700, 500, 0.000000001, 500, 6.67408e-11, 299792458, 1.989*Math.pow(10,30)],[[3.14, 149597870700, 0, 2e-7, 0, 1, "blue", "Země"]]];
 demo = [demo1, demo2, demo3];
 saves = JSON.parse(localStorage.getItem("savesotr")) || [];
 
@@ -251,7 +251,7 @@ function app(){
             document.getElementById("ic").className = "fa fa-play";
         }
         else if(pause != 0){
-            timer = setInterval(vypocet, 1);
+            timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 100; nvypoctu++){vypocet()}}, 1);
             pause = 1;
             document.getElementById("ic").className = "fa fa-pause";
         }
@@ -274,7 +274,7 @@ function startapp(){
 function start(){
     pause = 1;
     get();
-    timer = setInterval(vypocet, 1);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 100; nvypoctu++){vypocet()}}, 1);
     clear();
 }
 function dira(){
@@ -304,7 +304,7 @@ function vypocet(){
         document.getElementById("stavom"+i).innerHTML = Math.round(om1*100)/100;
         document.getElementById("stavv"+i).innerHTML = Math.round(v1*100)/100;
         document.getElementById("stavvt"+i).innerHTML = Math.round(vt1*10000)/10000;
-
+        
         cnx3.beginPath();
         cnx3.strokeStyle = telesa[i][6];
         cnx3.moveTo(X/2+r*Math.cos(fi)*met, Y/2-r*Math.sin(fi)*met);

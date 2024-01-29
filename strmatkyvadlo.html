@@ -36,7 +36,7 @@ button:active{
     <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
     <div style="display: flex; margin: 3px;">
         <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
-        <div  style="width: 100px; padding: 5px;">
+        <div  style="width: 110px; padding: 5px;">
             <div style="text-align: right;">
                 <label>\(\varphi(0):\) </label><input id="fi"><br>
                 <label>\(\omega(0):\) </label><input id="om"><br>
@@ -45,7 +45,7 @@ button:active{
             </div><br>
             <label style="font-weight: bold;">Přesnost:</label><br>
             <div>
-                <label>\(\Delta t:\) </label><input id="t">
+                <label>\(\Delta t\)[ms]: </label><input id="t">
             </div>
             <br>
             <button id="but">Spustit</button><br>
@@ -69,7 +69,7 @@ clear();
 document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
-    timer = setInterval(a, t);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 10/t; nvypoctu++){a()}}, 10);
 }
 
 function a(){
@@ -111,7 +111,7 @@ function zapis(){
     document.getElementById("om").value = "0";
     document.getElementById("l").value = "1";
     document.getElementById("g").value = "9.81";
-    document.getElementById("t").value = "4";
+    document.getElementById("t").value = "0.04";
 }
 function get(){
     fi = Number(document.getElementById("fi").value);

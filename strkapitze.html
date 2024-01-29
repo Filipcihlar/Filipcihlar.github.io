@@ -36,18 +36,18 @@ button:active{
     <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
     <div style="display: flex; margin: 3px;">
         <canvas id="can" width="800" height="500" style="border: 1px solid;"></canvas>
-        <div style="width: 200px; padding: 5px;">
+        <div style="width: 225px; padding: 5px;">
             <div style="text-align: right;">
-                <label>\(\varphi(0):\) </label><input id="fi">
+                <label>\(\varphi(0):\) </label><input id="fi" style="margin-right: 10px;">
                 <label>\(\omega(0):\) </label><input id="om"><br>
-                <label>\(A:\) </label><input id="a" style="margin-right: 21px;">
+                <label>\(A:\) </label><input id="a" style="margin-right: 31px;">
                 <label>\(\nu:\) </label><input id="ny"><br><br>
                 <label>\(l:\) </label><input id="l"><br>
                 <label>\(g:\) </label><input id="g">
             </div><br>
             <label style="font-weight: bold;">Přesnost:</label><br>
             <div>
-                <label>\(\Delta t:\) </label><input id="t">
+                <label>\(\Delta t\)[ms]: </label><input id="t">
                 <label>Zvětšení: </label><input id="met">
             </div>
             <br>
@@ -71,7 +71,7 @@ clear();
 document.getElementById("but").onclick = function(){
     clearInterval(timer);
     get();
-    timer = setInterval(vyp, dt*1000);
+    timer = setInterval(function(){for(let nvypoctu = 0; nvypoctu < 10/(dt*1000); nvypoctu++){vyp()}}, 10);
 }
 
 function vyp(){
@@ -108,7 +108,7 @@ function zapis(){
     document.getElementById("a").value = "1";
     document.getElementById("l").value = "10";
     document.getElementById("g").value = "9.81";
-    document.getElementById("t").value = "5";
+    document.getElementById("t").value = "0.04";
     document.getElementById("met").value = "20";
 }
 function get(){
