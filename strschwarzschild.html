@@ -92,7 +92,7 @@ canvas{
             <br>
             <label style="font-weight: bold;">Přesnost:</label>
             <div style="text-align: left;">
-                <label>\(\Delta\tau:\) </label><input id="dt">
+                <label>\(\Delta\tau:\) </label><input id="dt"><label> Hrubost drah: </label><input style="width: 60px;" id="hrubost">
             </div>
             <br>
             <label style="font-weight: bold;">Konstanty:</label>
@@ -305,11 +305,14 @@ function vypocet(){
         document.getElementById("stavv"+i).innerHTML = Math.round(v1*100)/100;
         document.getElementById("stavvt"+i).innerHTML = Math.round(vt1*10000)/10000;
         
-        cnx3.beginPath();
-        cnx3.strokeStyle = telesa[i][6];
-        cnx3.moveTo(X/2+r*Math.cos(fi)*met, Y/2-r*Math.sin(fi)*met);
-        cnx3.lineTo(X/2+r1*Math.cos(fi1)*met, Y/2-r1*Math.sin(fi1)*met);
-        cnx3.stroke();
+        if(n%hrubost == 0){
+            cnx3.beginPath();
+            cnx3.strokeStyle = telesa[i][6];
+            cnx3.moveTo(X/2+vykrpar[i][1]*Math.cos(vykrpar[i][0])*met, Y/2-vykrpar[i][1]*Math.sin(vykrpar[i][0])*met);
+            cnx3.lineTo(X/2+r1*Math.cos(fi1)*met, Y/2-r1*Math.sin(fi1)*met);
+            cnx3.stroke();
+            vykrpar[i][1] = r; vykrpar[i][0] = fi;
+        }
 
         cnx.beginPath();
         cnx.fillStyle = telesa[i][6];
@@ -319,6 +322,7 @@ function vypocet(){
 
         telesa[i][0] = fi1; telesa[i][1] = r1; telesa[i][2] = t1; telesa[i][3] = om1; telesa[i][4] = v1; telesa[i][5] = vt1;
     }
+    n++;
     
 }
 function clear(){
@@ -354,6 +358,7 @@ function zapis(){
     document.getElementById("t").value = "0";
     document.getElementById("v").value = "0";
     document.getElementById("vt").value = "1";
+    document.getElementById("hrubost").value = "10";
     if(sett.osy == true){
         document.getElementById("osy").style.border = "3px solid";
     }
@@ -381,6 +386,13 @@ function get(){
     if(sett.osy == true){osynakres()}
     timer = null;
     rg = (2*G*M)/(c*c);
+
+    hrubost = document.getElementById("hrubost").value;
+    n = 0;
+    vykrpar = [];
+    for(let i = 0; i < telesa.length; i++){
+        vykrpar.push([telesa[i][0],telesa[i][1]]);
+    }
 }
 function telesazapis(){
     while(document.getElementById("telesa").lastChild){
