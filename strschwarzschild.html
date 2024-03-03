@@ -293,7 +293,7 @@ function vypocet(){
 
         vt1 += -(v*vt*rg*dt)/(r*r*(1-rg/r));
         om1 += -(2*v*om*dt)/r;
-        v1 += ((v*v*rg)/(2*r*r-2*rg*r)+(1-rg/r)*(r*om*om-(c*c*vt*vt*rg)/(2*r*r)))*dt;
+        v1 += -0.5*(1-rg/r)*((c*c*rg*vt*vt)/(r*r)+(rg*v*v)/((rg-r)*(rg-r))-2*r*om*om)*dt;
         t1 += vt*dt;
         fi1 += om*dt;
         r1 += v*dt;
