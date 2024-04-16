@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <title>Grafy 2</title>
+    <style>
+input{
+    width: 70px;
+}
+button{
+    border: 2px solid;
+    background-color:chartreuse;
+    border-radius: 2px;
+    width: 70px;
+    height: 30px;
+}
+button:hover{
+    background-color: rgba(128, 255, 0, 0.639);
+}
+button:active{
+    background-color: rgba(128, 255, 0, 0.427);
+}
+.telesa, .saves{
+    border-radius: 5px;
+    border: 1px solid;
+    margin: 2px;
+    padding: 3px;
+    background-color:orange;
+    font-size: 13px;
+}
+.telesa label, .saves label{
+    font-weight: bold;
+    font-size: 20px;
+}
+.telesa button, .saves button{
+    padding: 0px;
+    width: 30px;
+    height: 26px;
+    border: 1px solid;
+    margin: 1px;
+}
+.telesa button:hover, .saves button:hover{
+    border: 2px solid;
+}
+.seznam{
+    background-color: cadetblue; 
+    padding: 3px; 
+    border-radius: 3px;
+}
+.seznam:hover{
+    border: 1px solid;
+}
+.plustel{
+    width: 86px;
+}
+canvas{
+    grid-row: 1;
+    grid-column: 1;
+    border: 1px solid;
+}
+    </style>
+</head>
+
+<body style="background-color: lightgrey; margin: 0px;">
+    <div class="navbar">
+        <a class="logo" href="index.html"><div><img  src="logo.png" width="43px"></div></a>
+        <a href="aplikace.html" style="font-size: 20px; font-weight: bold;"> HTML5 aplikace</a>
+        <a href="zajimavosti.html" style="font-size: 20px; font-weight: bold;"> Zajímavosti</a>
+    </div>
+    <div class="navtimediv"><label id="navtime" style="font-size: 25px;"></label></div>
+
+    <div id="app" style="display: flex; margin: 3px;">
+        <div style="display: grid;">
+            <canvas id="can3" width="700" height="500" style="background-color: white;"></canvas>
+            <canvas id="can2" width="700" height="500"></canvas>
+            <canvas id="can" width="700" height="500"></canvas>
+            <canvas id="can4" width="700" height="500"></canvas>
+            
+        </div>
+        <div style="width: 280px; padding: 5px;">
+            <label style="font-weight: bold;">Zobrazení:</label><br>
+            <div style="text-align: right;">
+                <label>\(X:\) </label><input style="width: 30px;" id="X"><label>&nbsp;\(Y:\) </label><input style="width: 30px;" id="Y"><label>&nbsp;Zvětšení: </label><input id="met"><br>
+            </div>
+            <div>
+                <button id="osy" style="border: 1px solid; height: 25px; width: 133px; margin-top: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Zobrazit osy</button>
+                <button id="body" style="border: 1px solid; height: 25px; width: 143px; margin-top: 5px; margin-left: -4px; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Zobrazit body</button>
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přesnost:</label>
+            <div style="text-align: left;">
+               <label> Hrubost: </label><input style="width: 60px;" id="hrubost"> <label>\(h:\) </label><input id="h">
+            </div>
+            <br>
+            <label style="font-weight: bold;">Přidat funkci:</label>
+            <div>
+                <label style="margin-left: 10px;">Název: </label><input id="name" style="width: 88px;"><br>
+                <label style="margin-left: 13px;">Barva: </label><input id="barva" style="width: 87px;"><br>
+                <label style="margin-left: 6px;">\(f(x)=\) </label><input class="plustel" id="funkceadd" style="width: 200px;"><br>
+                <br>
+                <label>Popisek (\(\LaTeX{}\)):</label><br>
+                <label style="margin-left: 6px;">\(f(x)=\) </label><input class="plustel" id="popisek" style="width: 200px;"><br>
+                <br>
+                <button id="add" style="height: 22px; width: 100px; margin: 1px;">Přidat</button>
+            </div>
+            <br><br>
+            <button id="start">Vykreslit</button>
+            <br><br>
+            <label id="mousepos"></label><br>
+            <br>
+            <label id="bodinfo"></label>
+        </div>
+        <div style="width: 250px; padding: 5px; margin-left: 8px;">
+            <div class="seznam" id="telsez">
+                <label id="tellab" style="font-weight: bold;">Funkce <i id="sipkatel" class="fa fa-caret-up"></i></label>
+                <div id="funkce" style="display: block;">
+                </div>
+            </div>
+            <div class="seznam" id="savesez" style="margin-top: 8px;">
+                <label id="savelab" style="font-weight: bold;">Uložit/Nahrát <i id="sipkasave" class="fa fa-caret-up"></i></label>
+                <div id="saves" style="display: block;">
+                   <label>Název: </label><input id="save" style="width: 80px;"> <button id="savebut" style="height: 23px;">Uložit</button><br>
+                   <div class="saves">
+                        <button id="demo1" style="background-color: lightblue;"><i class="material-icons">upload</i></button><label> Ukázka</label>
+                    </div>
+                    <div id="saves2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+let cnx = document.getElementById("can").getContext("2d");
+let cnx2 = document.getElementById("can2").getContext("2d");
+let cnx3 = document.getElementById("can3").getContext("2d");
+let cnx4 = document.getElementById("can4").getContext("2d");
+
+let zaokr = 10000;
+
+let sett = {"body": true, "osy": true};
+
+demo1 = [[700, 500, 50, 0.05, 0.000001],[["Math.log(x+1)-2", "\\log{x+1}-2", "orange", "logaritmus"],["(x+2)*(x+1)*(x-1)", "(x+2)(x+1)(x-1)", "blue", "mocninná"],["Math.sin(5*x)+3", "\\sin{5x}+3", "lime", "sinus"],["0.6*x-1", "0.6x-1", "red", "lineární"]]];
+demo = [demo1];
+saves = JSON.parse(localStorage.getItem("savesgrafy")) || [];
+
+startapp()
+window.addEventListener("click", app);
+document.getElementById("can4").onmousemove = function(event) {
+    cnx4.clearRect(0,0,X,Y);
+    document.getElementById("bodinfo").innerHTML = "";
+    let xpos = event.pageX - event.currentTarget.offsetLeft; 
+    let ypos = event.pageY - event.currentTarget.offsetTop;
+    document.getElementById("mousepos").innerHTML = "["+(xpos-X/2)/met+", "+(-ypos+Y/2)/met+"]";
+
+    for(let i = 0; i < funkce0.length; i++){
+        //koreny
+        for(bod = 0; bod < koreny[i].length; bod++){
+            x_bod = X/2+koreny[i][bod]*met;
+            if((x_bod-xpos)*(x_bod-xpos)+(Y/2-ypos)*(Y/2-ypos) < 36){
+                bodinfo(x_bod, Y/2);
+                document.getElementById("bodinfo").innerHTML = "Nulový bod funkce \\(f_{"+(i+1)+"}\\): ["+koreny[i][bod]+", 0]";
+                
+            }
+        }
+        //vrcholy
+        for(bod = 0; bod < vrcholy[i].length; bod++){
+            y_vr = Math.round(eval(funkce0[i][0].replaceAll("x", "("+vrcholy[i][bod]+")"))*zaokr)/zaokr;
+        
+            x_bod = X/2+vrcholy[i][bod]*met;
+            y_bod = Y/2-y_vr*met;
+
+            if((x_bod-xpos)*(x_bod-xpos)+(y_bod-ypos)*(y_bod-ypos) < 36){
+                bodinfo(x_bod, y_bod);
+                document.getElementById("bodinfo").innerHTML = "Vrchol funkce \\(f_{"+(i+1)+"}\\): ["+vrcholy[i][bod]+", "+y_vr+"]";
+            }
+        }
+    }
+    //pruseciky
+    for(let bod = 0; bod < pruseciky.length; bod++){
+        x_bod = X/2+pruseciky[bod][1][0]*met;
+        y_bod = Y/2-pruseciky[bod][1][1]*met;
+
+        if((x_bod-xpos)*(x_bod-xpos)+(y_bod-ypos)*(y_bod-ypos) < 36){
+            bodinfo(x_bod, y_bod);
+            document.getElementById("bodinfo").innerHTML = pruseciky[bod][0]+"["+pruseciky[bod][1][0]+", "+pruseciky[bod][1][1]+"]";
+        }
+    }
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("app")]);
+}
+
+function app(){
+    for(let i = 1; i <= demo.length; i++){
+        document.getElementById("demo"+i).onclick = function(){
+            clear();
+            par = JSON.parse(JSON.stringify(demo[i-1][0])); funkce0 = JSON.parse(JSON.stringify(demo[i-1][1]));
+            zapis();
+        }
+    }
+    buts()
+    document.getElementById("savebut").onclick = function(){
+        saves.push([[document.getElementById("save").value],[X,Y,met,hrubost,h],funkce0]);
+        localStorage.setItem("savesgrafy", JSON.stringify(saves));
+        savezapis();
+    };
+    document.getElementById("add").onclick = function(){
+        newtel = [];
+        newtel.push(document.getElementById("funkceadd").value);
+        newtel.push(document.getElementById("popisek").value);
+        newtel.push(document.getElementById("barva").value);
+        newtel.push(document.getElementById("name").value);
+        funkce0.push(newtel);
+        telesazapis();
+        clear();
+    }
+    document.getElementById("tellab").onclick = function(){
+        if(document.getElementById("funkce").style.display == "block"){
+            document.getElementById("funkce").style.display = "none";
+            document.getElementById("sipkatel").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("funkce").style.display = "block";
+            document.getElementById("sipkatel").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("savelab").onclick = function(){
+        if(document.getElementById("saves").style.display == "block"){
+            document.getElementById("saves").style.display = "none";
+            document.getElementById("sipkasave").className = "fa fa-caret-down";
+          }
+          else{
+            document.getElementById("saves").style.display = "block";
+            document.getElementById("sipkasave").className = "fa fa-caret-up";
+          }
+    }
+    document.getElementById("osy").onclick = function(){
+        if(sett.osy == true){
+            sett.osy = false;
+            this.style.border = "1px solid"
+            cnx2.clearRect(0, 0, X, Y);
+            
+        }
+        else{
+            sett.osy = true;
+            this.style.border = "3px solid"
+            osynakres();
+        }
+    }
+    document.getElementById("body").onclick = function(){
+        if(sett.body == true){
+            sett.body = false;
+            this.style.border = "1px solid";
+            cnx3.clearRect(0, 0, X, Y);
+        }
+        else{
+            sett.body = true;
+            this.style.border = "3px solid";
+            bodynakres();
+        }
+    }
+    document.getElementById("start").onclick = function(){
+        if(funkce0[0]){start()}
+    }
+}
+function startapp(){
+    par = [700, 500, 50, 0.1, 0.000001];
+    funkce0 = [];
+    savezapis();
+    zapis();
+    clear();
+    osynakres();
+    app();
+}
+
+function start(){
+    get();
+    clear();
+    vypocet();
+}
+
+function vypocet(){
+    koreny = JSON.parse(JSON.stringify(Array(funkce0.length).fill([])));
+    vrcholy = JSON.parse(JSON.stringify(Array(funkce0.length).fill([])));
+    pruseciky = JSON.parse(JSON.stringify([]));
+
+    for(let i = 0; i < funkce0.length; i++){
+        cnx.beginPath();
+        cnx.strokeStyle = funkce0[i][2];
+
+        for(let x = -X/2/met; x <= X/2/met+Number(hrubost); x += Number(hrubost)){
+
+            //graf
+            y = eval(funkce0[i][0].replaceAll("x", "("+String(x)+")"));
+            if(Math.abs(y)*met <= Y/2){
+                cnx.lineTo(X/2+x*met, Y/2-y*met);
+            }
+            cnx.moveTo(X/2+x*met, Y/2-y*met);
+            
+            
+            if(Math.abs(y)*met <= Y/2){
+
+                //koreny
+                uzje = false;
+                for(let bod = 0; bod < koreny[i].length; bod++){
+                    if(koreny[i][bod] == koren_find(funkce0[i][0],x)){
+                        uzje = true;
+                        break;
+                    }
+                }
+                if(uzje == false && koren_find(funkce0[i][0],x) != undefined){
+                    koreny[i].push(koren_find(funkce0[i][0],x));
+                }
+
+                //pruseciky
+                for(let ii = i+1; ii < funkce0.length; ii++){
+
+                    x_pr = koren_find("("+funkce0[i][0]+")-("+funkce0[ii][0]+")",x);
+                    y_pr = Math.round(eval(funkce0[i][0].replaceAll("x", "("+x_pr+")"))*zaokr)/zaokr;
+
+                    uzje = false;
+                    for(let bod = 0; bod < pruseciky.length; bod++){
+                        if(pruseciky[bod][1][0] == x_pr && pruseciky[bod][1][1] == y_pr){
+                            uzje = true;
+                            break;
+                        }
+                    }
+                    if(uzje == false && x_pr != undefined){
+                        pruseciky.push(["Průsečík funkcí \\(f_{"+(i+1)+"}\\) a \\(f_{"+(ii+1)+"}\\): ",[x_pr,y_pr]]);
+                    }
+                }
+
+                //vrcholy
+                funkce_der = "(eval("+funkce0[i][0].replaceAll("x", "(x+("+h+"))")+")-("+funkce0[i][0]+"))/("+h+")";
+
+                uzje = false;
+                for(let bod = 0; bod < vrcholy[i].length; bod++){
+                    if(vrcholy[i][bod] == koren_find(funkce_der,x)){
+                        uzje = true;
+                        break;
+                    }
+                }
+                if(uzje == false && koren_find(funkce_der,x) != undefined){
+                    vrcholy[i].push(koren_find(funkce_der,x));
+                }
+
+            }
+        }
+       cnx.stroke();
+    }
+
+    if(sett.body == true){
+        bodynakres();
+    }
+}
+function koren_find(f, b){
+    k = b;
+    k0 = null;
+    for(let n = 0; n < 10; n++){
+        k = k - h*eval(f.replaceAll("x", "("+k+")"))/(eval(f.replaceAll("x", "("+Number(k+Number(h))+")"))-eval(f.replaceAll("x", "("+k+")")));
+        if(Math.abs(k) < hrubost && eval(f.replaceAll("x", "(0)")) == 0){
+            return 0;
+            break;
+        }
+        if(Math.round(k0*zaokr)/zaokr == Math.round(k*zaokr)/zaokr && k > -X/2/met && k < X/2/met && Math.abs(eval(f.replaceAll("x", "("+k+")"))) < hrubost){
+            return Math.round(k*zaokr)/zaokr;
+            break;
+        }
+        k0 = k;
+    }
+}
+
+function clear(){
+    cnx3.fillStyle = "white";
+    cnx.clearRect(0, 0, X, Y); cnx3.fillRect(0, 0, X, Y);
+}
+function osynakres(){
+    met = document.getElementById("met").value;
+    cnx2.beginPath();
+    cnx2.strokeStyle = "black";
+    cnx2.moveTo(X/2, 0); cnx2.lineTo(X/2, Y);
+    cnx2.moveTo(0, Y/2); cnx2.lineTo(X, Y/2);
+    for(let i = 0; i <= X/2; i += 100){
+        cnx2.moveTo(i+X/2, Y/2); cnx2.lineTo(i+X/2, 4+Y/2);
+        cnx2.moveTo(-i+X/2, Y/2); cnx2.lineTo(-i+X/2, 4+Y/2);
+        cnx2.textAlign = "center";
+        if(i != 0){cnx2.fillText(Math.round(i/met*10)/10, i+X/2, 15+Y/2)}
+        if(i != 0){cnx2.fillText(Math.round(-i/met*10)/10, -i+X/2, 15+Y/2)}
+    }
+    for(let i = 0; i <= Y/2; i += 100){
+        cnx2.moveTo(X/2, i+Y/2); cnx2.lineTo(X/2-4, i+Y/2);
+        cnx2.moveTo(X/2, -i+Y/2); cnx2.lineTo(X/2-4, -i+Y/2);
+        cnx2.textAlign = "end";
+        if(i != 0){cnx2.fillText(Math.round(-i/met*10)/10, X/2-5, i+Y/2+3)}
+        if(i != 0){cnx2.fillText(Math.round(i/met*10)/10, X/2-5, -i+Y/2+3)}
+    }
+    cnx2.fillText("0", X/2-5, Y/2+15)
+    cnx2.stroke();
+}
+function bodynakres(){
+    for(let i = 0; i < funkce0.length; i++){
+
+        //koreny
+        for(bod = 0; bod < koreny[i].length; bod++){
+            cnx3.beginPath();
+            cnx3.arc(X/2+koreny[i][bod]*met, Y/2, 2, 0, Math.PI*2);
+            cnx3.fillStyle = "black";
+            cnx3.fill();
+            cnx3.stroke();
+        }
+
+        //vrcholy
+        for(bod = 0; bod < vrcholy[i].length; bod++){
+
+            y_vr = Math.round(eval(funkce0[i][0].replaceAll("x", "("+vrcholy[i][bod]+")"))*zaokr)/zaokr;
+
+            cnx3.beginPath();
+            cnx3.arc(X/2+vrcholy[i][bod]*met, Y/2-y_vr*met, 2, 0, Math.PI*2);
+            cnx3.fillStyle = "black";
+            cnx3.fill();
+            cnx3.stroke();
+        }
+    }
+
+    //pruseciky
+    for(let bod = 0; bod < pruseciky.length; bod++){
+        cnx3.beginPath();
+        cnx3.arc(X/2+pruseciky[bod][1][0]*met, Y/2-pruseciky[bod][1][1]*met, 2, 0, Math.PI*2);
+        cnx3.fillStyle = "black";
+        cnx3.fill();
+        cnx3.stroke();
+    }
+    
+}
+function zapis(){
+    telesazapis();
+    X = par[0]; Y = par[1]; met = par[2]; hrubost = par[3]; h = par[4];
+    document.getElementById("X").value = X;
+    document.getElementById("Y").value = Y;
+    document.getElementById("met").value = met;
+    document.getElementById("hrubost").value = hrubost;
+    document.getElementById("h").value = h;
+    document.getElementById("barva").value = "orange";
+    if(sett.osy == true){
+        document.getElementById("osy").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("osy").style.border = "1px solid";
+    }
+    if(sett.body == true){
+        document.getElementById("body").style.border = "3px solid";
+    }
+    else{
+        document.getElementById("body").style.border = "1px solid";
+    }
+}
+function get(){
+    X = document.getElementById("X").value;
+    Y = document.getElementById("Y").value;
+    met = document.getElementById("met").value;
+    hrubost = document.getElementById("hrubost").value;
+    h = document.getElementById("h").value;
+    document.getElementById("can").width = X; document.getElementById("can2").width = X; document.getElementById("can3").width = X; document.getElementById("can4").width = X;
+    document.getElementById("can").height = Y; document.getElementById("can2").height = Y; document.getElementById("can3").height = Y; document.getElementById("can4").height = Y;
+    if(sett.osy == true){osynakres()}
+}
+function telesazapis(){
+    while(document.getElementById("funkce").lastChild){
+        document.getElementById("funkce").removeChild(document.getElementById("funkce").lastChild)
+    }
+    for(let i = 0; i < funkce0.length; i++){
+        div = document.createElement("div");
+        div.className = "telesa";
+        div.id = "teleso"+i;
+        div.style = "background-color:"+funkce0[i][2];
+        
+        rmv = document.createElement("button");
+        rmv.id = "telrmv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        nst = document.createElement("button");
+        nst.id = "telsett"+i;
+        nst.style = "background-color: lightblue";
+        isett = document.createElement("i");
+        isett.className = "material-icons";
+        isett.appendChild(document.createTextNode("settings"));
+        nst.appendChild(isett);
+        div.appendChild(nst);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(" "+funkce0[i][3]));
+        div.appendChild(nzv);
+
+        div.appendChild(document.createElement("br"));
+
+        div.appendChild(document.createTextNode("\\(f_{"+Number(i+1)+"}(x)="+funkce0[i][1]+"\\)"));
+        
+
+        document.getElementById("funkce").appendChild(div);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    }
+}
+function buts(){
+    for(let i = 0; i < funkce0.length; i++){
+        document.getElementById("telrmv"+i).onclick = function(){
+            funkce0.splice(i, 1);
+            telesazapis();
+        }
+        document.getElementById("telsett"+i).onclick = function(){
+            document.getElementById("name").value = funkce0[i][3];
+            document.getElementById("barva").value = funkce0[i][2];
+            document.getElementById("funkceadd").value = funkce0[i][0];
+            document.getElementById("popisek").value = funkce0[i][1];
+            funkce0.splice(i, 1);
+            telesazapis();
+        }
+    }
+    for(let i = 0; i < saves.length; i++){
+        document.getElementById("savermv"+i).onclick = function(){
+            saves.splice(i, 1);
+            localStorage.setItem("savesgrafy", JSON.stringify(saves));
+            savezapis();
+        }
+        document.getElementById("saveupl"+i).onclick = function(){
+            clear();
+            par = saves[i][1];
+            funkce0 = saves[i][2];
+            zapis();
+        }
+    }
+}
+function savezapis(){
+    while(document.getElementById("saves2").lastChild){
+        document.getElementById("saves2").removeChild(document.getElementById("saves2").lastChild);
+    }
+    for(let i = 0; i < saves.length; i++){
+        div = document.createElement("div");
+        div.className = "saves";
+        div.id = "save"+i;
+        
+        rmv = document.createElement("button");
+        rmv.id = "savermv"+i;
+        rmv.style = "background-color: red";
+        iclose = document.createElement("i");
+        iclose.className = "material-icons";
+        iclose.appendChild(document.createTextNode("close"));
+        rmv.appendChild(iclose);
+        div.appendChild(rmv);
+
+        upl = document.createElement("button");
+        upl.id = "saveupl"+i;
+        upl.style = "background-color: lightblue";
+        iupl = document.createElement("i");
+        iupl.className = "material-icons";
+        iupl.appendChild(document.createTextNode("upload"));
+        upl.appendChild(iupl);
+        div.appendChild(upl);
+        
+        nzv = document.createElement("label");
+        nzv.appendChild(document.createTextNode(" "+saves[i][0]));
+        div.appendChild(nzv);
+
+        document.getElementById("saves2").appendChild(div);
+    }
+}
+function bodinfo(x,y){
+    cnx4.beginPath();
+    cnx4.arc(x, y, 6, 0, Math.PI*2);
+    cnx4.fillStyle = "rgb(0,0,0,0.4)";
+    cnx4.fill();
+    cnx4.beginPath();
+    cnx4.fillStyle = "black";
+    cnx4.textAlign = "center";
+    cnx4.font = "12px Arial"
+    cnx4.fillText("["+(Math.round((x-X/2)/met*100)/100)+","+(Math.round((-y+Y/2)/met*100)/100)+"]", x, y-10);
+    cnx4.stroke();
+}
+
+    </script>
+</body>
+</html>
