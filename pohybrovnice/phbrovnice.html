@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="phbrovnice.css">
+    <title>Pohybové rovnice</title>
+</head>
+<body style="background-color: lightgrey; margin: 0px;">
+    <div style="margin: 0px;">
+
+        <div id="hlokno">
+            <div id="objekty">
+
+                <div id="objektymenu">
+                    <button id="telesaopen" style="background-color: white; color: var(--pismo2);">Tělesa</button><button id="grafyopen">Grafy</button><button id="spojniceopen">Spojnice</button>
+                </div>
+
+
+                <div id="telesa" style="display: block;">
+
+                    <div id="telesaseznam">
+                        
+                    </div>
+
+                    <button id="telesaadd" class="objektyitem" style="text-align: center; border: none; width: 370px;">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+
+
+                <div id="grafy" style="display: none;">
+
+                    <div id="grafyseznam">
+
+                    </div>
+
+                    <button id="grafyadd" class="objektyitem" style="position: absolute; text-align: center; border: none; width: 370px;">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+
+
+                <div id="spojnice" style="display: none;">
+                    
+                    <div id="spojniceseznam">
+
+                    </div>
+
+                    <button id="spojniceadd" class="objektyitem" style="position: absolute; text-align: center; border: none; width: 370px;">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: grid; margin: 0px; width: 100%;">
+                <canvas id="can4" class="hlokno" style="background-color: white;"></canvas>
+                <canvas id="can1" class="hlokno"></canvas>
+                <canvas id="can2" class="hlokno"></canvas>
+                <canvas id="can3" class="hlokno"></canvas>
+                <canvas id="can5" class="hlokno"></canvas>
+                <canvas id="can6" class="hlokno"></canvas>
+                <button id="objektyskryt"><i id="objektyskryticon" class="material-icons">arrow_back_ios</i></button>
+                <div id="zalozky">
+                    
+                </div>
+                <div id="time">
+                    <div id="time2">
+                        <label>\(t=\)</label> <label id="timehod" style="width: 50px;">0</label>
+                    </div>
+                </div>
+                <div id="nazevinfo">
+                    <label>Soubor: </label><label id="nazevinfolab" style="font-weight: bold;"></label>
+                </div>
+            </div>
+
+            <div id="bodinfo" class="okno">
+                <label id="bodinfotext"></label><br>
+                <label id="bodinfopos"></label>
+            </div>
+
+
+            <div id="grafyzavislosti">
+                
+            </div>
+            
+
+            <div id="konstantyinfo" class="okno">
+                <div class="oknomenu">
+                    <label>Konstanty a proměnné</label>
+                    <div>
+                        <button id="konstantyclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div id="konstantyseznam">
+
+                    </div>
+                
+                    <button id="konstantyadd" class="objektyitem" style="text-align: center; border: none; min-width: 365px;">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="pochodnotyinfo" class="okno">
+                <div class="oknomenu">
+                    <label>Počáteční hodnoty</label>
+                    <div>
+                        <button id="pochodnotyclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div id="pochodnotyseznam">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div id="hodnotyinfo" class="okno" style="width: fit-content; min-width: 260px;">
+                <div class="oknomenu">
+                    <label>Hodnoty</label>
+                    <div>
+                        <button id="hodnotyclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div id="hodnotyseznam" style="display: grid;">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="podminkyinfo" class="okno">
+                <div class="oknomenu">
+                    <label>Podmínky pro zastavení</label>
+                    <div>
+                        <button id="podminkyclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div id="podminkyseznam">
+
+                    </div>
+                
+                    <button id="podminkyadd" class="objektyitem" style="text-align: center; border: none; min-width: 365px;">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+
+
+
+
+            <div id="telesaaddinfo" class="okno">
+                <div class="oknomenu">
+                    <label>Přidat těleso</label>
+                    <div>
+                        <button id="telesaaddclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="telesaaddnazev"><label>Barva:</label><input id="telesaaddbarva" value="black"><br><br>
+                        <div style="box-shadow: 0px 0px 10px gray; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                            <label>Pohybové rovnice (JS):</label><label style="margin-left: 30px;">Popisky (\(\LaTeX{}\)):</label>
+                            <div id="phbrovniceinput">
+                                
+                            </div>
+                            <button id="phbrovniceadd"  class="phbrovnicebuttons">Přidat</button><button id="phbrovniceremove"  class="phbrovnicebuttons">Odebrat</button>
+                        </div>
+                        <label>Velikost bodu (poloměr):</label><input id="telesaaddsize" value="0"><br><br>
+                        <label>Počátek souřadnic tělesa: </label><br>
+                        <label>\(x=\)</label><input id="telesaaddxpoc" value="0"><label>\(y=\)</label><input id="telesaaddypoc" value="0"><br>
+                        <br>
+                        <label>Souřadnicový systém:</label><select id="ssselect">
+                            <option>Kartézský</option><option>Polární</option></select><br>
+                        <label id="ssselectlab1">\(x=\)</label><input id="telesaaddx1" style="width: 50px;"><label id="ssselectlab2">\(y=\)</label><input id="telesaaddx2" style="width: 50px;"><br>
+                        <div style="text-align: right;"><button id="telesoadd" class="phbrovnicebuttons">Přidat</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="telesaeditinfo" class="okno">
+                <div class="oknomenu">
+                    <label id="telesaeditlabel"></label>
+                    <div>
+                        <button id="telesaeditclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="telesaeditnazev"><label>Barva:</label><input id="telesaeditbarva" value="black"><br><br>
+                        <div style="box-shadow: 0px 0px 10px gray; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                            <label>Pohybové rovnice (JS):</label><label style="margin-left: 30px;">Popisky (\(\LaTeX{}\)):</label>
+                            <div id="phbrovniceinputedit">
+                                
+                            </div>
+                            <button id="phbrovniceaddedit"  class="phbrovnicebuttons">Přidat</button><button id="phbrovniceremoveedit"  class="phbrovnicebuttons">Odebrat</button>
+                        </div>
+                        <label>Velikost bodu (poloměr):</label><input id="telesaeditsize" value="0"><br><br>
+                        <label>Počátek souřadnic tělesa: </label><br>
+                        <label>\(x=\)</label><input id="telesaeditxpoc" value="0"><label>\(y=\)</label><input id="telesaeditypoc" value="0"><br>
+                        <br>
+                        <label>Souřadnicový systém:</label><select id="ssselectedit">
+                            <option>Kartézský</option><option>Polární</option></select><br>
+                        <label id="ssselectlab1edit">\(x=\)</label><input id="telesaeditx1" style="width: 50px;"><label id="ssselectlab2edit">\(y=\)</label><input id="telesaeditx2" style="width: 50px;"><br>
+                        <div style="text-align: right;"><button id="telesoedit" class="phbrovnicebuttons">Uložit</button></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="grafyaddinfo" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label>Přidat graf funkce</label>
+                    <div>
+                        <button id="grafyaddclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="grafyaddnazev"><br>
+                        <label>Barva:</label><input id="grafyaddbarva" value="black" style="margin-left: 12px;">
+                        <br><br>
+                        <label>Předpis (JS):</label><br>
+                        <label id="grafyaddpredpislabel">\(f_1(x)=\)</label><input id="grafyaddpredpis" style="width: 200px;"><br><br>
+                        <label>Popisek (\(\LaTeX{}\)):</label><br>
+                        <label id="grafyaddpopiseklabel">\(f_1(x)=\)</label><input id="grafyaddpopisek" style="width: 200px;"><br><br>
+                        <div style="text-align: right;"><button id="grafadd" class="phbrovnicebuttons">Přidat</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="grafyeditinfo" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label id="grafyeditlabel"></label>
+                    <div>
+                        <button id="grafyeditclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="grafyeditnazev"><br>
+                        <label>Barva:</label><input id="grafyeditbarva" value="black" style="margin-left: 12px;">
+                        <br><br>
+                        <label>Předpis (JS):</label><br>
+                        <label>\(f_1(x)=\)</label><input id="grafyeditpredpis" style="width: 200px;"><br><br>
+                        <label>Popisek (\(\LaTeX{}\)):</label><br>
+                        <label>\(f_1(x)=\)</label><input id="grafyeditpopisek" style="width: 200px;"><br><br>
+                        <div style="text-align: right;"><button id="grafedit" class="phbrovnicebuttons">Uložit</button></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="spojniceaddinfo" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label>Přidat spojnici</label>
+                    <div>
+                        <button id="spojniceaddclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="spojniceaddnazev"><br>
+                        <label>Barva:</label><input id="spojniceaddbarva" value="black" style="margin-left: 12px;">
+                        <br><br>
+                        <label>\(A(\)</label><input id="spojniceaddx1" style="width: 90px; margin: 2px;"><label>\(,\)</label><input id="spojniceaddy1" style="width: 90px; margin: 2px;"><label>\()\)</label><br>
+                        <label>\(B(\)</label><input id="spojniceaddx2" style="width: 90px; margin: 2px;"><label>\(,\)</label><input id="spojniceaddy2" style="width: 90px; margin: 2px;"><label>\()\)</label><br><br>
+                        <label>Popisek (\(\LaTeX{}\)):</label><input id="spojniceaddpopisek" style="width: 144px;"><br><br>
+                        <div id="spojniceaddpruzina" style="opacity: 0.5;">
+                            <label>Pružina:</label><br>
+                            <label>Poloměr:</label><input id="spojniceaddpolomer" style="width: 46px;"><label>Počet závitů:</label><input id="spojniceaddzavity" style="width: 46px;">
+                        </div>
+                         
+                        <div style="text-align: right;"><button id="spojniceaddbutt" class="phbrovnicebuttons">Přidat</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="spojniceeditinfo" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label id="spojniceeditlabel"></label>
+                    <div>
+                        <button id="spojniceeditclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="spojniceeditnazev"><br>
+                        <label>Barva:</label><input id="spojniceeditbarva" value="black" style="margin-left: 12px;">
+                        <br><br>
+                        <label>\(A(\)</label><input id="spojniceeditx1" style="width: 90px; margin: 2px;"><label>\(,\)</label><input id="spojniceedity1" style="width: 90px; margin: 2px;"><label>\()\)</label><br>
+                        <label>\(B(\)</label><input id="spojniceeditx2" style="width: 90px; margin: 2px;"><label>\(,\)</label><input id="spojniceedity2" style="width: 90px; margin: 2px;"><label>\()\)</label><br><br>
+                        <label>Popisek (\(\LaTeX{}\)):</label><input id="spojniceeditpopisek" style="width: 144px;"><br><br>
+                        <div id="spojniceeditpruzina" style="opacity: 0.5;">
+                            <label>Pružina:</label><br>
+                            <label>Poloměr:</label><input id="spojniceeditpolomer" style="width: 46px;"><label>Počet závitů:</label><input id="spojniceeditzavity" style="width: 46px;">
+                        </div>
+
+                        <div style="text-align: right;"><button id="spojniceeditbutt" class="phbrovnicebuttons">Uložit</button></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="settings" class="okno" style="width: 435px;">
+                <div class="oknomenu">
+                    <label>Nastavení</label>
+                    <div>
+                        <button id="settingsclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno" id="settobsah">
+                        <label style="font-weight: bold;">Zobrazení</label>
+                        <div style="display: flex;">
+                            <div style="text-align: right;">
+                                <label>Zvětšení:</label><input id="settzvet"><br>
+                                <label>Hrubost trajektorií:</label><input id="setthrubdrah"><br>
+                                <label>Hrubost grafů:</label><input id="setthrubgraf"><br>
+                            </div>
+                            <div style="margin-left: 60px;">
+                                <button class="settbut" id="settosyzobr"><i class="material-icons">check_box</i></button><label class="settbutlab">Osy</label><br>
+                                <button class="settbut" id="settdrahyzobr"><i class="material-icons">check_box</i></button><label class="settbutlab">Trajektorie</label><br>
+                                <button class="settbut" id="settbodyzobr"><i class="material-icons">check_box</i></button><label class="settbutlab">Body</label><br>
+                            </div>
+                        </div>
+                        <div style="display: flex;">
+                            <div style="text-align: right; margin-left: 41px;">
+                                <label>Posun osy x:</label><input id="settposx"><br>
+                                <label>Posun osy y:</label><input id="settposy">
+                            </div>
+                            <div style="text-align: right; margin-left: 20px;">
+                                <label>Krok na ose x:</label><input id="settkrokx"><br>
+                                <label>Krok na ose y:</label><input id="settkroky">
+                            </div>
+                        </div>
+                        <br>
+
+                        <label style="font-weight: bold;">Výpočty</label>
+                        <div style="display: flex;">
+                            <div style="text-align: right; margin-left: 7px;">
+                                <label>\(\Delta t\):</label><input id="settdt"><br>
+                                <label>Délka cyklu [ms]:</label><input id="settdobacyk">
+                            </div>
+                            <div style="text-align: right; margin-left: 4px;">
+                                <label>\(h\) (v derivacích):</label><input id="setth"><br>
+                                <label>Výpočtů v cyklu:</label><input id="settvypcyk">
+                            </div>
+                        </div>
+                        <br>
+
+                        <label style="font-weight: bold;">Zaokrouhlování</label><br>
+                        <div style="text-align: right; margin-right: 6px;">
+                            <label>Poč. platných číslic:</label><input id="settplatcis"><br>
+                            <label>Poč. cifer:</label><input id="settpoccif">
+                            <label style="margin-left: 16px;">Poč. des. míst:</label><input id="settpocdes">
+                        </div>
+                        <br>
+
+                        <label style="font-weight: bold;">Barva</label><br>
+                        <div style="text-align: right; margin-right: 138px;">
+                            <label>Hlavní barva:</label><input id="setthlbarva" style="width: 110px;"><br>
+                            <label>Text:</label><input id="settpismo2" style="width: 110px;"><br>
+                            <label>Text v menu:</label><input id="settpismo1" style="width: 110px;">
+                        </div>
+                        <br>
+                        
+    
+                    </div>
+                </div>
+                <div style="text-align: right; padding: 5px; background-color: rgb(256,256,256,0.9); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;"><button id="settsave" class="phbrovnicebuttons">Uložit</button></div>
+            </div>
+
+
+            <div id="soubory" class="okno">
+                <div class="oknomenu">
+                    <label>Soubory</label>
+                    <div>
+                        <button id="souboryclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="objektyitem">
+                        <div class="objektyitemsett">
+                            <button id="souboryzabudseznamopen1"><i class="material-icons">open_in_new</i></button>
+                            <div>Výchozí</div>
+                        </div>
+                    </div>
+                    <div id="souboryvlastseznam">
+
+                    </div>
+                    <br>
+                    <div id="souboryzabudseznam">
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="ulozit" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label>Uložit</label>
+                    <div>
+                        <button id="ulozitclose"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div class="oknoobsah">
+                    <div class="addokno">
+                        <label>Název:</label><input id="ulozitnazev"><button id="ulozitbut" class="phbrovnicebuttons">Uložit</button><br>
+                        <label style="margin-left: 10px;">Data:</label><input id="ulozitdata" style="width: 223px;">
+                    </div>
+                </div>
+            </div>
+
+            <div id="textpole" class="okno" style="width: 330px;">
+                <div class="oknomenu">
+                    <label>Textové pole</label>
+                </div>
+                <div class="oknoobsah" style="padding: 4px;">
+                    <textarea id="textpolepole" style="max-width: 300px; min-width: 300px; max-height: calc(50vh - 30px); min-height: 50px;"></textarea>
+                </div>
+            </div>
+            
+
+        </div>
+        
+        <div id="menu">
+            
+            <div style="position: absolute;">
+                <button id="souboryopen">Soubory</button>
+                <button id="ulozitopen">Uložit</button>
+                <button id="konstantyopen">Konstanty a proměnné</button>
+                <button id="pochodnotyopen">Poč. hodnoty</button>
+                <button id="hodnotyopen">Hodnoty</button>
+                <button id="grafzavopen">Graf závislosti</button>
+                <button id="napovedaopen" onclick="window.open('napoveda.pdf')">Nápověda</button>  
+            </div>
+            
+            <div id="menuright">
+                <button id="refresh" style="border-left: 1px solid;"><i class="material-icons">refresh</i></button>
+                <button id="play"><i id="playicon" class="material-icons">play_arrow</i></button>
+                <button id="podminkyopen" style="border-right: 1px solid;"><i class="material-icons">more_vert</i></button>
+                <button id="settingsopen"><i class="material-icons">settings</i></button>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script src="phbrovnice.js"></script>
+</body>
+</html>

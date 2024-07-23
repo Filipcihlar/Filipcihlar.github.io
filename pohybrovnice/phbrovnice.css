@@ -1,0 +1,329 @@
+:root{
+    --hlbarva: rgb(255, 225, 50);
+    --pismo1: black;
+    --pismo2: black;
+}
+body{
+    color: var(--pismo2);
+    overflow: hidden;
+}
+body input, select{
+    outline-color: var(--pismo2);
+    color: var(--pismo2);
+    border: 1px solid var(--pismo2);
+    border-radius: 3px;
+}
+
+button:hover{
+    opacity: 0.5;
+}
+
+
+
+
+
+#menu{
+    display: block; 
+    background-color: var(--hlbarva);
+    color: var(--pismo1);
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0px 0px 10px black;
+    height: 35px;
+    position: absolute;
+}
+#menu button{
+    background-color: var(--hlbarva);
+    color: var(--pismo1);
+    border: none;
+    width: fit-content;
+    min-width: 100px;
+    height: 35px;
+}
+#menuright{
+    text-align: right;
+}
+#menuright button{
+    width: 50px;
+    min-width: 50px;
+}
+
+
+#hlokno{
+    margin: 0px; 
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.hlokno{
+    position: absolute;
+    grid-row: 1;
+    grid-column: 1;
+    border: none;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+}
+
+#objekty{
+    position: absolute;
+    width: 410px;
+    z-index: 1;
+    box-shadow: 0px 0px 10px gray;
+    background-color: rgb(256,256,256,0.7);
+    height: 100%;
+}
+#telesa, #grafy, #spojnice{
+    overflow-y: scroll;
+    height: calc(100% - 65px);
+}
+#objektymenu{
+    margin-top: 35px;
+    height: 30px;
+    display: flex;
+    box-shadow: 0px 0px 10px gray;
+}
+#objektymenu button{
+    background-color: var(--hlbarva);
+    color: var(--pismo1);
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+#objektyskryt{
+    grid-row: 1;
+    grid-column: 1;
+    border: none;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(256,256,256,0.7);
+    color: var(--pismo2);
+    box-shadow: 0px 0px 10px gray;
+    z-index: 0;
+    top: 50%;
+    width: 25px;
+    height: 40px;
+    position: absolute;
+    padding-top: 4px;
+    margin-left: 410px;
+}
+.objektyitem{
+    width:fit-content;
+    background-color: rgb(256,256,256,0.9);
+    color: var(--pismo2);
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 10px gray;
+    min-width: 355px;
+    font-size: 15px;
+}
+.objektyitemsett div{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3px;
+}
+.objektyitemsett{
+    display: flex;
+}
+.objektyitemsett button{
+    background-color: white;
+    color: var(--pismo2);
+    border: none;
+}
+.objektyitem input{
+    width: 115px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#zalozky{
+    display: flex;
+    grid-row: 1;
+    grid-column: 1;
+    border: none;
+    height: 30px;
+    width: calc(50vw - 130px);
+    margin-top: 35px;
+    margin-left: 415px;
+    z-index: 1;
+}
+#zalozky button{
+    background-color: white;
+    border: 1px solid;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 80px;
+    height: 25px;
+    box-shadow: 0px 0px 10px gray;
+    margin-left: 1px;   
+    color: var(--pismo2);
+}
+
+#time{
+    grid-row: 1;
+    grid-column: 2;
+    margin-top: 35px;
+    height: 30px;
+    z-index: 0;
+}
+#time2{
+    background-color: white;
+    box-shadow: 0px 0px 10px gray;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-right: 55px;
+    padding: 5px;
+    padding-left: 15px;
+    width: 137px;
+    float: right;
+}
+
+#nazevinfo{
+    grid-row: 1;
+    grid-column: 1;
+    border: none;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgb(256,256,256,0.7);
+    color: var(--pismo2);
+    box-shadow: 0px 0px 10px gray;
+    z-index: 0;
+    bottom: 0px;
+    width: fit-content;
+    position: absolute;
+    padding: 4px;
+    margin-left: 420px;
+}
+
+.okno{
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    width: 410px;
+    box-shadow: 0px 0px 10px gray;
+    display: none;
+}
+.oknomenu{
+    display: block; 
+    background-color: var(--hlbarva);
+    color: var(--pismo1);
+    box-shadow: 0px 0px 10px gray;
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    border-top-left-radius: 5px; border-top-right-radius: 5px;
+}
+.oknomenu label{
+    position: absolute;
+    font-weight: bold;
+    height: 100%;
+    padding: 5px;
+}
+.oknomenu div{
+    text-align: right;
+}
+.oknomenu button{
+    background-color: unset;
+    color: var(--pismo1);
+    border: none;
+}
+.oknoobsah{
+    background-color: rgb(256,256,256,0.9);
+    border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;
+    margin-top: 30px;
+    overflow-y: scroll;
+    max-height: 50vh;
+    min-height: 20px;
+}
+
+.addokno{
+    padding: 10px;
+}
+.addokno input{
+    width: 110px;
+    margin: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+.addokno select{
+    width: 90px;
+    margin: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+#phbrovniceinput, #phbrovniceinputedit{
+    overflow-y: scroll;
+    padding: 5px;
+    max-height: 60px;
+}
+#phbrovniceinput input, #phbrovniceinputedit input{
+    width: 85px;
+}
+.phbrovnicebuttons{
+    text-align: center; 
+    border: none; 
+    width: 100px; 
+    box-shadow: 0px 0px 5px gray; 
+    padding: 2px; 
+    border-radius: 5px;
+    background-color: var(--hlbarva);
+    color: var(--pismo1);
+    margin: 2px;
+    margin-top: 5px;
+}
+
+#bodinfo{
+    width: unset;
+    padding: 3px;
+    background-color: rgb(256,256,256,0.9);
+    text-align: center;
+}
+
+.grafzavsett{
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 0px 5px gray;
+    border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;
+    margin-top: 30px;
+    padding: 5px;
+    width: calc(100% - 10px);
+    z-index: 1;
+}
+.grafzavsett input{
+    width: 50px;
+    margin-top: 1px;
+}
+.grafzavcan{
+    display: grid;
+    position: absolute;
+    box-shadow: 0px 0px 10px gray;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.grafzavcan canvas{
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.settbut{
+    background-color:  rgb(256,256,256,0.9);
+    border: none;
+    color: unset;
+}
+.settbutlab{
+    vertical-align: 8px;
+    margin-right: 20px;
+}
+#settings input{
+    width: 50px;
+}
+
