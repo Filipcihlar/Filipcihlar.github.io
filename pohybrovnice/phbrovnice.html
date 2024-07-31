@@ -180,6 +180,50 @@
                         <label>Souřadnicový systém:</label><select id="ssselect">
                             <option>Kartézský</option><option>Polární</option></select><br>
                         <label id="ssselectlab1">\(x=\)</label><input id="telesaaddx1" style="width: 50px;"><label id="ssselectlab2">\(y=\)</label><input id="telesaaddx2" style="width: 50px;"><br>
+                        <br>
+                        <label>Diferenční schéma:</label>
+                        <select id="difschemselectadd" style="width: fit-content;">
+                            <option>Eulerova metoda</option>
+                            <option>Eulerova metoda (midpoint)</option>
+                            <option>Rungeova-Kuttova (2. řádu)</option>
+                            <option>Rungeova-Kuttova (4. řádu)</option>
+                            <option>Vlastní</option>
+                        </select><br>
+                        <br>
+                        <div id="euleradd" style="display: block;">
+                            \(\dot{q}(t+\Delta t)=\dot{q}(t)+\ddot{q}(t)\Delta t\)
+                            \(q(t+\Delta t)=q(t)+\dot{q}(t)\Delta t\)
+                        </div>
+                        <div id="eulermidadd" style="display: none;">
+                            \(\dot{q}(t+\Delta t)=\dot{q}(t)+\ddot{q}(t)\Delta t\)
+                            \(q(t+\Delta t)=q(t)+\dot{q}(t)\Delta t+\frac{1}{2}\ddot{q}(t)\Delta t^2\)
+                        </div>
+                        <div id="secorderadd" style="display: none;">
+                            \begin{array}
+                                {c|cc}
+                                0\\
+                                \frac{1}{2} & \frac{1}{2}\\
+                                \hline
+                                & 0 & 1
+                            \end{array}
+                        </div>
+                        <div id="fourorderadd" style="display: none;">
+                            \begin{array}
+                                {c|cccc}
+                                0\\
+                                \frac{1}{2} & \frac{1}{2}\\
+                                \frac{1}{2} &0 &\frac{1}{2} \\
+                                1& 0& 0& 1\\
+                                \hline
+                                & \frac{1}{6} &\frac{1}{3} &\frac{1}{3} &\frac{1}{6} 
+                            \end{array}
+                        </div>
+                        <div id="vlastmetodadd" style="display: none; text-align: center;">
+                            <label>Řád: </label><input id="vlasttablradadd" type="number" min="1" style="width: 50px;"><br>
+                            <div id="vlasttabladd">
+            
+                            </div>
+                        </div>
                         <div style="text-align: right;"><button id="telesoadd" class="phbrovnicebuttons">Přidat</button></div>
                     </div>
                 </div>
@@ -209,6 +253,50 @@
                         <label>Souřadnicový systém:</label><select id="ssselectedit">
                             <option>Kartézský</option><option>Polární</option></select><br>
                         <label id="ssselectlab1edit">\(x=\)</label><input id="telesaeditx1" style="width: 50px;"><label id="ssselectlab2edit">\(y=\)</label><input id="telesaeditx2" style="width: 50px;"><br>
+                        <br>
+                        <label>Diferenční schéma:</label>
+                        <select id="difschemselectedit" value="Eulerova metoda" style="width: fit-content;">
+                            <option>Eulerova metoda</option>
+                            <option>Eulerova metoda (midpoint)</option>
+                            <option>Rungeova-Kuttova (2. řádu)</option>
+                            <option>Rungeova-Kuttova (4. řádu)</option>
+                            <option>Vlastní</option>
+                        </select><br>
+                        <br>
+                        <div id="euleredit">
+                            \(\dot{q}(t+\Delta t)=\dot{q}(t)+\ddot{q}(t)\Delta t\)
+                            \(q(t+\Delta t)=q(t)+\dot{q}(t)\Delta t\)
+                        </div>
+                        <div id="eulermidedit">
+                            \(\dot{q}(t+\Delta t)=\dot{q}(t)+\ddot{q}(t)\Delta t\)
+                            \(q(t+\Delta t)=q(t)+\dot{q}(t)\Delta t+\frac{1}{2}\ddot{q}(t)\Delta t^2\)
+                        </div>
+                        <div id="secorderedit">
+                            \begin{array}
+                                {c|cc}
+                                0\\
+                                \frac{1}{2} & \frac{1}{2}\\
+                                \hline
+                                & 0 & 1
+                            \end{array}
+                        </div>
+                        <div id="fourorderedit">
+                            \begin{array}
+                                {c|cccc}
+                                0\\
+                                \frac{1}{2} & \frac{1}{2}\\
+                                \frac{1}{2} &0 &\frac{1}{2} \\
+                                1& 0& 0& 1\\
+                                \hline
+                                & \frac{1}{6} &\frac{1}{3} &\frac{1}{3} &\frac{1}{6} 
+                            \end{array}
+                        </div>
+                        <div id="vlastmetodedit" style="text-align: center;">
+                            <label>Řád: </label><input id="vlasttablradedit" type="number" min="1" style="width: 50px;"><br>
+                            <div id="vlasttabledit">
+            
+                            </div>
+                        </div>
                         <div style="text-align: right;"><button id="telesoedit" class="phbrovnicebuttons">Uložit</button></div>
                     </div>
                 </div>

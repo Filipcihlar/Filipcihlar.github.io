@@ -7,7 +7,7 @@ body{
     color: var(--pismo2);
     overflow: hidden;
 }
-body input, select{
+body input, select, textarea{
     outline-color: var(--pismo2);
     color: var(--pismo2);
     border: 1px solid var(--pismo2);
@@ -327,3 +327,22 @@ button:hover{
     width: 50px;
 }
 
+#vlasttabladd input, #vlasttabledit input{
+    width: 20px;
+    height: 20px;
+    margin: 0px;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 1px gray;
+    
+    text-align: center;
+}
+#vlasttabladd td, #vlasttabledit td{
+    text-align: center;
+}
+#vlasttabladd table, #vlasttabledit table{
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}

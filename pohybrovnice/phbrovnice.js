@@ -221,16 +221,16 @@ let souboryzabud = [
         grafyzav: [],
         podminky: []
     },
-    {"nazev":"Vrhy","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":10,"posunX":-20,"posunY":-20,"osaXvzdal":5,"osaYvzdal":5,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Hmotný bod","barva":"black","rovnice":["0","-g"],"popisek":["0","-g"],"hodnoty0":[[0,15],[25,15]],"hodnoty":[[0,15],[25,15]],"pochodnoty":[["0","15"],["25","15"]],"pocatek":["0","0"],"velikost":"0.5","system":"Kartézský","x1":"x1_1","x2":"x2_1"}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Gravitační konstanta","znacka":"G","hodnota":"6.674e-11","popisek":"G=6.674\\cdot 10^{-11}"},{"upravovano":false,"nazev":"Rychlost světla ve vakuu","znacka":"c","hodnota":"299792458","popisek":"c=299792458"}],"grafyzav":[{"opened":false,"margleft":"298px","margtop":"193px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"2","posx":"0","posy":"0","krokx":"1","kroky":"10","coord":["",""]},{"opened":false,"margleft":"-1px","margtop":"193px","velx":"t","vely":"x2_1","zvetx":"50","zvety":"2","posx":"0","posy":"0","krokx":"1","kroky":"10","coord":["",""]}],"podminky":[{"visibility":true,"hodnoty":["0","x2_1"]}]},
-    {"nazev":"Matematické kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":50,"posunX":0,"posunY":3,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(g/l)*Math.sin(x1_1)","0"],"popisek":["-\\frac{g}{l}\\sin{q_{1_1}}","0"],"hodnoty0":[[1,0],[4,0]],"hodnoty":[[1,0],[4,0]],"pochodnoty":[["1","0"],["l","0"]],"pocatek":["0","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1"}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Strop","barva":"black","x1":"-1","y1":"0","x2":"1","y2":"0","popisek":"","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Závěs","barva":"black","x1":"0","y1":"0","x2":"x1_1k","y2":"x2_1k","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"4","popisek":"l=4"}],"grafyzav":[{"opened":false,"margleft":"707px","margtop":"47px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
-    {"nazev":"Pružina","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":false,"body":true,"zvetseni":50,"posunX":0,"posunY":3,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["0","-(k/m)*x2_1-g"],"popisek":["0","-\\frac{k}{m}q_{2_1}-g"],"hodnoty0":[[0,0],[-3,0]],"hodnoty":[[0,0],[-3,0]],"pochodnoty":[["0","0"],["-3","0"]],"pocatek":["0","-2"],"velikost":"0.1","system":"Kartézský","x1":"x1_1","x2":"x2_1"}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Strop","barva":"black","x1":"-1","y1":"0","x2":"1","y2":"0","popisek":"","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Pružina","barva":"black","x1":"0","y1":"0","x2":"x1_1","y2":"x2_1-2","popisek":"A(0,0), B(q_{1_1}, q_{2_1}-2)","polomer":"0.2","zavity":"20"}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Tuhost pružiny","znacka":"k","hodnota":"5","popisek":"k=5"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"m","hodnota":"1","popisek":"m=1"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x2_1","zvetx":"50","zvety":"50","posx":"-4","posy":"2","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
-    {"nazev":"Kapitzovo kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":false,"body":true,"zvetseni":50,"posunX":0,"posunY":0,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-Math.sin(x1_1)*(g+_a*ny*ny*Math.cos(ny*_t))/l","0"],"popisek":["-\\sin{q_{1_1}}\\frac{g+a\\nu^2\\cos{\\nu t}}{l}","0"],"hodnoty0":[[3,0],[4,0]],"hodnoty":[[3,0],[4,0]],"pochodnoty":[["3","0"],["l","0"]],"pocatek":["0","vych"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1"}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Závěs","barva":"black","x1":"0","y1":"vych","x2":"x1_1k","y2":"x2_1k+vych","popisek":"A(0,a_{\\text{vych}}), B(q_{1_1},q_{2_1}+a_{\\text{vych}})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Držák","barva":"black","x1":"0","y1":"-_a","x2":"0","y2":"_a","popisek":"A(0,-a), B(0,a)","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Frekvence kmitů závěsu","znacka":"ny","hodnota":"30","popisek":"\\nu=30"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"4","popisek":"l=4"},{"upravovano":false,"nazev":"Amplituda výchylky závěsu","znacka":"a","hodnota":"0.4","popisek":"a=0.4"},{"upravovano":false,"nazev":"Výchylka závěsu","znacka":"vych","hodnota":"_a*Math.cos(ny*_t)","popisek":"a_{\\text{vych}}=a\\cos{\\nu t}"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"50","posx":"-4","posy":"-2","krokx":"2","kroky":"1","coord":["",""]},{"opened":false,"margleft":"746px","margtop":"146px","velx":"t","vely":"v1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"0.5","coord":["",""]}],"podminky":[]},
-    {"nazev":"Landauův vozíček","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":0,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":10,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(A/l)*(g*(mz+mv)+mz*l*v1_1*v1_1*Math.cos(x1_1))","0"],"popisek":["-\\frac{A}{l}(g(m_\\text{z}+m_\\text{v})+m_\\text{z}l\\dot{q}_{1_1}^2\\cos{q_{1_1}})","0"],"hodnoty0":[[1,0],[1,0]],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["l","0"]],"pocatek":["x1_2","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1"},{"poradi":2,"visibility":false,"nazev":"Vozík","barva":"black","rovnice":["A*mz*(l*v1_1*v1_1+g*Math.cos(x1_1))","0"],"popisek":["Am_\\text{z}(l\\dot{q}_{1_1}^2+g\\cos{q_{1_1}})","0"],"hodnoty0":[[0,0.5],[0,0]],"hodnoty":[[0,0.5],[0,0]],"pochodnoty":[["0","0.5"],["0","0"]],"pocatek":["0","0"],"velikost":"0","system":"Kartézský","x1":"x1_2","x2":"x2_2"},{"poradi":3,"visibility":true,"nazev":"Kolečko 1","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[[0,0],[0,0]],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["x1_2-l/3","-0.05"],"velikost":"0.05","system":"Kartézský","x1":"x1_3","x2":"x2_3"},{"poradi":4,"visibility":true,"nazev":"Kolečko 2","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[[0,0],[0,0]],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["x1_2+l/3","-0.05"],"velikost":"0.05","system":"Kartézský","x1":"x1_4","x2":"x2_4"}],"grafy":[{"poradi":1,"visibility":true,"nazev":"Graf 1","barva":"black","predpis":"-0.1","popisek":"-0.1"}],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Závěs","barva":"black","x1":"x1_2","y1":"x2_2","x2":"x1_1k+x1_2","y2":"x2_1k","popisek":"A(q_{1_2}, q_{2_2}), B(q_{1_1}+q_{1_2}, q_{2_1})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Vozík","barva":"black","x1":"x1_2-l/3","y1":"0","x2":"x1_2+l/3","y2":"0","popisek":"A(q_{1_2}-\\frac{l}{3}, 0), B(q_{1_2}+\\frac{l}{3}, 0))","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"1","popisek":"l=1"},{"upravovano":false,"nazev":"Hmotnost vozíku","znacka":"mv","hodnota":"1","popisek":"m_\\text{v}=1"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"mz","hodnota":"1","popisek":"m_\\text{z}=1"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"A","hodnota":"(Math.sin(x1_1))/(mz+mv-mz*Math.cos(x1_1)*Math.cos(x1_1))","popisek":"A=\\frac{\\sin{q_{1_1}}}{m_\\text{z}+m_\\text{v}-m_\\text{z}\\cos^2{q_{1_1}}}"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"100","zvety":"100","posx":"-2","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"-5px","margtop":"36px","velx":"t","vely":"x1_2","zvetx":"60","zvety":"60","posx":"-4","posy":"-2","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"150px","margtop":"60px","velx":"t","vely":"v1_2","zvetx":"50","zvety":"50","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"205px","margtop":"60px","velx":"t","vely":"a1_1","zvetx":"100","zvety":"10","posx":"-2","posy":"0","krokx":"1","kroky":"5","coord":["",""]},{"opened":false,"margleft":"190px","margtop":"51px","velx":"t","vely":"a1_2","zvetx":"100","zvety":"10","posx":"-2","posy":"0","krokx":"1","kroky":"5","coord":["",""]}],"podminky":[]},
-    {"nazev":"Elastické kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":2,"osaXvzdal":1,"osaYvzdal":1,"hrubostdrah":2,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(2*v1_1*v2_1+g*Math.sin(x1_1))/(l+x2_1)","(l+x2_1)*v1_1*v1_1+g*Math.cos(x1_1)-(k/m)*x2_1"],"popisek":["-\\frac{1}{l+q_{2_1}}(2\\dot{q}_{1_1}\\dot{q}_{2_1}+g\\sin{q_{1_1}})","(l+q_{2_1})\\dot{q}_{1_1}^2+g\\cos{q_{1_1}}-\\frac{k}{m}q_{2_1}"],"hodnoty0":[[1,0],[1,0]],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["1","0"]],"pocatek":["l*Math.sin(x1_1)","-l*Math.cos(x1_1)"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1"}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Pružina","barva":"black","x1":"0","y1":"0","x2":"x1_1k+l*Math.sin(x1_1)","y2":"x2_1k-l*Math.cos(x1_1)","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"0.1","zavity":"20"},{"poradi":2,"visibility":true,"nazev":"Strop","barva":"black","x1":"-0.5","y1":"0","x2":"0.5","y2":"0","popisek":"","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Tuhost pružiny","znacka":"k","hodnota":"15","popisek":"k=15"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"m","hodnota":"1","popisek":"m=1"},{"upravovano":false,"nazev":"Délka pružiny","znacka":"l","hodnota":"1","popisek":"l=1"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"95px","margtop":"60px","velx":"t","vely":"x2_1","zvetx":"100","zvety":"100","posx":"-2","posy":"-1","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"206px","margtop":"58px","velx":"t","vely":"v1_1","zvetx":"20","zvety":"20","posx":"-10","posy":"0","krokx":"2","kroky":"2","coord":["",""]},{"opened":false,"margleft":"55px","margtop":"49px","velx":"t","vely":"v2_1","zvetx":"20","zvety":"20","posx":"-10","posy":"0","krokx":"2","kroky":"2","coord":["",""]},{"opened":false,"margleft":"-28px","margtop":"64px","velx":"t","vely":"a1_1","zvetx":"20","zvety":"8","posx":"-10","posy":"0","krokx":"2","kroky":"5","coord":["",""]}],"podminky":[]},
-    {"nazev":"Dvojité kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":2,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.0005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":10,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"1. závaží","barva":"black","rovnice":["(A*l2-B*Math.cos(x1_1-x1_2))/(C*l1*l2-l1*Math.pow(Math.cos(x1_1-x1_2), 2))","0"],"popisek":["\\frac{Al_2-B\\cos{(q_{1_1}-q_{1_2})}}{Cl_1l_2-l_1\\cos^2{(q_{1_1}-q_{1_2})}}","0"],"hodnoty0":[[1,0],[1,0]],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["l1","0"]],"pocatek":["0","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1"},{"poradi":2,"visibility":true,"nazev":"2. závaží","barva":"black","rovnice":["(A*Math.cos(x1_1-x1_2)-B*C)/(Math.pow(Math.cos(x1_1-x1_2), 2)-l2*C)","0"],"popisek":["\\frac{A\\cos{(q_{1_1}-q_{1_2})}-BC}{\\cos^2{(q_{1_1}-q_{1_2})}-l_2C}","0"],"hodnoty0":[[0,3],[1,0]],"hodnoty":[[0,3],[1,0]],"pochodnoty":[["0","3"],["l2","0"]],"pocatek":["x1_1k","x2_1k"],"velikost":"0.1","system":"Polární","x1":"x1_2","x2":"x2_2"}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"1. závěs","barva":"black","x1":"0","y1":"0","x2":"x1_1k","y2":"x2_1k","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"2. závěs","barva":"black","x1":"x1_1k","y1":"x2_1k","x2":"x1_2k+x1_1k","y2":"x2_2k+x2_1k","popisek":"A(q_{1_1}, q_{2_1}), B(q_{1_2}+q_{1_1}, q_{2_2}+q_{2_1})","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Hmotnost 1. závaží","znacka":"m1","hodnota":"1","popisek":"m_1=1"},{"upravovano":false,"nazev":"Hmotnost 2. závaží","znacka":"m2","hodnota":"1","popisek":"m_2=1"},{"upravovano":false,"nazev":"Délka 1. závěsu","znacka":"l1","hodnota":"1","popisek":"l_1=1"},{"upravovano":false,"nazev":"Délka 2. závěsu","znacka":"l2","hodnota":"1","popisek":"l_2=1"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"A","hodnota":"-C*g*Math.sin(x1_1)-v1_2*v1_2*Math.sin(x1_1-x1_2)","popisek":"A=-Cg\\sin{q_{1_1}}-\\dot{q}_{1_2}^2\\sin{(q_{1_1}-q_{1_2})}"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"B","hodnota":"l1*v1_1*v1_1*Math.sin(x1_1-x1_2)-g*Math.sin(x1_2)","popisek":"B=l_1\\dot{q}_{1_1}^2\\sin{(q_{1_1}-q_{1_2})}-g\\sin{q_{1_2}}"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"C","hodnota":"(m1+m2)/(m2*l2)","popisek":"C=\\frac{m_1+m_2}{m_2l_2}"}],"grafyzav":[{"opened":false,"margleft":"6px","margtop":"31px","velx":"t","vely":"x1_1","zvetx":"100","zvety":"100","posx":"-2","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"95px","margtop":"60px","velx":"t","vely":"x1_2","zvetx":"50","zvety":"50","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
-    {"nazev":"Newtonův gravitační zákon","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":0.8,"posunX":0,"posunY":0,"osaXvzdal":100,"osaYvzdal":100,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.001,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":5,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Těleso 1","barva":"blue","rovnice":["G*((M2*(x1_2-x1_1))/Math.pow(Math.pow((x1_2-x1_1),2)+Math.pow((x2_2-x2_1),2),3/2)+(M3*(x1_3-x1_1))/Math.pow(Math.pow((x1_3-x1_1),2)+Math.pow((x2_3-x2_1),2),3/2)+(M4*(x1_4-x1_1))/Math.pow(Math.pow((x1_4-x1_1),2)+Math.pow((x2_4-x2_1),2),3/2))","G*((M2*(x2_2-x2_1))/Math.pow(Math.pow((x1_2-x1_1),2)+Math.pow((x2_2-x2_1),2),3/2)+(M3*(x2_3-x2_1))/Math.pow(Math.pow((x1_3-x1_1),2)+Math.pow((x2_3-x2_1),2),3/2)+(M4*(x2_4-x2_1))/Math.pow(Math.pow((x1_4-x1_1),2)+Math.pow((x2_4-x2_1),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-8,7],[-197,0]],"pochodnoty":[["-8","7"],["-197","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_1","x2":"x2_1"},{"poradi":2,"visibility":true,"nazev":"Těleso 2","barva":"red","rovnice":["G*((M1*(x1_1-x1_2))/Math.pow(Math.pow((x1_1-x1_2),2)+Math.pow((x2_1-x2_2),2),3/2)+(M3*(x1_3-x1_2))/Math.pow(Math.pow((x1_3-x1_2),2)+Math.pow((x2_3-x2_2),2),3/2)+(M4*(x1_4-x1_2))/Math.pow(Math.pow((x1_4-x1_2),2)+Math.pow((x2_4-x2_2),2),3/2))","G*((M1*(x2_1-x2_2))/Math.pow(Math.pow((x1_1-x1_2),2)+Math.pow((x2_1-x2_2),2),3/2)+(M3*(x2_3-x2_2))/Math.pow(Math.pow((x1_3-x1_2),2)+Math.pow((x2_3-x2_2),2),3/2)+(M4*(x2_4-x2_2))/Math.pow(Math.pow((x1_4-x1_2),2)+Math.pow((x2_4-x2_2),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-25,70],[-177,0]],"pochodnoty":[["-25","70"],["-177","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_2","x2":"x2_2"},{"poradi":3,"visibility":true,"nazev":"Těleso 3","barva":"green","rovnice":["G*((M1*(x1_1-x1_3))/Math.pow(Math.pow((x1_1-x1_3),2)+Math.pow((x2_1-x2_3),2),3/2)+(M2*(x1_2-x1_3))/Math.pow(Math.pow((x1_2-x1_3),2)+Math.pow((x2_2-x2_3),2),3/2)+(M4*(x1_4-x1_3))/Math.pow(Math.pow((x1_4-x1_3),2)+Math.pow((x2_4-x2_3),2),3/2))","G*((M1*(x2_1-x2_3))/Math.pow(Math.pow((x1_1-x1_3),2)+Math.pow((x2_1-x2_3),2),3/2)+(M2*(x2_2-x2_3))/Math.pow(Math.pow((x1_2-x1_3),2)+Math.pow((x2_2-x2_3),2),3/2)+(M4*(x2_4-x2_3))/Math.pow(Math.pow((x1_4-x1_3),2)+Math.pow((x2_4-x2_3),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-20,-7],[32,0]],"pochodnoty":[["-20","-7"],["32","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_3","x2":"x2_3"},{"poradi":4,"visibility":true,"nazev":"Těleso 4","barva":"yellow","rovnice":["G*((M1*(x1_1-x1_4))/Math.pow(Math.pow((x1_1-x1_4),2)+Math.pow((x2_1-x2_4),2),3/2)+(M2*(x1_2-x1_4))/Math.pow(Math.pow((x1_2-x1_4),2)+Math.pow((x2_2-x2_4),2),3/2)+(M3*(x1_3-x1_4))/Math.pow(Math.pow((x1_3-x1_4),2)+Math.pow((x2_3-x2_4),2),3/2))","G*((M1*(x2_1-x2_4))/Math.pow(Math.pow((x1_1-x1_4),2)+Math.pow((x2_1-x2_4),2),3/2)+(M2*(x2_2-x2_4))/Math.pow(Math.pow((x1_2-x1_4),2)+Math.pow((x2_2-x2_4),2),3/2)+(M3*(x2_3-x2_4))/Math.pow(Math.pow((x1_3-x1_4),2)+Math.pow((x2_3-x2_4),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-24,100],[-44,0]],"pochodnoty":[["-24","100"],["-44","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_4","x2":"x2_4"}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Gravitační konstanta","znacka":"G","hodnota":"10000","popisek":"G=10000"},{"upravovano":false,"nazev":"Hmotnost tělesa 1","znacka":"M1","hodnota":"0","popisek":"M_1=0"},{"upravovano":false,"nazev":"Hmotnost tělesa 2","znacka":"M2","hodnota":"10","popisek":"M_2=10"},{"upravovano":false,"nazev":"Hmotnost tělesa 3","znacka":"M3","hodnota":"100","popisek":"M_3=100"},{"upravovano":false,"nazev":"Hmotnost tělesa 4","znacka":"M4","hodnota":"0","popisek":"M_4=0"}],"grafyzav":[],"podminky":[]},
-    {"nazev":"Schwarzschildova metrika","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":0.0001,"posunX":0,"posunY":0,"osaXvzdal":1000000,"osaYvzdal":1000000,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.00001,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Černá díra","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["0","0"],"velikost":"rg","system":"Kartézský","x1":"x1_1","x2":"x2_1"},{"poradi":2,"visibility":true,"nazev":"Částice 1","barva":"orange","rovnice":["-(2*v2_2*v1_2)/x2_2","-0.5*(1-rg/x2_2)*((c*c*rg*v3_2*v3_2)/(x2_2*x2_2)+(rg*v2_2*v2_2)/((rg-x2_2)*(rg-x2_2))-2*x2_2*v1_2*v1_2)","-(v2_2*v3_2*rg)/(x2_2*x2_2*(1-rg/x2_2))"],"popisek":["-\\frac{2\\dot{\\varphi}\\dot{r}}{r}","-\\frac{1}{2}\\left(1-\\frac{r_\\text{g}}{r}\\right)\\left(\\frac{c^2r_\\text{g}}{r^2}\\dot{t}^2+\\frac{r_\\text{g}}{(r_\\text{g}-r)^2}\\dot{r}^2-2r\\dot{\\varphi}^2\\right)","-\\frac{r_\\text{g}\\dot{t}\\dot{r}}{r^2\\left(1-\\frac{r_\\text{g}}{r}\\right)}"],"hodnoty0":[],"hodnoty":[[0,163],[800000,0],[0,1]],"pochodnoty":[["0","163"],["800000","0"],["0","1"]],"pocatek":["0","0"],"velikost":"0","system":"Polární","x1":"x1_2","x2":"x2_2"}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Rychlost světla","znacka":"c","hodnota":"299792458","popisek":"c=299792558"},{"upravovano":false,"nazev":"Gravitační konstanta","znacka":"G","hodnota":"6.67408e-11","popisek":"G=6.67408\\cdot10^{-11}"},{"upravovano":false,"nazev":"Hmotnost černé díry","znacka":"M","hodnota":"1.989e+32","popisek":"M=1.989\\cdot10^{32}"},{"upravovano":false,"nazev":"Schwarzschildův poloměr","znacka":"rg","hodnota":"(2*G*M)/(c*c)","popisek":"r_\\text{g}=\\frac{2GM}{c^2}"}],"grafyzav":[],"podminky":[]}
-]
+    {"nazev":"Vrhy","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":10,"posunX":-20,"posunY":-20,"osaXvzdal":5,"osaYvzdal":5,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.001,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":20,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Hmotný bod","barva":"black","rovnice":["0","-g"],"popisek":["0","-g"],"hodnoty0":[],"hodnoty":[[0,15],[25,15]],"pochodnoty":[["0","15"],["25","15"]],"pocatek":["0","0"],"velikost":"0.5","system":"Kartézský","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Eulerova metoda (midpoint)"}}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"}],"grafyzav":[{"opened":false,"margleft":"298px","margtop":"193px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"2","posx":"0","posy":"0","krokx":"1","kroky":"10","coord":["",""]},{"opened":false,"margleft":"-1px","margtop":"193px","velx":"t","vely":"x2_1","zvetx":"50","zvety":"2","posx":"0","posy":"0","krokx":"1","kroky":"10","coord":["",""]}],"podminky":[{"visibility":true,"hodnoty":["0","x2_1"]}]},
+    {"nazev":"Matematické kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":50,"posunX":0,"posunY":3,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.001,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":10,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(g/l)*Math.sin(x1_1)","0"],"popisek":["-\\frac{g}{l}\\sin{q_{1_1}}","0"],"hodnoty0":[],"hodnoty":[[1,0],[4,0]],"pochodnoty":[["1","0"],["l","0"]],"pocatek":["0","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Strop","barva":"black","x1":"-1","y1":"0","x2":"1","y2":"0","popisek":"","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Závěs","barva":"black","x1":"0","y1":"0","x2":"x1_1k","y2":"x2_1k","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"4","popisek":"l=4"}],"grafyzav":[{"opened":false,"margleft":"707px","margtop":"47px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
+    {"nazev":"Pružina","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":50,"posunX":0,"posunY":3,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":10,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":2,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["0","-(k/m)*x2_1-g"],"popisek":["0","-\\frac{k}{m}q_{2_1}-g"],"hodnoty0":[],"hodnoty":[[0,0],[-3,0]],"pochodnoty":[["0","0"],["-3","0"]],"pocatek":["0","-2"],"velikost":"0.1","system":"Kartézský","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Strop","barva":"black","x1":"-1","y1":"0","x2":"1","y2":"0","popisek":"","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Pružina","barva":"black","x1":"0","y1":"0","x2":"x1_1","y2":"x2_1-2","popisek":"A(0,0), B(q_{1_1}, q_{2_1}-2)","polomer":"0.2","zavity":"20"}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Tuhost pružiny","znacka":"k","hodnota":"5","popisek":"k=5"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"m","hodnota":"1","popisek":"m=1"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x2_1","zvetx":"50","zvety":"50","posx":"-4","posy":"2","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
+    {"nazev":"Kapitzovo kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":50,"posunX":0,"posunY":0,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.001,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":10,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-Math.sin(x1_1)*(g+_a*ny*ny*Math.cos(ny*_t))/l","0"],"popisek":["-\\sin{q_{1_1}}\\frac{g+a\\nu^2\\cos{\\nu t}}{l}","0"],"hodnoty0":[],"hodnoty":[[3,0],[4,0]],"pochodnoty":[["3","0"],["l","0"]],"pocatek":["0","vych"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Závěs","barva":"black","x1":"0","y1":"vych","x2":"x1_1k","y2":"x2_1k+vych","popisek":"A(0,a_{\\text{vych}}), B(q_{1_1},q_{2_1}+a_{\\text{vych}})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Držák","barva":"black","x1":"0","y1":"-_a","x2":"0","y2":"_a","popisek":"A(0,-a), B(0,a)","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Frekvence kmitů závěsu","znacka":"ny","hodnota":"30","popisek":"\\nu=30"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"4","popisek":"l=4"},{"upravovano":false,"nazev":"Amplituda výchylky závěsu","znacka":"a","hodnota":"0.4","popisek":"a=0.4"},{"upravovano":false,"nazev":"Výchylka závěsu","znacka":"vych","hodnota":"_a*Math.cos(ny*_t)","popisek":"a_{\\text{vych}}=a\\cos{\\nu t}"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"50","posx":"-4","posy":"-2","krokx":"2","kroky":"1","coord":["",""]},{"opened":false,"margleft":"746px","margtop":"146px","velx":"t","vely":"v1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"0.5","coord":["",""]}],"podminky":[]},
+    {"nazev":"Landauův vozíček","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":0,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":2,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(A/l)*(g*(mz+mv)+mz*l*v1_1*v1_1*Math.cos(x1_1))","0"],"popisek":["-\\frac{A}{l}(g(m_\\text{z}+m_\\text{v})+m_\\text{z}l\\dot{q}_{1_1}^2\\cos{q_{1_1}})","0"],"hodnoty0":[],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["l","0"]],"pocatek":["x1_2","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}},{"poradi":2,"visibility":false,"nazev":"Vozík","barva":"black","rovnice":["A*mz*(l*v1_1*v1_1+g*Math.cos(x1_1))","0"],"popisek":["Am_\\text{z}(l\\dot{q}_{1_1}^2+g\\cos{q_{1_1}})","0"],"hodnoty0":[],"hodnoty":[[0,0.5],[0,0]],"pochodnoty":[["0","0.5"],["0","0"]],"pocatek":["0","0"],"velikost":"0","system":"Kartézský","x1":"x1_2","x2":"x2_2","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}},{"poradi":3,"visibility":true,"nazev":"Kolečko 1","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["x1_2-l/3","-0.05"],"velikost":"0.05","system":"Kartézský","x1":"x1_3","x2":"x2_3","tableau":{"typ":"Eulerova metoda"}},{"poradi":4,"visibility":true,"nazev":"Kolečko 2","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["x1_2+l/3","-0.05"],"velikost":"0.05","system":"Kartézský","x1":"x1_4","x2":"x2_4","tableau":{"typ":"Eulerova metoda"}}],"grafy":[{"poradi":1,"visibility":true,"nazev":"Graf 1","barva":"black","predpis":"-0.1","popisek":"-0.1"}],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Závěs","barva":"black","x1":"x1_2","y1":"x2_2","x2":"x1_1k+x1_2","y2":"x2_1k","popisek":"A(q_{1_2}, q_{2_2}), B(q_{1_1}+q_{1_2}, q_{2_1})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"Vozík","barva":"black","x1":"x1_2-l/3","y1":"0","x2":"x1_2+l/3","y2":"0","popisek":"A(q_{1_2}-\\frac{l}{3}, 0), B(q_{1_2}+\\frac{l}{3}, 0))","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Délka závěsu","znacka":"l","hodnota":"1","popisek":"l=1"},{"upravovano":false,"nazev":"Hmotnost vozíku","znacka":"mv","hodnota":"1","popisek":"m_\\text{v}=1"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"mz","hodnota":"1","popisek":"m_\\text{z}=1"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"A","hodnota":"(Math.sin(x1_1))/(mz+mv-mz*Math.cos(x1_1)*Math.cos(x1_1))","popisek":"A=\\frac{\\sin{q_{1_1}}}{m_\\text{z}+m_\\text{v}-m_\\text{z}\\cos^2{q_{1_1}}}"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"100","zvety":"100","posx":"-2","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"-5px","margtop":"36px","velx":"t","vely":"x1_2","zvetx":"60","zvety":"60","posx":"-4","posy":"-2","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"150px","margtop":"60px","velx":"t","vely":"v1_2","zvetx":"50","zvety":"50","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"205px","margtop":"60px","velx":"t","vely":"a1_1","zvetx":"100","zvety":"10","posx":"-2","posy":"0","krokx":"1","kroky":"5","coord":["",""]},{"opened":false,"margleft":"190px","margtop":"51px","velx":"t","vely":"a1_2","zvetx":"100","zvety":"10","posx":"-2","posy":"0","krokx":"1","kroky":"5","coord":["",""]}],"podminky":[]},
+    {"nazev":"Elastické kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":2,"osaXvzdal":1,"osaYvzdal":1,"hrubostdrah":2,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":2,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Závaží","barva":"black","rovnice":["-(2*v1_1*v2_1+g*Math.sin(x1_1))/(l+x2_1)","(l+x2_1)*v1_1*v1_1+g*Math.cos(x1_1)-(k/m)*x2_1"],"popisek":["-\\frac{1}{l+q_{2_1}}(2\\dot{q}_{1_1}\\dot{q}_{2_1}+g\\sin{q_{1_1}})","(l+q_{2_1})\\dot{q}_{1_1}^2+g\\cos{q_{1_1}}-\\frac{k}{m}q_{2_1}"],"hodnoty0":[],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["1","0"]],"pocatek":["l*Math.sin(x1_1)","-l*Math.cos(x1_1)"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"Pružina","barva":"black","x1":"0","y1":"0","x2":"x1_1k+l*Math.sin(x1_1)","y2":"x2_1k-l*Math.cos(x1_1)","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"0.1","zavity":"20"},{"poradi":2,"visibility":true,"nazev":"Strop","barva":"black","x1":"-0.5","y1":"0","x2":"0.5","y2":"0","popisek":"","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Tuhost pružiny","znacka":"k","hodnota":"15","popisek":"k=15"},{"upravovano":false,"nazev":"Hmotnost závaží","znacka":"m","hodnota":"1","popisek":"m=1"},{"upravovano":false,"nazev":"Délka pružiny","znacka":"l","hodnota":"1","popisek":"l=1"}],"grafyzav":[{"opened":false,"margleft":"40px","margtop":"60px","velx":"t","vely":"x1_1","zvetx":"50","zvety":"100","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"95px","margtop":"60px","velx":"t","vely":"x2_1","zvetx":"100","zvety":"100","posx":"-2","posy":"-1","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"206px","margtop":"58px","velx":"t","vely":"v1_1","zvetx":"20","zvety":"20","posx":"-10","posy":"0","krokx":"2","kroky":"2","coord":["",""]},{"opened":false,"margleft":"55px","margtop":"49px","velx":"t","vely":"v2_1","zvetx":"20","zvety":"20","posx":"-10","posy":"0","krokx":"2","kroky":"2","coord":["",""]},{"opened":false,"margleft":"-28px","margtop":"64px","velx":"t","vely":"a1_1","zvetx":"20","zvety":"8","posx":"-10","posy":"0","krokx":"2","kroky":"5","coord":["",""]}],"podminky":[]},
+    {"nazev":"Dvojité kyvadlo","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":false,"drahyzobr":true,"body":true,"zvetseni":100,"posunX":0,"posunY":2,"osaXvzdal":2,"osaYvzdal":2,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":2,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"1. závaží","barva":"black","rovnice":["(A*l2-B*Math.cos(x1_1-x1_2))/(C*l1*l2-l1*Math.pow(Math.cos(x1_1-x1_2), 2))","0"],"popisek":["\\frac{Al_2-B\\cos{(q_{1_1}-q_{1_2})}}{Cl_1l_2-l_1\\cos^2{(q_{1_1}-q_{1_2})}}","0"],"hodnoty0":[],"hodnoty":[[1,0],[1,0]],"pochodnoty":[["1","0"],["l1","0"]],"pocatek":["0","0"],"velikost":"0.1","system":"Polární","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}},{"poradi":2,"visibility":true,"nazev":"2. závaží","barva":"black","rovnice":["(A*Math.cos(x1_1-x1_2)-B*C)/(Math.pow(Math.cos(x1_1-x1_2), 2)-l2*C)","0"],"popisek":["\\frac{A\\cos{(q_{1_1}-q_{1_2})}-BC}{\\cos^2{(q_{1_1}-q_{1_2})}-l_2C}","0"],"hodnoty0":[],"hodnoty":[[0,3],[1,0]],"pochodnoty":[["0","3"],["l2","0"]],"pocatek":["x1_1k","x2_1k"],"velikost":"0.1","system":"Polární","x1":"x1_2","x2":"x2_2","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[{"poradi":1,"visibility":true,"nazev":"1. závěs","barva":"black","x1":"0","y1":"0","x2":"x1_1k","y2":"x2_1k","popisek":"A(0,0), B(q_{1_1}, q_{2_1})","polomer":"","zavity":""},{"poradi":2,"visibility":true,"nazev":"2. závěs","barva":"black","x1":"x1_1k","y1":"x2_1k","x2":"x1_2k+x1_1k","y2":"x2_2k+x2_1k","popisek":"A(q_{1_1}, q_{2_1}), B(q_{1_2}+q_{1_1}, q_{2_2}+q_{2_1})","polomer":"","zavity":""}],"konstanty":[{"upravovano":false,"nazev":"Tíhové zrychlení","znacka":"g","hodnota":"9.81","popisek":"g=9.81"},{"upravovano":false,"nazev":"Hmotnost 1. závaží","znacka":"m1","hodnota":"1","popisek":"m_1=1"},{"upravovano":false,"nazev":"Hmotnost 2. závaží","znacka":"m2","hodnota":"1","popisek":"m_2=1"},{"upravovano":false,"nazev":"Délka 1. závěsu","znacka":"l1","hodnota":"1","popisek":"l_1=1"},{"upravovano":false,"nazev":"Délka 2. závěsu","znacka":"l2","hodnota":"1","popisek":"l_2=1"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"A","hodnota":"-C*g*Math.sin(x1_1)-v1_2*v1_2*Math.sin(x1_1-x1_2)","popisek":"A=-Cg\\sin{q_{1_1}}-\\dot{q}_{1_2}^2\\sin{(q_{1_1}-q_{1_2})}"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"B","hodnota":"l1*v1_1*v1_1*Math.sin(x1_1-x1_2)-g*Math.sin(x1_2)","popisek":"B=l_1\\dot{q}_{1_1}^2\\sin{(q_{1_1}-q_{1_2})}-g\\sin{q_{1_2}}"},{"upravovano":false,"nazev":"Pomocná proměnná","znacka":"C","hodnota":"(m1+m2)/(m2*l2)","popisek":"C=\\frac{m_1+m_2}{m_2l_2}"}],"grafyzav":[{"opened":false,"margleft":"6px","margtop":"31px","velx":"t","vely":"x1_1","zvetx":"100","zvety":"100","posx":"-2","posy":"0","krokx":"1","kroky":"1","coord":["",""]},{"opened":false,"margleft":"95px","margtop":"60px","velx":"t","vely":"x1_2","zvetx":"50","zvety":"50","posx":"-4","posy":"0","krokx":"1","kroky":"1","coord":["",""]}],"podminky":[]},
+    {"nazev":"Newtonův gravitační zákon","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":0.8,"posunX":0,"posunY":0,"osaXvzdal":100,"osaYvzdal":100,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.01,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":2,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Těleso 1","barva":"blue","rovnice":["G*((M2*(x1_2-x1_1))/Math.pow(Math.pow((x1_2-x1_1),2)+Math.pow((x2_2-x2_1),2),3/2)+(M3*(x1_3-x1_1))/Math.pow(Math.pow((x1_3-x1_1),2)+Math.pow((x2_3-x2_1),2),3/2)+(M4*(x1_4-x1_1))/Math.pow(Math.pow((x1_4-x1_1),2)+Math.pow((x2_4-x2_1),2),3/2))","G*((M2*(x2_2-x2_1))/Math.pow(Math.pow((x1_2-x1_1),2)+Math.pow((x2_2-x2_1),2),3/2)+(M3*(x2_3-x2_1))/Math.pow(Math.pow((x1_3-x1_1),2)+Math.pow((x2_3-x2_1),2),3/2)+(M4*(x2_4-x2_1))/Math.pow(Math.pow((x1_4-x1_1),2)+Math.pow((x2_4-x2_1),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-8,7],[-197,0]],"pochodnoty":[["-8","7"],["-197","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Rungeova-Kuttova (2. řádu)","c":[0,0.5],"b":[0,1],"a":[[0.5]]}},{"poradi":2,"visibility":true,"nazev":"Těleso 2","barva":"red","rovnice":["G*((M1*(x1_1-x1_2))/Math.pow(Math.pow((x1_1-x1_2),2)+Math.pow((x2_1-x2_2),2),3/2)+(M3*(x1_3-x1_2))/Math.pow(Math.pow((x1_3-x1_2),2)+Math.pow((x2_3-x2_2),2),3/2)+(M4*(x1_4-x1_2))/Math.pow(Math.pow((x1_4-x1_2),2)+Math.pow((x2_4-x2_2),2),3/2))","G*((M1*(x2_1-x2_2))/Math.pow(Math.pow((x1_1-x1_2),2)+Math.pow((x2_1-x2_2),2),3/2)+(M3*(x2_3-x2_2))/Math.pow(Math.pow((x1_3-x1_2),2)+Math.pow((x2_3-x2_2),2),3/2)+(M4*(x2_4-x2_2))/Math.pow(Math.pow((x1_4-x1_2),2)+Math.pow((x2_4-x2_2),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-25,70],[-177,0]],"pochodnoty":[["-25","70"],["-177","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_2","x2":"x2_2","tableau":{"typ":"Rungeova-Kuttova (2. řádu)","c":[0,0.5],"b":[0,1],"a":[[0.5]]}},{"poradi":3,"visibility":true,"nazev":"Těleso 3","barva":"green","rovnice":["G*((M1*(x1_1-x1_3))/Math.pow(Math.pow((x1_1-x1_3),2)+Math.pow((x2_1-x2_3),2),3/2)+(M2*(x1_2-x1_3))/Math.pow(Math.pow((x1_2-x1_3),2)+Math.pow((x2_2-x2_3),2),3/2)+(M4*(x1_4-x1_3))/Math.pow(Math.pow((x1_4-x1_3),2)+Math.pow((x2_4-x2_3),2),3/2))","G*((M1*(x2_1-x2_3))/Math.pow(Math.pow((x1_1-x1_3),2)+Math.pow((x2_1-x2_3),2),3/2)+(M2*(x2_2-x2_3))/Math.pow(Math.pow((x1_2-x1_3),2)+Math.pow((x2_2-x2_3),2),3/2)+(M4*(x2_4-x2_3))/Math.pow(Math.pow((x1_4-x1_3),2)+Math.pow((x2_4-x2_3),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-20,-7],[32,0]],"pochodnoty":[["-20","-7"],["32","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_3","x2":"x2_3","tableau":{"typ":"Rungeova-Kuttova (2. řádu)","c":[0,0.5],"b":[0,1],"a":[[0.5]]}},{"poradi":4,"visibility":true,"nazev":"Těleso 4","barva":"yellow","rovnice":["G*((M1*(x1_1-x1_4))/Math.pow(Math.pow((x1_1-x1_4),2)+Math.pow((x2_1-x2_4),2),3/2)+(M2*(x1_2-x1_4))/Math.pow(Math.pow((x1_2-x1_4),2)+Math.pow((x2_2-x2_4),2),3/2)+(M3*(x1_3-x1_4))/Math.pow(Math.pow((x1_3-x1_4),2)+Math.pow((x2_3-x2_4),2),3/2))","G*((M1*(x2_1-x2_4))/Math.pow(Math.pow((x1_1-x1_4),2)+Math.pow((x2_1-x2_4),2),3/2)+(M2*(x2_2-x2_4))/Math.pow(Math.pow((x1_2-x1_4),2)+Math.pow((x2_2-x2_4),2),3/2)+(M3*(x2_3-x2_4))/Math.pow(Math.pow((x1_3-x1_4),2)+Math.pow((x2_3-x2_4),2),3/2))"],"popisek":["a_{\\text{g}_x}","a_{\\text{g}_y}"],"hodnoty0":[],"hodnoty":[[-24,100],[-44,0]],"pochodnoty":[["-24","100"],["-44","0"]],"pocatek":["0","0"],"velikost":"3","system":"Kartézský","x1":"x1_4","x2":"x2_4","tableau":{"typ":"Rungeova-Kuttova (2. řádu)","c":[0,0.5],"b":[0,1],"a":[[0.5]]}}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Gravitační konstanta","znacka":"G","hodnota":"10000","popisek":"G=10000"},{"upravovano":false,"nazev":"Hmotnost tělesa 1","znacka":"M1","hodnota":"0","popisek":"M_1=0"},{"upravovano":false,"nazev":"Hmotnost tělesa 2","znacka":"M2","hodnota":"10","popisek":"M_2=10"},{"upravovano":false,"nazev":"Hmotnost tělesa 3","znacka":"M3","hodnota":"100","popisek":"M_3=100"},{"upravovano":false,"nazev":"Hmotnost tělesa 4","znacka":"M4","hodnota":"0","popisek":"M_4=0"}],"grafyzav":[],"podminky":[]},
+    {"nazev":"Schwarzschildova metrika","settings":{"hlbarva":"rgb(255,225,50)","barvapismo1":"black","barvapismo2":"black","osyzobr":true,"drahyzobr":true,"body":true,"zvetseni":0.00001,"posunX":0,"posunY":0,"osaXvzdal":10000000,"osaYvzdal":10000000,"hrubostdrah":1,"hrubostgraf":0.1,"zaokr":3,"maxcif":6,"maxdes":3,"dt":0.005,"h":0.000001,"dobacyklu":10,"vypoctyvcyklu":1,"oknoX":1280,"oknoY":551.333},"telesa":[{"poradi":1,"visibility":true,"nazev":"Černá díra","barva":"black","rovnice":["0","0"],"popisek":["0","0"],"hodnoty0":[],"hodnoty":[[0,0],[0,0]],"pochodnoty":[["0","0"],["0","0"]],"pocatek":["0","0"],"velikost":"rg","system":"Kartézský","x1":"x1_1","x2":"x2_1","tableau":{"typ":"Eulerova metoda"}},{"poradi":2,"visibility":true,"nazev":"Částice 1","barva":"orange","rovnice":["-(2*v2_2*v1_2)/x2_2","-0.5*(1-rg/x2_2)*((c*c*rg*v3_2*v3_2)/(x2_2*x2_2)+(rg*v2_2*v2_2)/((rg-x2_2)*(rg-x2_2))-2*x2_2*v1_2*v1_2)","-(v2_2*v3_2*rg)/(x2_2*x2_2*(1-rg/x2_2))"],"popisek":["-\\frac{2\\dot{\\varphi}\\dot{r}}{r}","-\\frac{1}{2}\\left(1-\\frac{r_\\text{g}}{r}\\right)\\left(\\frac{c^2r_\\text{g}}{r^2}\\dot{t}^2+\\frac{r_\\text{g}}{(r_\\text{g}-r)^2}\\dot{r}^2-2r\\dot{\\varphi}^2\\right)","-\\frac{r_\\text{g}\\dot{t}\\dot{r}}{r^2\\left(1-\\frac{r_\\text{g}}{r}\\right)}"],"hodnoty0":[],"hodnoty":[[0,2.5],[10000000,0],[0,1]],"pochodnoty":[["0","2.5"],["10000000","0"],["0","1"]],"pocatek":["0","0"],"velikost":"0","system":"Polární","x1":"x1_2","x2":"x2_2","tableau":{"typ":"Rungeova-Kuttova (4. řádu)","c":[0,0.5,0.5,1],"b":[0.16666666666666666,0.3333333333333333,0.3333333333333333,0.16666666666666666],"a":[[0.5],[0,0.5],[0,0,1]]}}],"grafy":[],"spojnice":[],"konstanty":[{"upravovano":false,"nazev":"Rychlost světla","znacka":"c","hodnota":"299792458","popisek":"c=299792558"},{"upravovano":false,"nazev":"Gravitační konstanta","znacka":"G","hodnota":"6.67408e-11","popisek":"G=6.67408\\cdot10^{-11}"},{"upravovano":false,"nazev":"Hmotnost černé díry","znacka":"M","hodnota":"1.989e+32","popisek":"M=1.989\\cdot10^{32}"},{"upravovano":false,"nazev":"Schwarzschildův poloměr","znacka":"rg","hodnota":"(2*G*M)/(c*c)","popisek":"r_\\text{g}=\\frac{2GM}{c^2}"}],"grafyzav":[],"podminky":[]},
+];
 
 let souboryvlast = JSON.parse(localStorage.getItem("phbrovnicesoubory")) || [];
 
@@ -277,9 +277,16 @@ document.getElementById("phbrovniceremove").onclick = function(){
 document.getElementById("ssselect").onchange = function(){
     ssselectset("");
 }
+document.getElementById("difschemselectadd").onchange = function(){
+    selectdifschem("add", 2);
+}
+document.getElementById("vlasttablradadd").onchange = function(){
+    if(document.getElementById("vlasttablradadd").value < 1){document.getElementById("vlasttablradadd").value = 1};
+    tableaubuild("add", document.getElementById("vlasttablradadd").value)
+}
 
 document.getElementById("telesoadd").onclick = function(){
-    newteleso = {};
+    let newteleso = {};
     if(telesa.length != 0){
         newteleso.poradi = telesa[telesa.length-1].poradi+1;
     }
@@ -294,6 +301,7 @@ document.getElementById("telesoadd").onclick = function(){
     newteleso.hodnoty0 = [];
     newteleso.hodnoty = [];
     newteleso.pochodnoty = [];
+    newteleso.tableau = tableauget("add");
     newteleso.pocatek = [document.getElementById("telesaaddxpoc").value, document.getElementById("telesaaddypoc").value];
     newteleso.velikost = document.getElementById("telesaaddsize").value;
     newteleso.system = document.getElementById("ssselect").value;
@@ -331,7 +339,11 @@ window.addEventListener("mousedown", function(){
             document.getElementById("ssselectedit").value = telesa[i-1].system;
             document.getElementById("telesaeditx1").value = telesa[i-1].x1;
             document.getElementById("telesaeditx2").value = telesa[i-1].x2;
+            document.getElementById("difschemselectedit").value = telesa[i-1].tableau.typ;
             ssselectset("edit");
+            if(telesa[i-1].tableau.typ == "Vlastní"){selectdifschem("edit", telesa[i-1].tableau.c.length, telesa[i-1].tableau);}
+            else{selectdifschem("edit")}
+
 
             while(document.getElementById("phbrovniceinputedit").lastChild){
                 document.getElementById("phbrovniceinputedit").removeChild(document.getElementById("phbrovniceinputedit").lastChild);
@@ -356,6 +368,13 @@ document.getElementById("phbrovniceremoveedit").onclick = function(){
 document.getElementById("ssselectedit").onchange = function(){
     ssselectset("edit");
 }
+document.getElementById("difschemselectedit").onchange = function(){
+    selectdifschem("edit", 2);
+}
+document.getElementById("vlasttablradedit").onchange = function(){
+    if(document.getElementById("vlasttablradedit").value < 1){document.getElementById("vlasttablradedit").value = 1};
+    tableaubuild("edit", document.getElementById("vlasttablradedit").value);
+}
 
 document.getElementById("telesoedit").onclick = function(){
     for(let i = 1; i <= telesa.length; i++){
@@ -365,6 +384,7 @@ document.getElementById("telesoedit").onclick = function(){
             telesa[i-1].barva = document.getElementById("telesaeditbarva").value;
             telesa[i-1].rovnice = [];
             telesa[i-1].popisek = [];
+            telesa[i-1].tableau = tableauget("edit");
             telesa[i-1].pocatek = [document.getElementById("telesaeditxpoc").value, document.getElementById("telesaeditypoc").value];
             telesa[i-1].velikost = document.getElementById("telesaeditsize").value;
             telesa[i-1].system = document.getElementById("ssselectedit").value;
@@ -380,6 +400,7 @@ document.getElementById("telesoedit").onclick = function(){
 
             refresh();
             telesaadd();
+            pochodnotyget("refresh");
         }
     }
 }
@@ -949,7 +970,7 @@ document.getElementById("ulozitbut").onclick = function(){
     souboryadd(souboryvlast, "souboryvlastseznam", 0);
 }
 window.addEventListener("mousedown", function(e){
-    if(e.target.id != "ulozit" && e.target.parentNode.id != "ulozit" && e.target.parentNode.parentNode.id != "ulozit" && e.target.parentNode.parentNode.parentNode.id != "ulozit"){
+    if(e.target.id != "ulozit" && e.target.parentNode.id != "ulozit" && e.target.parentNode.parentNode.id != "ulozit" && e.target.parentNode.parentNode.parentNode.id != "ulozit" && document.getElementById("textpole").style.display != "block"){
         document.getElementById("ulozit").style.display = "none";
     }
 })
@@ -966,12 +987,14 @@ window.addEventListener("mousedown", function(){
             souboryadd(souboryvlast, "souboryvlastseznam", 0);
         }
         document.getElementById("souboryvlastseznamopen"+i).onclick = function(){
+            clearInterval(timerduha);
             refresh();
             dataget(souboryvlast, i-1);
         }
     }
     for(let i = 1; i <= souboryzabud.length; i++){
         document.getElementById("souboryzabudseznamopen"+i).onclick = function(){
+            clearInterval(timerduha);
             refresh();
             dataget(souboryzabud, i-1);
         }
@@ -1345,22 +1368,45 @@ function refresh(){
 }
 
 function vypocet(){
+    let telesa1 = JSON.parse(JSON.stringify(telesa));
     for(let i = 0; i < telesa.length; i++){
-
         for(let ii = 0; ii < telesa[i].rovnice.length; ii++){
-            x0 = telesa[i].hodnoty[ii][0]; v0 = telesa[i].hodnoty[ii][1];
 
-            a = vztahvypocet(telesa[i].rovnice[ii]);
+            if(telesa[i].tableau.typ != "Eulerova metoda" && telesa[i].tableau.typ != "Eulerova metoda (midpoint)"){
+                let koeficienty = [];
+                for(let tel = 0; tel < telesa.length; tel++){
+                    koeficienty.push(JSON.parse(JSON.stringify(Array(telesa[tel].rovnice.length).fill([]))));
+                }
+                koeficienty = koeficientyvypocet(koeficienty, i, ii, telesa[i].tableau.b.length-1, telesa[i].tableau);
+
+                let ksumv = 0; let ksumx = 0;
+                for(let kpoc = 0; kpoc < telesa[i].tableau.b.length; kpoc++){
+                    ksumv += telesa[i].tableau.b[kpoc]*koeficienty[i][ii][kpoc][1];
+                    ksumx += telesa[i].tableau.b[kpoc]*koeficienty[i][ii][kpoc][0];
+                }
+
+                telesa1[i].hodnoty[ii][1] = telesa[i].hodnoty[ii][1] + settings.dt*ksumv;
+                telesa1[i].hodnoty[ii][0] = telesa[i].hodnoty[ii][0] + settings.dt*ksumx;
+            }
             
-            telesa[i].hodnoty[ii][1] = v0 + a*settings.dt;
-            telesa[i].hodnoty[ii][0] = x0 + v0*settings.dt;
+            a = vztahvypocet(telesa[i].rovnice[ii]);
 
-            document.getElementById("hodx"+(ii+1)+"_"+telesa[i].poradi).innerHTML = zaokrouh(telesa[i].hodnoty[ii][0], settings.zaokr, settings.maxcif);
-            document.getElementById("hodv"+(ii+1)+"_"+telesa[i].poradi).innerHTML = zaokrouh(telesa[i].hodnoty[ii][1], settings.zaokr, settings.maxcif);
+            if(telesa[i].tableau.typ == "Eulerova metoda"){
+                telesa1[i].hodnoty[ii][1] = telesa[i].hodnoty[ii][1] + a*settings.dt;
+                telesa1[i].hodnoty[ii][0] = telesa[i].hodnoty[ii][0] + telesa[i].hodnoty[ii][1]*settings.dt
+            }
+            if(telesa[i].tableau.typ == "Eulerova metoda (midpoint)"){
+                telesa1[i].hodnoty[ii][1] = telesa[i].hodnoty[ii][1] + a*settings.dt;
+                telesa1[i].hodnoty[ii][0] = telesa[i].hodnoty[ii][0] + telesa[i].hodnoty[ii][1]*settings.dt+0.5*a*settings.dt*settings.dt;
+            }
+
+            document.getElementById("hodx"+(ii+1)+"_"+telesa[i].poradi).innerHTML = zaokrouh(telesa1[i].hodnoty[ii][0], settings.zaokr, settings.maxcif);
+            document.getElementById("hodv"+(ii+1)+"_"+telesa[i].poradi).innerHTML = zaokrouh(telesa1[i].hodnoty[ii][1], settings.zaokr, settings.maxcif);
             document.getElementById("hoda"+(ii+1)+"_"+telesa[i].poradi).innerHTML = zaokrouh(a, settings.zaokr, settings.maxcif);
         }
 
     }
+    telesa = JSON.parse(JSON.stringify(telesa1));
 }
 
 
@@ -1559,6 +1605,96 @@ function ssselectset(edit){
     }
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("telesaaddinfo"+edit)]);
 }
+function selectdifschem(editadd, velikost, tableau){
+    document.getElementById("euler"+editadd).style.display = "none";
+    document.getElementById("eulermid"+editadd).style.display = "none";
+    document.getElementById("secorder"+editadd).style.display = "none";
+    document.getElementById("fourorder"+editadd).style.display = "none";
+    document.getElementById("vlastmetod"+editadd).style.display = "none";
+    if(document.getElementById("difschemselect"+editadd).value == "Eulerova metoda"){
+        document.getElementById("euler"+editadd).style.display = "block";
+    }
+    if(document.getElementById("difschemselect"+editadd).value == "Eulerova metoda (midpoint)"){
+        document.getElementById("eulermid"+editadd).style.display = "block";
+    }
+    if(document.getElementById("difschemselect"+editadd).value == "Rungeova-Kuttova (2. řádu)"){
+        document.getElementById("secorder"+editadd).style.display = "block";
+    }
+    if(document.getElementById("difschemselect"+editadd).value == "Rungeova-Kuttova (4. řádu)"){
+        document.getElementById("fourorder"+editadd).style.display = "block";
+    }
+    if(document.getElementById("difschemselect"+editadd).value == "Vlastní"){
+        document.getElementById("vlastmetod"+editadd).style.display = "block";
+        tableaubuild(editadd, velikost, tableau);
+    }
+}
+function tableauget(editadd){
+    let tableau = {};
+    tableau.typ = document.getElementById("difschemselect"+editadd).value
+    if(tableau.typ == "Rungeova-Kuttova (2. řádu)"){
+        tableau.c = [0, 0.5];
+        tableau.b = [0, 1];
+        tableau.a = [[0.5]];
+    }
+    if(tableau.typ == "Rungeova-Kuttova (4. řádu)"){
+        tableau.c = [0, 0.5, 0.5, 1];
+        tableau.b = [1/6, 1/3, 1/3, 1/6];
+        tableau.a = [[0.5],[0,0.5],[0,0,1]];
+    }
+    if(tableau.typ == "Vlastní"){
+        velikost = document.getElementById("vlasttablrad"+editadd).value;
+        tableau.c = [0];
+        tableau.b = []
+        tableau.a = []
+        
+        for(let i = 0; i < velikost; i++){
+            if(i > 0){tableau.c[i] = vztahvypocet(document.getElementById("koefc"+editadd+i).value)};
+            tableau.b[i] = vztahvypocet(document.getElementById("koefb"+editadd+(i)).value);
+            if(i > 0){tableau.a.push(JSON.parse(JSON.stringify([])))};
+            for(let ii = 0; ii < i; ii++){
+                tableau.a[i-1][ii] = vztahvypocet(document.getElementById("koefa"+editadd+String(i-1)+String(ii)).value);
+            }
+        }
+    }
+    return tableau;
+}
+function tableaubuild(editadd, velikost, tableau){
+    document.getElementById("vlasttablrad"+editadd).value = velikost;
+
+    while(document.getElementById("vlasttabl"+editadd).lastChild){
+        document.getElementById("vlasttabl"+editadd).removeChild(document.getElementById("vlasttabl"+editadd).lastChild);
+    }
+
+    table = document.createElement("table");
+    for(let i = 0; i <= velikost; i++){
+        tr = document.createElement("tr");
+        for(let ii = 0; ii <= i; ii++){
+            td = document.createElement("td");
+            if(ii == 0){td.style.borderRight = "1px solid"}
+            if(ii == 0 && i == 0){td.appendChild(document.createTextNode("0"))}
+            else if(i < velikost || ii > 0){
+                input = document.createElement("input");
+                if(ii == 0){
+                    input.id = "koefc"+editadd+i;
+                    if(tableau){input.value = tableau.c[i]}
+                }
+                else if(i < velikost){
+                    input.id = "koefa"+editadd+String(i-1)+String(ii-1)
+                    if(tableau){input.value = tableau.a[i-1][ii-1]}
+                }
+                else if(i == velikost){
+                    input.id = "koefb"+editadd+(ii-1);
+                    tr.style.borderTop = "1px solid";
+                    if(tableau){input.value = tableau.b[ii-1]}
+                }
+                td.appendChild(input);
+            }
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+    document.getElementById("vlasttabl"+editadd).appendChild(table);
+}
 
 function telesaadd(){
     
@@ -1654,7 +1790,7 @@ function telesaadd(){
                     input = document.createElement("input");
                     input.id = "pocx"+(ii+1)+"_"+telesa[i-1].poradi;
                     input.value = 0;
-                    if(telesa[i-1].pochodnoty.length != 0){input.value = telesa[i-1].pochodnoty[ii][0];}
+                    if(telesa[i-1].pochodnoty[ii]){input.value = telesa[i-1].pochodnoty[ii][0];}
                 div.appendChild(input);
                     label = document.createElement("label");
                     label.appendChild(document.createTextNode("\\(\\dot{q}_{"+(ii+1)+"_{"+telesa[i-1].poradi+"}}^0=\\)"));
@@ -1662,7 +1798,7 @@ function telesaadd(){
                     input = document.createElement("input");
                     input.id = "pocv"+(ii+1)+"_"+telesa[i-1].poradi;
                     input.value = 0;
-                    if(telesa[i-1].pochodnoty.length != 0){input.value = telesa[i-1].pochodnoty[ii][1];}
+                    if(telesa[i-1].pochodnoty[ii]){input.value = telesa[i-1].pochodnoty[ii][1];}
                 div.appendChild(input);
                 div.appendChild(document.createElement("br"));
             }
@@ -2190,7 +2326,6 @@ function souboryadd(seznam, sezid, zacod){
 
 
 
-
 function pochodnotyget(typ){
     for(let i = 0; i < telesa.length; i++){
         if(typ == "refresh"){
@@ -2235,44 +2370,77 @@ function grafyzavget(){
     }
 }
 
-function vztahvypocet(zrychlenivztah){
+function vztahvypocet(zrychlenivztah, koeficienty, koef, tableau){
     for(let i = 0;; i++){
         try{
             zrychleni = eval(zrychlenivztah);
             return zrychleni;
         }
         catch(err){
-            jdeopravit = false;
-            errorval = err.message.split(" ")[0];
+            let jdeopravit = false;
+            let errorval = err.message.split(" ")[0];
+            
+            if(koeficienty){casposun = tableau.c[koef]*settings.dt}else{casposun = 0}
             
 
             if(errorval == "t" || errorval == "_t"){
-                zrychlenivztah = zrychlenivztah.replace(errorval, "("+time+")");
+                zrychlenivztah = zrychlenivztah.replace(errorval, "("+Number(time+casposun)+")");
                 jdeopravit = true;
             }
             for(let tel = 0; tel < telesa.length; tel++){
                 for(let sou = 0; sou < telesa[tel].hodnoty.length; sou++){
-
                     
-                    if(errorval == "x"+(sou+1)+"_"+(telesa[tel].poradi)+"k" || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)+"k"){
-                        if(sou == 0){
-                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(vztahvypocet(telesa[i].x2)*Math.sin(vztahvypocet(telesa[i].x1)))+")");
+                    if(koeficienty){
+                        if(errorval == "x"+(sou+1)+"_"+(telesa[tel].poradi)+"k" || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)+"k"){
+                            if(sou == 0){
+                                zrychlenivztah = zrychlenivztah.replaceAll(errorval, "(("+telesa[i].x2+")*Math.sin("+telesa[i].x1+"))");
+                            }
+                            if(sou == 1){
+                                zrychlenivztah = zrychlenivztah.replaceAll(errorval, "(-("+telesa[i].x2+")*Math.cos("+telesa[i].x1+"))");
+                            }
+                            jdeopravit = true;
                         }
-                        if(sou == 1){
-                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(-vztahvypocet(telesa[i].x2)*Math.cos(vztahvypocet(telesa[i].x1)))+")");
+                        if(errorval == "x"+Number(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)){
+                            let posunsou = 0;
+                            for(let koefpred = 0; koefpred < koef; koefpred++){
+                                koeficienty = koeficientyvypocet(koeficienty, tel, sou, koefpred, tableau);
+                                posunsou += koeficienty[tel][sou][koefpred][0]*tableau.a[koef-1][koefpred];
+                            }
+                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(telesa[tel].hodnoty[sou][0]+posunsou*settings.dt)+")");
+                            jdeopravit = true;
                         }
-                        jdeopravit = true;
+                        if(errorval == "v"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_v"+(sou+1)+"_"+(telesa[tel].poradi)){
+                            let posunsou = 0;
+                            for(let koefpred = 0; koefpred < koef; koefpred++){
+                                koeficienty = koeficientyvypocet(koeficienty, tel, sou, koefpred, tableau);
+                                posunsou += koeficienty[tel][sou][koefpred][1]*tableau.a[koef-1][koefpred];
+                            }
+                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(telesa[tel].hodnoty[sou][1]+posunsou*settings.dt)+")");
+                            jdeopravit = true;
+                        }
                     }
-                    if(errorval == "x"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)){
-                        zrychlenivztah = zrychlenivztah.replace(errorval, "("+telesa[tel].hodnoty[sou][0]+")");
-                        jdeopravit = true;
+                    else{
+                        if(errorval == "x"+(sou+1)+"_"+(telesa[tel].poradi)+"k" || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)+"k"){
+                            if(sou == 0){
+                                zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(vztahvypocet(telesa[i].x2)*Math.sin(vztahvypocet(telesa[i].x1)))+")");
+                            }
+                            if(sou == 1){
+                                zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(-vztahvypocet(telesa[i].x2)*Math.cos(vztahvypocet(telesa[i].x1)))+")");
+                            }
+                            jdeopravit = true;
+                        }
+                        if(errorval == "x"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_x"+(sou+1)+"_"+(telesa[tel].poradi)){
+                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(telesa[tel].hodnoty[sou][0])+")");
+                            jdeopravit = true;
+                        }
+                        if(errorval == "v"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_v"+(sou+1)+"_"+(telesa[tel].poradi)){
+                            zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+Number(telesa[tel].hodnoty[sou][1])+")");
+                            jdeopravit = true;
+                        }
                     }
-                    if(errorval == "v"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_v"+(sou+1)+"_"+(telesa[tel].poradi)){
-                        zrychlenivztah = zrychlenivztah.replace(errorval, "("+telesa[tel].hodnoty[sou][1]+")");
-                        jdeopravit = true;
-                    }
+                    
                     if(errorval == "a"+(sou+1)+"_"+(telesa[tel].poradi) || errorval == "_a"+(sou+1)+"_"+(telesa[tel].poradi)){
-                        zrychlenivztah = zrychlenivztah.replace(errorval, "("+vztahvypocet(telesa[tel].rovnice[sou])+")");
+                        zrychlenivztah = zrychlenivztah.replaceAll(errorval, "("+vztahvypocet(telesa[tel].rovnice[sou])+")");
                         jdeopravit = true;
                     }
                 }
@@ -2290,6 +2458,33 @@ function vztahvypocet(zrychlenivztah){
         }
     }
 }
+
+function koeficientyvypocet(koeficienty, tel, sou, maxkoef, tableau){
+    for(let koef = koeficienty[tel][sou].length; koef <= maxkoef; koef++){
+        koeficienty[tel][sou].push(koefvypocet(koeficienty, tel, sou, koef, tableau));
+    }
+    return JSON.parse(JSON.stringify(koeficienty));
+
+    function koefvypocet(koeficienty, tel, sou, koef, tableau){
+        if(koef == 0){
+            koefx = telesa[tel].hodnoty[sou][1];
+            koefv = vztahvypocet(telesa[tel].rovnice[sou]);
+        }
+        else{
+            koefv = vztahvypocet(telesa[tel].rovnice[sou], koeficienty, koef, tableau);
+            koefx = 0;
+            for(let koefpred = 0; koefpred < koef; koefpred++){
+                koefx += koeficienty[tel][sou][koefpred][1]*tableau.a[koef-1][koefpred];
+            }
+            koefx = telesa[tel].hodnoty[sou][1] + koefx*settings.dt; 
+
+        }
+        return JSON.parse(JSON.stringify([koefx, koefv]));
+    }
+}
+
+
+
 
 function zaokrouh(x, platc, maxlen){
     if(x == null){return null}{
