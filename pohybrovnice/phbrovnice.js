@@ -459,8 +459,7 @@ document.getElementById("grafyadd").onclick = function(){
         document.getElementById("grafyaddpredpislabel").innerHTML = "\\(f_1(x)\\)";
         document.getElementById("grafyaddpopiseklabel").innerHTML = "\\(f_1(x)\\)";
     }
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("grafyaddinfo")]);
-
+    MathJax.typeset();
 }
 document.getElementById("grafyaddclose").onclick = function(){
     document.getElementById("grafyaddinfo").style.display = "none";
@@ -489,7 +488,7 @@ document.getElementById("grafadd").onclick = function(){
     document.getElementById("grafyaddpopiseklabel").innerHTML = "\\(f_{"+(grafy[grafy.length-1].poradi+1)+"}(x)\\)";
     document.getElementById("grafyaddpredpis").value = "";
     document.getElementById("grafyaddpopisek").value = "";
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("grafyaddinfo")]);
+    MathJax.typeset();
 
     grafyvykres(settings.oknoX, settings.oknoY, settings.posunX, settings.posunY, settings.zvetseni);
 }
@@ -511,8 +510,7 @@ window.addEventListener("mousedown", function(){
 
             document.getElementById("grafyeditpredpislabel").innerHTML = "\\(f_{"+(grafy[i-1].poradi+1)+"}(x)\\)";
             document.getElementById("grafyeditpopiseklabel").innerHTML = "\\(f_{"+(grafy[i-1].poradi+1)+"}(x)\\)";
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("grafyeditinfo")]);
-            
+            MathJax.typeset();            
         }
     }
 })
@@ -1299,8 +1297,7 @@ function bodyzobr(X, Y, pX, pY ,met, event){
             document.getElementById("bodinfopos").innerHTML = "("+pruseciky[bod][1][0]+", "+pruseciky[bod][1][1]+")";
         }
     }
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("bodinfo")]);
-    
+    MathJax.typeset();    
     
 }
 function bodinfo(x,y){
@@ -1547,7 +1544,7 @@ function phbrovniceadd(souradnice, teleso){
     div.appendChild(input);
 
     document.getElementById("phbrovniceinput").appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("phbrovniceinput")]);
+    MathJax.typeset();
 }
 function phbrovniceaddedit(souradnice, teleso, JStext, TeXtext){
     div = document.createElement("div");
@@ -1571,7 +1568,7 @@ function phbrovniceaddedit(souradnice, teleso, JStext, TeXtext){
     div.appendChild(input);
 
     document.getElementById("phbrovniceinputedit").appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("phbrovniceinputedit")]);
+    MathJax.typeset();
 }
 function telesaaddset(){
     if(telesa.length != 0){
@@ -1604,7 +1601,7 @@ function ssselectset(edit){
         document.getElementById("ssselectlab1"+edit).innerHTML = "\\(x=\\)";
         document.getElementById("ssselectlab2"+edit).innerHTML = "\\(y=\\)";
     }
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("telesaaddinfo"+edit)]);
+    MathJax.typeset();
 }
 function selectdifschem(editadd, velikost, tableau){
     document.getElementById("euler"+editadd).style.display = "none";
@@ -1768,8 +1765,7 @@ function telesaadd(){
         hldiv.appendChild(div);
 
         document.getElementById("telesaseznam").appendChild(hldiv);
-        
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("telesaseznam")]);
+        MathJax.typeset();
     }
     function telesaaddpochodnoty(i){
         hldiv = document.createElement("div");
@@ -1808,7 +1804,7 @@ function telesaadd(){
 
         document.getElementById("pochodnotyseznam").appendChild(hldiv);
         
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("pochodnotyseznam")]);
+        MathJax.typeset();
     }
     function telesaaddhodnoty(i){
         hldiv = document.createElement("div");
@@ -1856,7 +1852,7 @@ function telesaadd(){
 
         document.getElementById("hodnotyseznam").appendChild(hldiv);
         
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("hodnotyseznam")]);
+        MathJax.typeset();
     }
 }
 function grafyadd(){
@@ -1911,7 +1907,7 @@ function grafyadd(){
 
             document.getElementById("grafyseznam").appendChild(hldiv);
             
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("grafyseznam")]);
+            MathJax.typeset();
     }           
 }
 function spojniceadd(){
@@ -1972,7 +1968,7 @@ function spojniceadd(){
 
             document.getElementById("spojniceseznam").appendChild(hldiv);
             
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("spojniceseznam")]);
+            MathJax.typeset();
     }
 }
 
@@ -2076,7 +2072,7 @@ function konstantyadd(){
 
         document.getElementById("konstantyseznam").appendChild(hldiv);
         
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("konstantyseznam")]);
+        MathJax.typeset();
     }
 }
 
@@ -2204,7 +2200,7 @@ function grafzavadd(){
 
     if(grafyzav[i-1].opened == false){document.getElementById("grafzav"+i).style.display = "none"}
 
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById("grafyzavislosti")]);
+    MathJax.typeset();
     }
 
     function grafzavsettadd(div, i, xy){
