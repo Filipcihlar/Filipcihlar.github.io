@@ -135,7 +135,7 @@ function kolo(hrac){
     document.getElementById("hod").disabled = false;
     document.getElementById("hrac").innerHTML = "Hraje "+barvy2[hrac]+" hráč";
     document.getElementById("hrac").style.color = barvy[hrac];
-    if(pos[hrac][0]+pos[hrac][1]+pos[hrac][2]+pos[hrac][3] == 0){
+    if(pos[hrac][0] == 0 && pos[hrac][1] == 0 && pos[hrac][2] == 0 && pos[hrac][3] == 0){
         trojhod(hrac);
     }
     else{hod(hrac)}
