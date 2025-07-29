@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <table id="tab">
+        <tr>
+            <th onclick="namesort()">Název</th>
+            <th onclick="yearsort()">Rok</th>
+            <th>Typ</th>
+            <th>Místo</th>
+            <th onclick="datesort()">Datum</th>
+            <th>Další info</th>
+        </tr>
+    </table>
+
+    <script>
+
+let cwg = [
+    {
+        "name": "tomaskoz",
+        "year": "2017",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "AHAcaching",
+        "year": "2015",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Pandírek",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Mezinárodní den letectví a kosmonautiky 12. dubna",
+        "year": "2021",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Brambora666",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Prisoner666",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "4Kulíšci",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "TURKOFKA",
+        "year": "2014",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": "GEOCACHING.CZ místo CZ GEOCACHING"
+    },
+    {
+        "name": "Pštrosíčáci",
+        "year": "2024",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Halloweenské mlsání",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Jan_Hedvika_2018",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "maskacp",
+        "year": "2018",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "VioPetr",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": "2000 po obvodu"
+    },
+    {
+        "name": "-Indiánský duch-",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "9. 11. 1989 padla Berlínská zeď",
+        "year": "2021",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "MEETINGS IN OMIS - EVENT BY DULÍK & VOJTÍK",
+        "year": "2019",
+        "type": "CWG (HR GEOCACHING)",
+        "place": "",
+        "date": "",
+        "info": "28. 6. 2019 uprostřed"
+    },
+    {
+        "name": "RouLovci",
+        "year": "2016",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": "nápis XXVII. VI. MMXVI"
+    },
+    {
+        "name": "Lena-CZ",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "tschundi",
+        "year": "2013",
+        "type": "AWG (GEOCACHING.AT)",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "matomega",
+        "year": "2012",
+        "type": "SWG (GEOCACHING.SK)",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "otasparta",
+        "year": "2024",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Tajga208",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "kubatovci",
+        "year": "2016",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Velikonoce 2017 - Ztracené údolí",
+        "year": "2017",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Sabi009",
+        "year": "2018",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "Dominikovo dvaadvacítka",
+        "year": "2020",
+        "type": "CWG",
+        "place": "",
+        "date": "",
+        "info": ""
+    },
+    {
+        "name": "bobes ltm",
+        "year": "2023",
+        "type": "CWG",
+        "place": "KES PANA KRISTIANA Z OSVRACINA",
+        "date": "2025/7/23",
+        "info": ""
+    },
+    {
+        "name": "Opylecz",
+        "year": "2023",
+        "type": "CWG",
+        "place": "Mezholezsky rybnik",
+        "date": "2025/7/25",
+        "info": ""
+    },
+    {
+        "name": "Hejvilovcí",
+        "year": "2023",
+        "type": "CWG",
+        "place": "Racovske rybnicky",
+        "date": "2025/7/25",
+        "info": ""
+    },
+    {
+        "name": "77 let od konce WWII",
+        "year": "2022",
+        "type": "CWG",
+        "place": "Ztracene veverky",
+        "date": "2025/7/25",
+        "info": ""
+    },
+];
+
+
+let name_click = false;
+let year_click = false;
+let date_click = false;
+tabulka(cwg);
+
+
+function namesort(){
+    if(!name_click){
+        cwg.sort((a, b) => a.name.localeCompare(b.name));
+        name_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.name.localeCompare(a.name));
+        name_click = false;
+    }
+    tabulka(cwg);
+}
+function yearsort(){
+    if(!year_click){
+        cwg.sort((a, b) => a.year.localeCompare(b.year));
+        year_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.year.localeCompare(a.year));
+        year_click = false;
+    }
+    tabulka(cwg);
+}
+function datesort(){
+
+    if(!date_click){
+        cwg.sort((a, b) => a.date.localeCompare(b.date));
+        date_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.date.localeCompare(a.date));
+        date_click = false;
+    }
+    tabulka(cwg);
+}
+
+
+function tabulka(arr){
+    while(document.getElementById("tab").children.length > 1){
+        document.getElementById("tab").removeChild(document.getElementById("tab").lastChild)
+    }
+    for(let i = 0; i < arr.length; i++){
+        tr = document.createElement("tr");
+        add_td(tr, arr[i].name);
+        add_td(tr, arr[i].year);
+        add_td(tr, arr[i].type);
+        add_td(tr, arr[i].place);
+        add_td(tr, arr[i].date);
+        add_td(tr, arr[i].info);
+        document.getElementById("tab").appendChild(tr);
+    }
+
+    function add_td(tr, text){
+        td = document.createElement("td");
+        td.appendChild(document.createTextNode(text));
+        tr.appendChild(td);
+    }
+}
+
+    </script>
+</body>
+</html>
