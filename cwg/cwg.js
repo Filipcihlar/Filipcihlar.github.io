@@ -1,0 +1,314 @@
+window.cwg = [
+  {
+    "name": "tomaskoz",
+    "year": "2017",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "AHAcaching",
+    "year": "2015",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Pandírek",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Mezinárodní den letectví a kosmonautiky 12. dubna",
+    "year": "2021",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Brambora666",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Prisoner666",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "4Kulíšci",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "TURKOFKA",
+    "year": "2014",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": "GEOCACHING.CZ místo CZ GEOCACHING"
+  },
+  {
+    "name": "Pštrosíčáci",
+    "year": "2024",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Halloweenské mlsání",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Jan_Hedvika_2018",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "maskacp",
+    "year": "2018",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "VioPetr",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": "2000 po obvodu"
+  },
+  {
+    "name": "-Indiánský duch-",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "9. 11. 1989 padla Berlínská zeď",
+    "year": "2021",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "MEETINGS IN OMIS - EVENT BY DULÍK & VOJTÍK",
+    "year": "2019",
+    "type": "CWG (HR GEOCACHING)",
+    "place": "",
+    "date": "",
+    "info": "28. 6. 2019 uprostřed"
+  },
+  {
+    "name": "RouLovci",
+    "year": "2016",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": "nápis XXVII. VI. MMXVI"
+  },
+  {
+    "name": "Lena-CZ",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "tschundi",
+    "year": "2013",
+    "type": "AWG (GEOCACHING.AT)",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "matomega",
+    "year": "2012",
+    "type": "SWG (GEOCACHING.SK)",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "otasparta",
+    "year": "2024",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Tajga208",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "kubatovci",
+    "year": "2016",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Velikonoce 2017 - Ztracené údolí",
+    "year": "2017",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Sabi009",
+    "year": "2018",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "Dominikovo dvaadvacítka",
+    "year": "2020",
+    "type": "CWG",
+    "place": "",
+    "date": "",
+    "info": ""
+  },
+  {
+    "name": "bobes ltm",
+    "year": "2023",
+    "type": "CWG",
+    "place": "KES PANA KRISTIANA Z OSVRACINA",
+    "date": "2025/07/23",
+    "info": ""
+  },
+  {
+    "name": "Opylecz",
+    "year": "2023",
+    "type": "CWG",
+    "place": "Mezholezsky rybnik",
+    "date": "2025/07/25",
+    "info": ""
+  },
+  {
+    "name": "Hejvilovcí",
+    "year": "2023",
+    "type": "CWG",
+    "place": "Racovske rybnicky",
+    "date": "2025/07/25",
+    "info": ""
+  },
+  {
+    "name": "77 let od konce WWII",
+    "year": "2022",
+    "type": "CWG",
+    "place": "Ztracene veverky",
+    "date": "2025/07/25",
+    "info": ""
+  },
+  {
+    "name": "V_clav11 CZ",
+    "year": "2025",
+    "type": "CWG",
+    "place": "Lesní zvířecí ráj - Bonus",
+    "date": "2025/07/29",
+    "info": ""
+  },
+  {
+    "name": "olasa & team",
+    "year": "2024",
+    "type": "CWG",
+    "place": "První pomoc",
+    "date": "2025/07/29",
+    "info": ""
+  },
+  {
+    "name": "HCL a Veverka",
+    "year": "2025",
+    "type": "CWG",
+    "place": "OLOMOUCKY ORLOJ/Olomouc Astronomical Clock",
+    "date": "2025/09/27",
+    "info": ""
+  },
+  {
+    "name": "BOSOU NOHOU Z HRADISTE NA NETREB XI.",
+    "year": "2025",
+    "type": "CWG",
+    "place": "ZUŠ - Sady Petra Bezruče",
+    "date": "2025/10/28",
+    "info": "TTF, 15 min. od FTF"
+  },
+  {
+    "name": "MOTÝLEK",
+    "year": "2015",
+    "type": "CWG",
+    "place": "Emerichova studna",
+    "date": "2025/11/01",
+    "info": "STF"
+  },
+  {
+    "name": "Mudlokačka & Malin.cz",
+    "year": "2013",
+    "type": "CWG",
+    "place": "Antiflood Vystaviste",
+    "date": "2025/11/12",
+    "info": "GEOCACHING.CZ"
+  },
+  {
+    "name": "EKASYR & MANTIS",
+    "year": "2025",
+    "type": "PWG",
+    "place": "Motocyklová",
+    "date": "2025/11/12",
+    "info": "GEOCACHING.PL"
+  },
+  {
+    "name": "ARTHUR1854",
+    "year": "2025",
+    "type": "CWG",
+    "place": "JUHUUŮ a TRALALAÁ",
+    "date": "2025/11/15",
+    "info": "TTF"
+  },
+  {
+    "name": "ScorerCZ",
+    "year": "2025",
+    "type": "CWG",
+    "place": "Jedova chyse",
+    "date": "2025/11/27",
+    "info": ""
+  }
+]

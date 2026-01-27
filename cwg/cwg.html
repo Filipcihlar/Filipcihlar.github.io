@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <table id="tab">
+        <tr>
+            <th onclick="namesort()">Název</th>
+            <th onclick="yearsort()">Rok</th>
+            <th>Typ</th>
+            <th>Místo</th>
+            <th onclick="datesort()">Datum</th>
+            <th>Další info</th>
+        </tr>
+    </table>
+
+    <script src="cwg.js"></script>
+    <script>
+
+let cwg = window.cwg
+
+
+
+let name_click = false;
+let year_click = false;
+let date_click = false;
+tabulka(cwg);
+
+
+function namesort(){
+    if(!name_click){
+        cwg.sort((a, b) => a.name.localeCompare(b.name));
+        name_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.name.localeCompare(a.name));
+        name_click = false;
+    }
+    tabulka(cwg);
+}
+function yearsort(){
+    if(!year_click){
+        cwg.sort((a, b) => a.year.localeCompare(b.year));
+        year_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.year.localeCompare(a.year));
+        year_click = false;
+    }
+    tabulka(cwg);
+}
+function datesort(){
+
+    if(!date_click){
+        cwg.sort((a, b) => a.date.localeCompare(b.date));
+        date_click = true;
+    }
+    else{
+        cwg.sort((a, b) => b.date.localeCompare(a.date));
+        date_click = false;
+    }
+    tabulka(cwg);
+}
+
+
+function tabulka(arr){
+    while(document.getElementById("tab").children.length > 1){
+        document.getElementById("tab").removeChild(document.getElementById("tab").lastChild)
+    }
+    for(let i = 0; i < arr.length; i++){
+        tr = document.createElement("tr");
+        add_td(tr, arr[i].name);
+        add_td(tr, arr[i].year);
+        add_td(tr, arr[i].type);
+        add_td(tr, arr[i].place);
+        add_td(tr, arr[i].date);
+        add_td(tr, arr[i].info);
+        document.getElementById("tab").appendChild(tr);
+    }
+
+    function add_td(tr, text){
+        td = document.createElement("td");
+        td.appendChild(document.createTextNode(text));
+        tr.appendChild(td);
+    }
+}
+
+    </script>
+</body>
+</html>
