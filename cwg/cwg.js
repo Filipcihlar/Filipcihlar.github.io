@@ -310,5 +310,13 @@ window.cwg = [
     "place": "Jedova chyse",
     "date": "2025/11/27",
     "info": ""
+  },
+  {
+    "name": "Žaluďáci",
+    "year": "2026",
+    "type": "CWG",
+    "place": "Handi friendly ART 13 - Plav!",
+    "date": "2026/02/20",
+    "info": ""
   }
 ]
