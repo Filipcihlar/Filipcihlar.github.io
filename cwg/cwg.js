@@ -318,5 +318,13 @@ window.cwg = [
     "place": "Handi friendly ART 13 - Plav!",
     "date": "2026/02/20",
     "info": ""
+  },
+  {
+    "name": "zdegeokys",
+    "year": "2025",
+    "type": "CWG",
+    "place": "Kámen / The Stone",
+    "date": "2026/04/07",
+    "info": ""
   }
 ]
