@@ -326,5 +326,13 @@ window.cwg = [
     "place": "Kámen / The Stone",
     "date": "2026/04/07",
     "info": ""
+  },
+  {
+    "name": "bobrlinek",
+    "year": "2022",
+    "type": "CWG",
+    "place": "Tépětky v remízku III.",
+    "date": "2026/04/25",
+    "info": ""
   }
 ]
