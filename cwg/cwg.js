@@ -334,5 +334,13 @@ window.cwg = [
     "place": "Tépětky v remízku III.",
     "date": "2026/04/25",
     "info": ""
+  },
+  {
+    "name": "Fousci - Meggie",
+    "year": "2019",
+    "type": "CWG",
+    "place": "Hřebíkovka, D-Nagel",
+    "date": "2026/04/26",
+    "info": ""
   }
 ]
