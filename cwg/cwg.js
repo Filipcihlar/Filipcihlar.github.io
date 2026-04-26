@@ -67,8 +67,8 @@ window.cwg = [
     "name": "Pštrosíčáci",
     "year": "2024",
     "type": "CWG",
-    "place": "",
-    "date": "",
+    "place": "Mohyly u Milavec / Grabhuegel bei Milavetsch",
+    "date": "2025/06/21",
     "info": ""
   },
   {
@@ -76,7 +76,7 @@ window.cwg = [
     "year": "2020",
     "type": "CWG",
     "place": "",
-    "date": "",
+    "date": "2021/08/19",
     "info": ""
   },
   {
@@ -108,7 +108,7 @@ window.cwg = [
     "year": "2020",
     "type": "CWG",
     "place": "",
-    "date": "",
+    "date": "2021/05/15",
     "info": ""
   },
   {
