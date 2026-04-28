@@ -342,5 +342,13 @@ window.cwg = [
     "place": "Hřebíkovka, D-Nagel",
     "date": "2026/04/26",
     "info": ""
+  },
+  {
+    "name": "PAJĎÁCI",
+    "year": "2026",
+    "type": "CWG",
+    "place": "Tančící dům / The Dancing House",
+    "date": "2026/04/28",
+    "info": ""
   }
 ]
