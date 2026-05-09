@@ -350,5 +350,21 @@ window.cwg = [
     "place": "Tančící dům / The Dancing House",
     "date": "2026/04/28",
     "info": ""
+  },
+  {
+    "name": "RC_pilot",
+    "year": "2015",
+    "type": "CWG",
+    "place": "Lehké opevnění úsek 173 Jivjany",
+    "date": "2026/05/08",
+    "info": ""
+  },
+  {
+    "name": "rbe100m",
+    "year": "2020",
+    "type": "CWG",
+    "place": "VOUSUV KMEN",
+    "date": "2026/05/08",
+    "info": "nápis Kulíkov team"
   }
 ]
