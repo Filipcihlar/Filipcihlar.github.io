@@ -366,5 +366,13 @@ window.cwg = [
     "place": "VOUSUV KMEN",
     "date": "2026/05/08",
     "info": "nápis Kulíkov team"
+  },
+  {
+    "name": "ScorerCZ",
+    "year": "2025",
+    "type": "CWG",
+    "place": "SMS",
+    "date": "2026/05/13",
+    "info": ""
   }
 ]
