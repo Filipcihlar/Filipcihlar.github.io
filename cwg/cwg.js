@@ -374,5 +374,13 @@ window.cwg = [
     "place": "SMS",
     "date": "2026/05/13",
     "info": ""
+  },
+  {
+    "name": "Datel černý-Ptáci na Hoře",
+    "year": "2016",
+    "type": "CWG",
+    "place": "Datel cerny- U sve skryse",
+    "date": "2026/05/16",
+    "info": ""
   }
 ]
