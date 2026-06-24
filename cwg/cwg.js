@@ -382,5 +382,13 @@ window.cwg = [
     "place": "Datel cerny- U sve skryse",
     "date": "2026/05/16",
     "info": ""
+  },
+  {
+    "name": "ŠNECI43",
+    "year": "2023",
+    "type": "CWG",
+    "place": "Totoro",
+    "date": "2026/06/24",
+    "info": "IV. uprostřed"
   }
 ]
