@@ -390,5 +390,21 @@ window.cwg = [
     "place": "Totoro",
     "date": "2026/06/24",
     "info": "IV. uprostřed"
+  },
+  {
+    "name": "JAMLEZ",
+    "year": "2015",
+    "type": "CWG",
+    "place": "Ptaci na Hore - BONUS - Orel skalni",
+    "date": "2026/07/02",
+    "info": ""
+  },
+  {
+    "name": "Luboš0101",
+    "year": "2017",
+    "type": "CWG",
+    "place": "Kukacka obecna - Vejce",
+    "date": "2026/07/02",
+    "info": ""
   }
 ]
