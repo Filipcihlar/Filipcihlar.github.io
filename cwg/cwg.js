@@ -406,5 +406,37 @@ window.cwg = [
     "place": "Kukacka obecna - Vejce",
     "date": "2026/07/02",
     "info": ""
+  },
+  {
+    "name": "OKYBA",
+    "year": "2024",
+    "type": "CWG",
+    "place": "Sokolova vyhlidka",
+    "date": "2026/07/03",
+    "info": ""
+  },
+  {
+    "name": "BFS52",
+    "year": "2021",
+    "type": "CWG",
+    "place": "Smirci kamen, Ujezd",
+    "date": "2026/07/03",
+    "info": ""
+  },
+  {
+    "name": "PavelChodov",
+    "year": "2024",
+    "type": "CWG",
+    "place": "Zastrčená lavička 2",
+    "date": "2026/07/03",
+    "info": ""
+  },
+  {
+    "name": "pavelchodov",
+    "year": "2024",
+    "type": "CWG",
+    "place": "Cyklostezka 3A",
+    "date": "2026/07/03",
+    "info": ""
   }
 ]
