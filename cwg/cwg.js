@@ -438,13 +438,5 @@ window.cwg = [
     "place": "Cyklostezka 3A",
     "date": "2026/07/03",
     "info": ""
-  },
-  {
-    "name": "pavelchodov",
-    "year": "2024",
-    "type": "CWG",
-    "place": "Cyklostezka 3A",
-    "date": "2026/07/03",
-    "info": ""
   }
 ]
