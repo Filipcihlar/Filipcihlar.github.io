@@ -438,5 +438,13 @@ window.cwg = [
     "place": "Cyklostezka 3A",
     "date": "2026/07/03",
     "info": ""
+  },
+  {
+    "name": "TJAM_TEAM",
+    "year": "2024",
+    "type": "CWG",
+    "place": "1. Sedlecká",
+    "date": "2026/07/11",
+    "info": "s mini kolečkem"
   }
 ]
