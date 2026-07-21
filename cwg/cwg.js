@@ -446,5 +446,13 @@ window.cwg = [
     "place": "1. Sedlecká",
     "date": "2026/07/11",
     "info": "s mini kolečkem"
+  },
+  {
+    "name": "LavinaX",
+    "year": "2025",
+    "type": "CWG",
+    "place": "Kostel sv.Kunhuty.",
+    "date": "2026/07/21",
+    "info": ""
   }
 ]
