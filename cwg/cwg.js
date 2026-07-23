@@ -454,5 +454,13 @@ window.cwg = [
     "place": "Kostel sv.Kunhuty.",
     "date": "2026/07/21",
     "info": ""
+  },
+  {
+    "name": "O hodinu míň III",
+    "year": "2023",
+    "type": "CWG",
+    "place": "VRCH TRNY: POVEST O HLEDACICH POKLADU",
+    "date": "2026/07/22",
+    "info": "night event GCA5T2X"
   }
 ]
