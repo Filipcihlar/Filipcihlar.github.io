@@ -462,5 +462,21 @@ window.cwg = [
     "place": "VRCH TRNY: POVEST O HLEDACICH POKLADU",
     "date": "2026/07/22",
     "info": "night event GCA5T2X"
+  },
+  {
+    "name": "ATOMMUZEUM BRDY",
+    "year": "2026",
+    "type": "CWG",
+    "place": "Yrstvelkap - Rodokmen kralu - Mirael",
+    "date": "2026/07/26",
+    "info": ""
+  },
+  {
+    "name": "Kočičák 72",
+    "year": "2024",
+    "type": "CWG",
+    "place": "Yrstvelkap - kral Edward",
+    "date": "2026/07/26",
+    "info": ""
   }
 ]
