@@ -478,5 +478,37 @@ window.cwg = [
     "place": "Yrstvelkap - kral Edward",
     "date": "2026/07/26",
     "info": ""
+  },
+  {
+    "name": "Pštrosíčáci",
+    "year": "2024",
+    "type": "CWG",
+    "place": "Mala skala v Ceskem lese",
+    "date": "2026/08/11",
+    "info": ""
+  },
+  {
+    "name": "Archa na Korábské vrchovině",
+    "year": "2015",
+    "type": "CWG",
+    "place": "Velka skala",
+    "date": "2026/08/11",
+    "info": ""
+  },
+  {
+    "name": "JEŽKOTÝM",
+    "year": "2021",
+    "type": "CWG",
+    "place": "Skarmanka (OK/PL-019) SOTA cache",
+    "date": "2026/08/11",
+    "info": ""
+  },
+  {
+    "name": "mrkvicka37",
+    "year": "2022",
+    "type": "CWG",
+    "place": "Haltrava",
+    "date": "2026/08/11",
+    "info": ""
   }
 ]
