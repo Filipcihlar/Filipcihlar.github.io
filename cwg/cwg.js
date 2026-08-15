@@ -510,5 +510,13 @@ window.cwg = [
     "place": "Haltrava",
     "date": "2026/08/11",
     "info": ""
+  },
+  {
+    "name": "Doubravské deskohraní",
+    "year": "2015",
+    "type": "CWG",
+    "place": "Domazlicke mlyny: Spaleny mlyn u Zubriny",
+    "date": "2026/08/14",
+    "info": ""
   }
 ]
