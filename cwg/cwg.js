@@ -518,5 +518,29 @@ window.cwg = [
     "place": "Domazlicke mlyny: Spaleny mlyn u Zubriny",
     "date": "2026/08/14",
     "info": ""
+  },
+  {
+    "name": "hrat.",
+    "year": "2020",
+    "type": "CWG",
+    "place": "Nejmensi ves Chodska/Das kleinste Chodengemeinde",
+    "date": "2026/08/18",
+    "info": "zakládá první keš GC91TEG"
+  },
+  {
+    "name": "Pe-Kri",
+    "year": "2025",
+    "type": "CWG",
+    "place": "Těžba na Svatovavřinecké hoře",
+    "date": "2026/08/18",
+    "info": ""
+  },
+  {
+    "name": "DedaLibor",
+    "year": "2020",
+    "type": "CWG",
+    "place": "Obrazek",
+    "date": "2026/08/18",
+    "info": ""
   }
 ]
