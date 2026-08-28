@@ -542,5 +542,13 @@ window.cwg = [
     "place": "Obrazek",
     "date": "2026/08/18",
     "info": ""
+  },
+  {
+    "name": "Lukij",
+    "year": "2024",
+    "type": "SWG",
+    "place": "hormansgasse",
+    "date": "2026/08/25",
+    "info": "1000+ WINNER"
   }
 ]
