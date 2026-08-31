@@ -550,5 +550,13 @@ window.cwg = [
     "place": "hormansgasse",
     "date": "2026/08/25",
     "info": "1000+ WINNER"
+  },
+  {
+    "name": "jiri1117",
+    "year": "2017",
+    "type": "CWG",
+    "place": "Yrstvelkap - Rodokmen kralu - Thorin",
+    "date": "2026/08/30",
+    "info": "100x T5"
   }
 ]
