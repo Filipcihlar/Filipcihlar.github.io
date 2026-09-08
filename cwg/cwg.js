@@ -558,5 +558,13 @@ window.cwg = [
     "place": "Yrstvelkap - Rodokmen kralu - Thorin",
     "date": "2026/08/30",
     "info": "100x T5"
+  },
+  {
+    "name": "Pucung & Tom",
+    "year": "2017",
+    "type": "CWG",
+    "place": "Srbicke Stonehenge",
+    "date": "2026/09/08",
+    "info": ""
   }
 ]
